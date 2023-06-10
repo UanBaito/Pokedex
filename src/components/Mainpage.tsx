@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
-import Pokecard from "./Pokecard";
 import { NamedAPIResourceList, Pokemon, PokemonClient } from "pokenode-ts";
-
-let pokemonList: NamedAPIResourceList | object = {};
+import Pokelist from "./PokeList";
 
 export default function Mainpage() {
-  const [pokeState, setPokestate] = useState<Pokemon>();
   const [SearchState, setSearchState] = useState("");
+
+  const pokemonList = useRef<NamedAPIResourceList>();
 
   useEffect(() => {
     const api = new PokemonClient();
     const pokemon = api.listPokemons();
     pokemon
       .then((response) => {
-        pokemonList = response;
+        pokemonList.current = response;
       })
       .catch(() => console.log("error"));
   }, []);
@@ -30,7 +29,7 @@ export default function Mainpage() {
           onChange={(e) => setSearchState(e.target.value)}
         />
       </label>
-      <Pokecard pokeState={pokeState} />
+      <Pokelist pokemonList={pokemonList} />
     </div>
   );
 }
