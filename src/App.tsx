@@ -3,7 +3,7 @@ import Mainpage from "./components/Mainpage";
 
 function App() {
   return (
-    <div className="bg-violet-900 w-full h-full">
+    <div className="bg-slate-50 w-full h-full">
       <Mainpage />
     </div>
   );

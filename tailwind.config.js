@@ -2,7 +2,7 @@
 /* eslint-env node */
 module.exports = {
   content: ["./index.html",
-  "./src/**/*.{js,ts,jsx,tsx}",],
+    "./src/**/*.{js,ts,jsx,tsx}",],
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
@@ -53,6 +53,8 @@ module.exports = {
       'gradient-to-bl': 'linear-gradient(to bottom left, var(--tw-gradient-stops))',
       'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
       'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
+      'curved-line': "url('/src/components/assets/curved line.svg')",
+      'crossed': "url('/src/components/assets/crossed.svg')"
     },
     backgroundOpacity: ({ theme }) => theme('opacity'),
     backgroundPosition: {
@@ -791,6 +793,8 @@ module.exports = {
       150: '1.5',
     },
     screens: {
+      xxsm: '360px',
+      xsm: '400px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
