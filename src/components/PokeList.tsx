@@ -4,15 +4,31 @@ import Pokecard from "./Pokecard";
 
 export default function Pokelist({
   pokemonList,
+  handlePokecardClick,
+  isMinimized,
 }: {
-  pokemonList: React.MutableRefObject<NamedAPIResourceList | undefined>;
+  pokemonList: NamedAPIResourceList;
+  handlePokecardClick: any;
+  isMinimized: boolean;
 }) {
-  const mappedPokeList = pokemonList.current?.results.map((v, i) => {
-    return <Pokecard key={v.name} name={v.name} />;
+  const mappedPokeList = pokemonList.results.map((v) => {
+    return (
+      <Pokecard
+        key={v.name}
+        name={v.name}
+        handlePokecardClick={handlePokecardClick}
+      />
+    );
   });
 
   return (
-    <div className="flex flex-col flex-wrap justify-center">
+    <div
+      className={
+        isMinimized
+          ? "flex flex-col flex-wrap justify-center mb-14"
+          : "overflow-hidden"
+      }
+    >
       {mappedPokeList}
     </div>
   );
