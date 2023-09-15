@@ -24,9 +24,7 @@ export default function Pokelist({
   return (
     <div
       className={
-        isMinimized
-          ? "flex flex-col flex-wrap justify-center mb-14"
-          : "overflow-hidden"
+        isMinimized ? "flex flex-col flex-wrap justify-center mb-14" : "hidden"
       }
     >
       {mappedPokeList}

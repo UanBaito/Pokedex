@@ -8,18 +8,18 @@ export default function Pokecard({
   name: string;
   handlePokecardClick: any;
 }) {
-  const [isLoadingState, setIsLoadingState] = useState(true);
+  const [isListLoading, setIsListLoading] = useState(true);
   const pokemon = useRef<Pokemon>();
   useEffect(() => {
     const api = new PokemonClient();
     api.getPokemonByName(`${name}`).then((response) => {
       pokemon.current = response;
-      setIsLoadingState(false);
+      setIsListLoading(false);
     });
     return;
   }, [name]);
 
-  if (!isLoadingState && pokemon.current) {
+  if (!isListLoading && pokemon.current) {
     const typeOne = pokemon.current.types[0].type.name;
     const typeOneString = `src/components/assets/types/${typeOne}.svg`;
     let typeTwo: undefined | string;

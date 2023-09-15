@@ -8,7 +8,7 @@ export default function Mainpage() {
   const [searchState, setSearchState] = useState("");
   const [pokemonList, setPokemonListState] = useState<NamedAPIResourceList>();
   const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
 
   useEffect(() => {
     const api = new PokemonClient();
@@ -25,6 +25,7 @@ export default function Mainpage() {
     pokemon: React.MutableRefObject<Pokemon>
   ) {
     setSelectedPoke(pokemon.current);
+    setIsMinimized(false);
     return;
   }
 
