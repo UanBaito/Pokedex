@@ -1,4 +1,4 @@
-import React from "react";
+import { ChangeEventHandler } from "react";
 import Searchbar from "./Searchbar";
 
 export default function Navbar({
@@ -6,7 +6,7 @@ export default function Navbar({
   handleInput,
 }: {
   searchState: string;
-  handleInput: any;
+  handleInput: ChangeEventHandler;
 }) {
   return (
     <div className="bg-violet-600 w-full sticky top-0 z-30">

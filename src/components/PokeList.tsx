@@ -1,21 +1,25 @@
-import { NamedAPIResourceList } from "pokenode-ts";
-import React from "react";
+import { Pokedex } from "pokenode-ts";
 import Pokecard from "./Pokecard";
+import { PokeCardClickHandler } from "./typings";
 
 export default function Pokelist({
-  pokemonList,
+  pokedex,
   handlePokecardClick,
   isMinimized,
 }: {
-  pokemonList: NamedAPIResourceList;
-  handlePokecardClick: any;
+  pokedex: Pokedex;
+  handlePokecardClick: PokeCardClickHandler;
   isMinimized: boolean;
 }) {
-  const mappedPokeList = pokemonList.results.map((v) => {
+  const mappedPokeList = pokedex.pokemon_entries.map((v, i) => {
+    i++;
+    if (i !== 1000) {
+      return;
+    }
     return (
       <Pokecard
-        key={v.name}
-        name={v.name}
+        key={v.pokemon_species.name}
+        name={v.pokemon_species.name}
         handlePokecardClick={handlePokecardClick}
       />
     );

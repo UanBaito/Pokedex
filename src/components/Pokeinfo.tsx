@@ -1,7 +1,6 @@
-import { Pokemon } from "pokenode-ts";
-import { useState, useEffect } from "react";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
 import MinimizedPokeInfo from "./MinimizedPokeInfo";
+import { PokeInfo } from "./typings";
 
 export default function Pokeinfo({
   selectedPoke,
@@ -9,10 +8,10 @@ export default function Pokeinfo({
   handleClickMaximize,
   handleClickMinimize,
 }: {
-  selectedPoke: Pokemon;
+  selectedPoke: PokeInfo;
   isMinimized: boolean;
-  handleClickMaximize: any;
-  handleClickMinimize: any;
+  handleClickMaximize: () => void;
+  handleClickMinimize: () => void;
 }) {
   return (
     <>

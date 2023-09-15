@@ -1,22 +1,27 @@
-import { Pokemon, PokemonClient } from "pokenode-ts";
+import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
 import { useEffect, useState, useRef } from "react";
+import { PokeCardClickHandler } from "./typings";
 
 export default function Pokecard({
   name,
   handlePokecardClick,
 }: {
   name: string;
-  handlePokecardClick: any;
+  handlePokecardClick: PokeCardClickHandler;
 }) {
   const [isListLoading, setIsListLoading] = useState(true);
   const pokemon = useRef<Pokemon>();
+  const pokemonSpecies = useRef<PokemonSpecies>();
+
   useEffect(() => {
     const api = new PokemonClient();
     api.getPokemonByName(`${name}`).then((response) => {
       pokemon.current = response;
-      setIsListLoading(false);
+      api.getPokemonSpeciesByName(`${name}`).then((response) => {
+        pokemonSpecies.current = response;
+        setIsListLoading(false);
+      });
     });
-    return;
   }, [name]);
 
   if (!isListLoading && pokemon.current) {
@@ -32,7 +37,7 @@ export default function Pokecard({
       <div
         className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2"
         onClick={(e) => {
-          handlePokecardClick(e.target, pokemon);
+          handlePokecardClick(e.target, pokemon, pokemonSpecies);
         }}
       >
         <div className="col-span-2 row-span-4">

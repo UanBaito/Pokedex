@@ -1,31 +1,40 @@
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { NamedAPIResourceList, Pokemon, PokemonClient } from "pokenode-ts";
+import { GameClient, Pokedex, Pokemon, PokemonSpecies } from "pokenode-ts";
 import Pokelist from "./PokeList";
 import Pokeinfo from "./Pokeinfo";
+import { PokeInfo } from "./typings";
 
 export default function Mainpage() {
   const [searchState, setSearchState] = useState("");
-  const [pokemonList, setPokemonListState] = useState<NamedAPIResourceList>();
-  const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
+  const [pokedex, setPokedex] = useState<Pokedex>();
+  const [selectedPoke, setSelectedPoke] = useState<PokeInfo>();
   const [isMinimized, setIsMinimized] = useState(true);
 
   useEffect(() => {
-    const api = new PokemonClient();
-    const pokemon = api.listPokemons();
-    pokemon
+    const api = new GameClient();
+    const pokedex = api.getPokedexByName("national");
+    pokedex
       .then((response) => {
-        setPokemonListState(response);
+        setPokedex(response);
       })
       .catch(() => console.log("error"));
   }, []);
 
   function handlePokecardClick(
-    e: MouseEventHandler,
-    pokemon: React.MutableRefObject<Pokemon>
+    _: EventTarget,
+    pokemonData: React.MutableRefObject<Pokemon | undefined>,
+    pokemonSpeciesData: React.MutableRefObject<PokemonSpecies | undefined>
   ) {
-    setSelectedPoke(pokemon.current);
-    setIsMinimized(false);
+    if (pokemonData.current && pokemonSpeciesData.current) {
+      setSelectedPoke({
+        pokemon: pokemonData.current,
+        species: pokemonSpeciesData.current,
+      });
+      setIsMinimized(false);
+    } else {
+      ("error trying to select pokemon");
+    }
     return;
   }
 
@@ -37,8 +46,8 @@ export default function Mainpage() {
     setIsMinimized(false);
   }
 
-  function handleInput(e) {
-    setSearchState(e.target.value);
+  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchState((e.target as HTMLInputElement).value);
   }
 
   return (
@@ -53,9 +62,9 @@ export default function Mainpage() {
             handleClickMaximize={handleClickMaximize}
           />
         )}
-        {pokemonList ? (
+        {pokedex ? (
           <Pokelist
-            pokemonList={pokemonList}
+            pokedex={pokedex}
             handlePokecardClick={handlePokecardClick}
             isMinimized={isMinimized}
           />

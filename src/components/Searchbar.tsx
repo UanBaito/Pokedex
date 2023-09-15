@@ -1,9 +1,11 @@
+import { ChangeEventHandler } from "react";
+
 export default function Searchbar({
   searchState,
   handleInput,
 }: {
   searchState: string;
-  handleInput: any;
+  handleInput: ChangeEventHandler;
 }) {
   return (
     <div className="sticky top-0">
