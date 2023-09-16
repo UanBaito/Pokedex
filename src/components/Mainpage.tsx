@@ -10,7 +10,11 @@ export default function Mainpage() {
   const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
   const [selectedSpecies, setSelectedSpecies] = useState<PokemonSpecies>();
   const [isMinimized, setIsMinimized] = useState(true);
+  const [isVariant, setIsVariant] = useState(false);
 
+  function handleVariantToggle() {
+    setIsVariant(!isVariant);
+  }
   useEffect(() => {
     const api = new GameClient({ logs: true, cacheOptions: {} });
     const pokedex = api.getPokedexByName("national");
@@ -30,6 +34,7 @@ export default function Mainpage() {
       setSelectedPoke(pokemonData);
       setSelectedSpecies(speciesData);
       setIsMinimized(false);
+      setIsVariant(false);
     } else {
       ("error trying to select pokemon");
     }
@@ -49,15 +54,17 @@ export default function Mainpage() {
   }
 
   return (
-    <div className="bg-primary">
+    <div className="relative bg-primary">
       <Navbar searchState={searchState} handleInput={handleInput} />
       <div className="relative">
         {selectedPoke && (
           <Pokeinfo
+            isVariant={isVariant}
             selectedPoke={selectedPoke}
             selectedSpecies={selectedSpecies}
             setSelectedPoke={setSelectedPoke}
             isMinimized={isMinimized}
+            handleVariantToggle={handleVariantToggle}
             handleClickMaximize={handleClickMaximize}
             handleClickMinimize={handleClickMinimize}
           />
