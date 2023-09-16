@@ -1,14 +1,14 @@
 import { HiOutlineChevronUp } from "react-icons/hi";
 import { IconContext } from "react-icons";
-import { PokeInfo } from "./typings";
 import { MouseEventHandler } from "react";
+import { Pokemon } from "pokenode-ts";
 
 export default function MinimizedPokeInfo({
   handleClickMaximize,
   selectedPoke,
 }: {
   handleClickMaximize: MouseEventHandler;
-  selectedPoke: PokeInfo;
+  selectedPoke: Pokemon;
 }) {
   return (
     <div>
@@ -33,14 +33,12 @@ export default function MinimizedPokeInfo({
           <img
             className="object-contain"
             src={
-              selectedPoke.pokemon.sprites.front_default
-                ? selectedPoke.pokemon.sprites.front_default
+              selectedPoke.sprites.front_default
+                ? selectedPoke.sprites.front_default
                 : "src/components/assets/sprite-unavailable.svg"
             }
           ></img>
-          <p className="capitalize my-auto font-bold">
-            {selectedPoke.pokemon.name}
-          </p>
+          <p className="capitalize my-auto font-bold">{selectedPoke.name}</p>
         </div>
       </div>
     </div>

@@ -3,16 +3,16 @@ import Navbar from "./Navbar";
 import { GameClient, Pokedex, Pokemon, PokemonSpecies } from "pokenode-ts";
 import Pokelist from "./PokeList";
 import Pokeinfo from "./Pokeinfo";
-import { PokeInfo } from "./typings";
 
 export default function Mainpage() {
   const [searchState, setSearchState] = useState("");
   const [pokedex, setPokedex] = useState<Pokedex>();
-  const [selectedPoke, setSelectedPoke] = useState<PokeInfo>();
+  const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
+  const [selectedSpecies, setSelectedSpecies] = useState<PokemonSpecies>();
   const [isMinimized, setIsMinimized] = useState(true);
 
   useEffect(() => {
-    const api = new GameClient();
+    const api = new GameClient({ logs: true, cacheOptions: {} });
     const pokedex = api.getPokedexByName("national");
     pokedex
       .then((response) => {
@@ -23,14 +23,12 @@ export default function Mainpage() {
 
   function handlePokecardClick(
     _: EventTarget,
-    pokemonData: React.MutableRefObject<Pokemon | undefined>,
-    pokemonSpeciesData: React.MutableRefObject<PokemonSpecies | undefined>
+    pokemonData: Pokemon | undefined,
+    speciesData: PokemonSpecies | undefined
   ) {
-    if (pokemonData.current && pokemonSpeciesData.current) {
-      setSelectedPoke({
-        pokemon: pokemonData.current,
-        species: pokemonSpeciesData.current,
-      });
+    if (pokemonData && speciesData) {
+      setSelectedPoke(pokemonData);
+      setSelectedSpecies(speciesData);
       setIsMinimized(false);
     } else {
       ("error trying to select pokemon");
@@ -57,9 +55,11 @@ export default function Mainpage() {
         {selectedPoke && (
           <Pokeinfo
             selectedPoke={selectedPoke}
+            selectedSpecies={selectedSpecies}
+            setSelectedPoke={setSelectedPoke}
             isMinimized={isMinimized}
-            handleClickMinimize={handleClickMinimize}
             handleClickMaximize={handleClickMaximize}
+            handleClickMinimize={handleClickMinimize}
           />
         )}
         {pokedex ? (

@@ -1,6 +1,6 @@
 import { Pokedex } from "pokenode-ts";
-import Pokecard from "./Pokecard";
 import { PokeCardClickHandler } from "./typings";
+import Pokecard from "./Pokecard";
 
 export default function Pokelist({
   pokedex,
@@ -13,7 +13,7 @@ export default function Pokelist({
 }) {
   const mappedPokeList = pokedex.pokemon_entries.map((v, i) => {
     i++;
-    if (i !== 1000) {
+    if (i > 50) {
       return;
     }
     return (

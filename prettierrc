@@ -1,7 +1,7 @@
 {
   "singleQuote": true,
-  "printwidth": 200,
-  "proseWrap": "always",
+  "printwidth": 1000,
+  "proseWrap": "preserve",
   "tabwidth": 4,
   "useTabs": true,
   "trailingComma": "none",

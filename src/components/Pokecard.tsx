@@ -37,7 +37,11 @@ export default function Pokecard({
       <div
         className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2"
         onClick={(e) => {
-          handlePokecardClick(e.target, pokemon, pokemonSpecies);
+          handlePokecardClick(
+            e.target,
+            pokemon.current,
+            pokemonSpecies.current
+          );
         }}
       >
         <div className="col-span-2 row-span-4">
@@ -88,7 +92,6 @@ export default function Pokecard({
       </div>
     );
   }
-  return;
 
   /**
    * With dynamic classnames, Tailwind needs the class to be mentioned,

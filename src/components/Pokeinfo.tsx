@@ -1,18 +1,28 @@
+import { Pokemon, PokemonSpecies } from "pokenode-ts";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
 import MinimizedPokeInfo from "./MinimizedPokeInfo";
-import { PokeInfo } from "./typings";
+import { useState } from "react";
 
 export default function Pokeinfo({
   selectedPoke,
+  selectedSpecies,
   isMinimized,
   handleClickMaximize,
   handleClickMinimize,
 }: {
-  selectedPoke: PokeInfo;
+  selectedPoke: Pokemon;
+  selectedSpecies: PokemonSpecies | undefined;
   isMinimized: boolean;
+  setSelectedPoke: React.Dispatch<React.SetStateAction<Pokemon | undefined>>;
   handleClickMaximize: () => void;
   handleClickMinimize: () => void;
 }) {
+  const [isVariant, setIsVariant] = useState(false);
+
+  function handleVariantToggle() {
+    setIsVariant(!isVariant);
+  }
+
   return (
     <>
       {isMinimized ? (
@@ -22,8 +32,10 @@ export default function Pokeinfo({
         />
       ) : (
         <MaximazedPokeInfo
+          isVariant={isVariant}
+          handleVariantToggle={handleVariantToggle}
+          selectedSpecies={selectedSpecies}
           handleClickMinimize={handleClickMinimize}
-          selectedPoke={selectedPoke}
         />
       )}
     </>

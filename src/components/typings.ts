@@ -11,6 +11,12 @@ export type InfoSettings = {
 
 export type PokeCardClickHandler = (
   e: EventTarget,
-  pokemonData: React.MutableRefObject<Pokemon | undefined>,
-  pokemonSpeciesData: React.MutableRefObject<PokemonSpecies | undefined>
+  pokemonData: Pokemon | undefined,
+  speciesData: PokemonSpecies | undefined
 ) => void;
+
+export type SpriteHas = {
+  shiny: false;
+  female: false;
+  shinyPlusFemale: false;
+};
