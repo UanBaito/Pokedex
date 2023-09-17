@@ -1,4 +1,4 @@
-import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
+import { Pokemon, PokemonClient } from "pokenode-ts";
 import { useEffect, useState, useRef } from "react";
 import { PokeCardClickHandler } from "./typings";
 
@@ -11,16 +11,12 @@ export default function Pokecard({
 }) {
   const [isListLoading, setIsListLoading] = useState(true);
   const pokemon = useRef<Pokemon>();
-  const pokemonSpecies = useRef<PokemonSpecies>();
 
   useEffect(() => {
     const api = new PokemonClient();
     api.getPokemonByName(`${name}`).then((response) => {
       pokemon.current = response;
-      api.getPokemonSpeciesByName(`${name}`).then((response) => {
-        pokemonSpecies.current = response;
-        setIsListLoading(false);
-      });
+      setIsListLoading(false);
     });
   }, [name]);
 
@@ -36,17 +32,14 @@ export default function Pokecard({
     return (
       <div
         className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2"
-        onClick={(e) => {
-          handlePokecardClick(
-            e.target,
-            pokemon.current,
-            pokemonSpecies.current
-          );
+        onClick={() => {
+          handlePokecardClick(pokemon.current);
         }}
       >
         <div className="col-span-2 row-span-4">
           <img
             className="object-contain mx-auto object-right"
+            loading="lazy"
             src={
               pokemon.current.sprites.front_default
                 ? pokemon.current.sprites.front_default

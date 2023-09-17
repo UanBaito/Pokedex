@@ -129,8 +129,8 @@ export default function MaximazedPokeInfo({
           selectedPoke.current = response;
           setIsLoading(false);
         })
-        .catch((e) => {
-          console.log("error fetching variety sprite");
+        .catch((err) => {
+          console.log(`error: ${err}`);
         });
     } else if (!isVariant && selectedSpecies?.varieties[0]) {
       api
@@ -139,8 +139,8 @@ export default function MaximazedPokeInfo({
           selectedPoke.current = response;
           setIsLoading(false);
         })
-        .catch((e) => {
-          console.log("error fetching default sprite");
+        .catch((err) => {
+          console.log(`error: ${err}`);
         });
     } else {
       console.log("error on fetch pokeeffect effect");
@@ -171,31 +171,27 @@ export default function MaximazedPokeInfo({
                   : spriteString
               }
             ></img>
-            <span
-              onClick={shouldReverseGray() ? undefined : handleReverseSprite}
+            <button
+              onClick={handleReverseSprite}
+              disabled={shouldReverseGray()}
               className={
-                shouldReverseGray()
-                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
-                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
+                "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2 disabled:bg-gray-900"
               }
             >
               <HiRefresh />
-            </span>
-            <span
-              onClick={shouldShinyGray() ? undefined : handleShinyToggle}
+            </button>
+            <button
+              onClick={handleShinyToggle}
+              disabled={shouldShinyGray()}
               className={
-                shouldShinyGray()
-                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
-                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
+                "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2 disabled:bg-gray-900"
               }
             >
               <HiOutlineSparkles />
-            </span>
-            <span
+            </button>
+            <button
               className={
-                !checkVariant()
-                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
-                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
+                "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2 disabled:bg-gray-900"
               }
               onClick={() => {
                 if (checkVariant()) {
@@ -203,9 +199,10 @@ export default function MaximazedPokeInfo({
                   handleVariantToggle();
                 }
               }}
+              disabled={!checkVariant()}
             >
               <HiOutlineSwitchHorizontal />
-            </span>
+            </button>
           </div>
         </div>
         <h3 className="text-white">"{}"</h3>

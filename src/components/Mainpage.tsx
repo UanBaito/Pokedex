@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { GameClient, Pokedex, Pokemon, PokemonSpecies } from "pokenode-ts";
+import { GameClient, Pokedex, Pokemon } from "pokenode-ts";
 import Pokelist from "./PokeList";
 import Pokeinfo from "./Pokeinfo";
 
@@ -8,7 +8,6 @@ export default function Mainpage() {
   const [searchState, setSearchState] = useState("");
   const [pokedex, setPokedex] = useState<Pokedex>();
   const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
-  const [selectedSpecies, setSelectedSpecies] = useState<PokemonSpecies>();
   const [isMinimized, setIsMinimized] = useState(true);
   const [isVariant, setIsVariant] = useState(false);
 
@@ -16,7 +15,7 @@ export default function Mainpage() {
     setIsVariant(!isVariant);
   }
   useEffect(() => {
-    const api = new GameClient({ logs: true, cacheOptions: {} });
+    const api = new GameClient({ logs: true });
     const pokedex = api.getPokedexByName("national");
     pokedex
       .then((response) => {
@@ -25,14 +24,9 @@ export default function Mainpage() {
       .catch(() => console.log("error"));
   }, []);
 
-  function handlePokecardClick(
-    _: EventTarget,
-    pokemonData: Pokemon | undefined,
-    speciesData: PokemonSpecies | undefined
-  ) {
-    if (pokemonData && speciesData) {
+  function handlePokecardClick(pokemonData: Pokemon | undefined) {
+    if (pokemonData) {
       setSelectedPoke(pokemonData);
-      setSelectedSpecies(speciesData);
       setIsMinimized(false);
       setIsVariant(false);
     } else {
@@ -61,7 +55,6 @@ export default function Mainpage() {
           <Pokeinfo
             isVariant={isVariant}
             selectedPoke={selectedPoke}
-            selectedSpecies={selectedSpecies}
             setSelectedPoke={setSelectedPoke}
             isMinimized={isMinimized}
             handleVariantToggle={handleVariantToggle}
