@@ -14,7 +14,7 @@ export default function MaximazedPokeInfo({
   selectedSpecies: PokemonSpecies | undefined;
 }) {
   return (
-    <div className="fixed overflow-y-scroll bottom-0 left-0 w-full h-full bg-black z-40">
+    <div className="fixed overflow-y-scroll bottom-0 left-0 w-full h-full bg-gray-800 z-40">
       <div
         onClick={handleClickMinimize}
         className="absolute top-0 right-0 bg-white rounded-full z-50 w-6 h-6 inline-flex justify-center items-center m-4"

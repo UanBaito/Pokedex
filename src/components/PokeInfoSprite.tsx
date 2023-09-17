@@ -148,69 +148,68 @@ export default function MaximazedPokeInfo({
     }
   }, [isVariant, selectedSpecies]);
 
-  if (!isLoading && selectedPoke.current) {
-    const spriteString = createSpriteString(
-      spriteSettings.isShiny,
-      !spriteSettings.isFemale,
-      spriteSettings.facingFront
-    );
-    return (
-      <div>
-        <div className="flex flex-col my-4">
-          <div className="flex justify-center h-44 relative">
-            <div className="w-3/5 inline-flex justify-center relative">
-              <img className="h-full object-contain" src={spriteString}></img>
-              <span
-                onClick={shouldReverseGray() ? undefined : handleReverseSprite}
-                className={
-                  shouldReverseGray()
-                    ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
-                    : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
+  if (!isLoading && !selectedPoke.current) {
+    return <h3>variabnle undefined</h3>;
+  }
+
+  const spriteString = createSpriteString(
+    spriteSettings.isShiny,
+    !spriteSettings.isFemale,
+    spriteSettings.facingFront
+  );
+
+  return (
+    <div>
+      <div className="flex flex-col my-4">
+        <div className="flex justify-center h-44 relative">
+          <div className="w-3/5 inline-flex justify-center relative">
+            <img
+              className="h-full object-contain"
+              src={
+                isLoading
+                  ? "src/components/assets/sprite-unavailable.svg"
+                  : spriteString
+              }
+            ></img>
+            <span
+              onClick={shouldReverseGray() ? undefined : handleReverseSprite}
+              className={
+                shouldReverseGray()
+                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
+                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2"
+              }
+            >
+              <HiRefresh />
+            </span>
+            <span
+              onClick={shouldShinyGray() ? undefined : handleShinyToggle}
+              className={
+                shouldShinyGray()
+                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
+                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
+              }
+            >
+              <HiOutlineSparkles />
+            </span>
+            <span
+              className={
+                !checkVariant()
+                  ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
+                  : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
+              }
+              onClick={() => {
+                if (checkVariant()) {
+                  clearSpriteSettings();
+                  handleVariantToggle();
                 }
-              >
-                <HiRefresh />
-              </span>
-              <span
-                onClick={shouldShinyGray() ? undefined : handleShinyToggle}
-                className={
-                  shouldShinyGray()
-                    ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
-                    : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2"
-                }
-              >
-                <HiOutlineSparkles />
-              </span>
-              <span
-                className={
-                  !checkVariant()
-                    ? "bg-gray-900 rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
-                    : "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2"
-                }
-                onClick={() => {
-                  if (checkVariant()) {
-                    clearSpriteSettings();
-                    handleVariantToggle();
-                  }
-                }}
-              >
-                <HiOutlineSwitchHorizontal />
-              </span>
-            </div>
-            <span className="capitalize font-bold text-lg absolute bottom-0 m-auto text-white">
-              {selectedPoke.current.name}
+              }}
+            >
+              <HiOutlineSwitchHorizontal />
             </span>
           </div>
-          <h3 className="text-white">"{}"</h3>
         </div>
+        <h3 className="text-white">"{}"</h3>
       </div>
-    );
-  } else if (!isLoading && !selectedPoke.current) {
-    return (
-      <h3 className="text-white font-bold text-lg">
-        error, selectedPoke appears to be undefined
-      </h3>
-    );
-  } else {
-    return <h3 className="text-white font-bold text-lg">Loading...</h3>;
-  }
+    </div>
+  );
 }
