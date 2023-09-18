@@ -15,12 +15,12 @@ export default function MinimizedPokeInfo({
   return (
     <div
       className={
-        "flex flex-row fixed bottom-0 bg-primary h-12 w-full z-50 " +
+        "flex flex-row flex-row-reverse fixed bottom-0 bg-primary h-12 w-full z-50 " +
         (isMinimized ? "" : "hidden")
       }
     >
-      <span
-        className="basis-1/5 flex justif justify-center align-middle bg-secondary"
+      <button
+        className="basis-1/4 flex justify-center align-middle bg-secondary"
         onClick={handleClickMaximize}
       >
         <IconContext.Provider
@@ -34,8 +34,8 @@ export default function MinimizedPokeInfo({
             <HiOutlineChevronUp />
           </div>
         </IconContext.Provider>
-      </span>
-      <div className="flex flex-row basis-2/4 justify-center">
+      </button>
+      <div className="flex flex-row basis-3/4 justify-center">
         <img
           className="object-contain"
           src={
