@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { GameClient, Pokedex, Pokemon } from "pokenode-ts";
+import {
+  GameClient,
+  Pokedex,
+  Pokemon,
+  PokemonClient,
+  PokemonSpecies,
+} from "pokenode-ts";
 import Pokelist from "./PokeList";
 
 import MinimizedPokeInfo from "./MinimizedPokeInfo";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
+import PokeInfoSprite from "./PokeInfoSprite";
 
 export default function Mainpage() {
   const [searchState, setSearchState] = useState("");
@@ -12,6 +19,8 @@ export default function Mainpage() {
   const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
   const [isMinimized, setIsMinimized] = useState(true);
   const [isVariant, setIsVariant] = useState(false);
+  const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
+  const [isSpeciesLoading, setIsSpeciesLoading] = useState(true);
 
   useEffect(() => {
     const api = new GameClient({ logs: true });
@@ -27,6 +36,18 @@ export default function Mainpage() {
     if (pokemonData && pokemonData.name !== selectedPoke?.name) {
       setSelectedPoke(pokemonData);
       setIsVariant(false);
+      console.log("species loading");
+      const api = new PokemonClient();
+      api
+        .getPokemonSpeciesByName(`${pokemonData.name}`)
+        .then((response) => {
+          setPokemonSpecies(response);
+          setIsSpeciesLoading(false);
+        })
+        .catch((err) => {
+          console.log(`error: ${err}`);
+          setIsSpeciesLoading(false);
+        });
     } else {
       console.log("same poke selected");
     }
@@ -43,7 +64,7 @@ export default function Mainpage() {
   }
 
   function handleVariantToggle() {
-    setIsVariant((prevState) => !prevState);
+    if (pokemonSpecies?.varieties[0].pokemon.name);
   }
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,12 +83,17 @@ export default function Mainpage() {
               isMinimized={isMinimized}
             />
             <MaximazedPokeInfo
-              isVariant={isVariant}
-              handleVariantToggle={handleVariantToggle}
-              selectedPoke={selectedPoke}
               handleClickMinimize={handleClickMinimize}
               isMinimized={isMinimized}
-            />
+              isSpeciesLoading={isSpeciesLoading}
+            >
+              <PokeInfoSprite
+                pokemon={pokemon}
+                selectedSpecies={pokemonSpecies}
+                isVariant={isVariant}
+                handleVariantToggle={handleVariantToggle}
+              />
+            </MaximazedPokeInfo>
           </>
         )}
         {pokedex ? (

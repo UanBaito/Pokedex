@@ -1,45 +1,19 @@
 import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
 import { HiOutlineChevronDown } from "react-icons/hi";
-import PokeInfoSprite from "./PokeInfoSprite";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function MaximazedPokeInfo({
+  children,
   handleClickMinimize,
-  isVariant,
-  selectedPoke,
-  handleVariantToggle,
   isMinimized,
+  isSpeciesLoading,
 }: {
+  children: React.ReactNode;
+  isSpeciesLoading: boolean;
   handleClickMinimize: () => void;
-  handleVariantToggle: () => void;
-  selectedPoke: Pokemon;
-  isVariant: boolean;
   isMinimized: boolean;
 }) {
-  const [isSpeciesLoading, setIsSpeciesLoading] = useState(true);
-  const [isVariantLoading, setVariantIsLoading] = useState(true);
-  const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
-  const [pokemon, setPokemon] = useState<Pokemon>();
-
-  useLayoutEffect(() => {
-    const fetchSpecies = async () => {
-      setIsSpeciesLoading(true);
-      console.log("species loading");
-      const api = new PokemonClient();
-      await api
-        .getPokemonSpeciesByName(`${selectedPoke.name}`)
-        .then((response) => {
-          setPokemonSpecies(response);
-          setIsSpeciesLoading(false);
-        })
-        .catch((err) => {
-          console.log(`error: ${err}`);
-          setIsSpeciesLoading(false);
-        });
-    };
-    fetchSpecies();
-  }, [selectedPoke]);
-
+  /** 
   useLayoutEffect(() => {
     const fetchVariant = async () => {
       setVariantIsLoading(true);
@@ -64,8 +38,9 @@ export default function MaximazedPokeInfo({
 
     fetchVariant();
   }, [isVariant, pokemonSpecies, selectedPoke]);
+*/
 
-  if (isSpeciesLoading || !pokemonSpecies || isVariantLoading || !pokemon) {
+  if (isSpeciesLoading) {
     return (
       <>
         <div
@@ -98,12 +73,7 @@ export default function MaximazedPokeInfo({
       >
         <HiOutlineChevronDown />
       </button>
-      <PokeInfoSprite
-        pokemon={pokemon}
-        selectedSpecies={pokemonSpecies}
-        isVariant={isVariant}
-        handleVariantToggle={handleVariantToggle}
-      />
+      {children}
     </div>
   );
 }
