@@ -13,7 +13,7 @@ export default function Pokelist({
 }) {
   const mappedPokeList = pokedex.pokemon_entries.map((v, i) => {
     i++;
-    if (i !== 1010) {
+    if (i > 50) {
       return;
     }
     return (

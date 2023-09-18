@@ -1,5 +1,5 @@
 import { Pokemon, PokemonClient } from "pokenode-ts";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { PokeCardClickHandler } from "./typings";
 
 export default function Pokecard({
@@ -9,31 +9,32 @@ export default function Pokecard({
   name: string;
   handlePokecardClick: PokeCardClickHandler;
 }) {
-  const [isListLoading, setIsListLoading] = useState(true);
-  const pokemon = useRef<Pokemon>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
+    setIsLoading(true);
     const api = new PokemonClient();
     api.getPokemonByName(`${name}`).then((response) => {
-      pokemon.current = response;
-      setIsListLoading(false);
+      setPokemon(response);
+      setIsLoading(false);
     });
   }, [name]);
 
-  if (!isListLoading && pokemon.current) {
-    const typeOne = pokemon.current.types[0].type.name;
+  if (!isLoading && pokemon) {
+    const typeOne = pokemon.types[0].type.name;
     const typeOneString = `src/components/assets/types/${typeOne}.svg`;
     let typeTwo: undefined | string;
     let typeTwoString: undefined | string;
-    if (pokemon.current.types[1]) {
-      typeTwo = pokemon.current.types[1].type.name;
+    if (pokemon.types[1]) {
+      typeTwo = pokemon.types[1].type.name;
       typeTwoString = `src/components/assets/types/${typeTwo}.svg`;
     }
     return (
       <div
         className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2"
         onClick={() => {
-          handlePokecardClick(pokemon.current);
+          handlePokecardClick(pokemon);
         }}
       >
         <div className="col-span-2 row-span-4">
@@ -41,9 +42,7 @@ export default function Pokecard({
             className="object-contain mx-auto object-right"
             loading="lazy"
             src={
-              pokemon.current.sprites.front_default
-                ? pokemon.current.sprites.front_default
-                : ""
+              pokemon.sprites.front_default ? pokemon.sprites.front_default : ""
             }
           ></img>
         </div>
@@ -52,7 +51,7 @@ export default function Pokecard({
         </span>
         <span className="col-span-2 text-center row-start-6">
           N.º
-          {pokemon.current.id}
+          {pokemon.id}
         </span>
 
         <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 mr-1">
