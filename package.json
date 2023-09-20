@@ -10,9 +10,22 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "relay": {
+    "src": "./src",
+    "language": "typescript",
+    "schema": "./UnofficialSchema.graphql",
+    "eagerEsModules": true,
+    "excludes": [
+      "**/node_modules/**",
+      "**/__mocks__/**",
+      "**/__generated__/**"
+    ]
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "axios-cache-interceptor": "^1.2.0",
+    "babel-plugin-relay": "^15.0.0",
+    "graphql": "^16.8.1",
     "pokenode-ts": "^1.19.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,8 +34,12 @@
     "relay-compiler": "^15.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/react-relay": "^14.1.5",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^4.0.0",
@@ -33,6 +50,7 @@
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-relay": "^2.0.0"
   }
 }

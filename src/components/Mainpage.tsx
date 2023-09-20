@@ -2,11 +2,25 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { GameClient, Pokedex, Pokemon } from "pokenode-ts";
 import Pokelist from "./PokeList";
-
 import MinimizedPokeInfo from "./MinimizedPokeInfo";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
+import { useLazyLoadQuery } from "react-relay";
+import { graphql } from "react-relay";
+
+const MainpageQuery = graphql`
+  query MainpageQuery {
+    pokemons(limit: 151) {
+      results {
+        name
+      }
+    }
+  }
+`;
 
 export default function Mainpage() {
+  const data = useLazyLoadQuery(MainpageQuery, {});
+  console.log(data);
+
   const [searchState, setSearchState] = useState("");
   const [pokedex, setPokedex] = useState<Pokedex>();
   const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
