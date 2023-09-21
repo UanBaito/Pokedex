@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Navbar from "./Navbar";
 import { Pokemon } from "pokenode-ts";
 import Pokelist from "./PokeList";
@@ -13,23 +13,22 @@ const MainpageQuery = graphql`
     pokemon_v2_pokemon(limit: 50, order_by: { id: asc }) {
       ...PokeListFragment
     }
+    ...MaximazedPokeInfoFragment
   }
 `;
 
 export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
+  const pokeid = 19;
 
-  const [selectedPoke, setSelectedPoke] = useState<Pokemon>();
+  const [selectedPoke, setSelectedPoke] = useState("");
   const [isMinimized, setIsMinimized] = useState(true);
   const [isVariant, setIsVariant] = useState(false);
+  const refetchMaxInfoQuery = useRef();
 
-  function handlePokecardClick(pokemonData: Pokemon | undefined) {
-    if (pokemonData && pokemonData.name !== selectedPoke?.name) {
-      setSelectedPoke(pokemonData);
-      setIsVariant(false);
-    } else {
-      console.log("same poke selected");
-    }
+  function handlePokecardClick(pokemonName: string) {
+    setSelectedPoke(pokemonName);
+    refetchMaxInfoQuery.current({ pokeName: pokemonName });
     setIsMinimized(false);
     return;
   }
@@ -50,22 +49,16 @@ export default function Mainpage() {
     <div className="relative bg-primary">
       <Navbar />
       <div className="relative">
-        {selectedPoke && (
-          <>
-            <MinimizedPokeInfo
-              handleClickMaximize={handleClickMaximize}
-              selectedPoke={selectedPoke}
-              isMinimized={isMinimized}
-            />
-            <MaximazedPokeInfo
-              isVariant={isVariant}
-              handleVariantToggle={handleVariantToggle}
-              selectedPoke={selectedPoke}
-              handleClickMinimize={handleClickMinimize}
-              isMinimized={isMinimized}
-            />
-          </>
-        )}
+        <>
+          <MaximazedPokeInfo
+            refetchMaxInfoQuery={refetchMaxInfoQuery}
+            pokeSpecies={data}
+            isVariant={isVariant}
+            handleVariantToggle={handleVariantToggle}
+            handleClickMinimize={handleClickMinimize}
+            isMinimized={isMinimized}
+          />
+        </>
 
         <Pokelist
           pokeList={data.pokemon_v2_pokemon}

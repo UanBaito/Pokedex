@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2d5f0a0bdee520d082e98c8b0523515b>>
+ * @generated SignedSource<<1a6c1630759630d856105d233d1bbfc1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,7 @@ export type MainpageQuery$data = {
   readonly pokemon_v2_pokemon: ReadonlyArray<{
     readonly " $fragmentSpreads": FragmentRefs<"PokeListFragment">;
   }>;
+  readonly " $fragmentSpreads": FragmentRefs<"MaximazedPokeInfoFragment">;
 };
 export type MainpageQuery = {
   response: MainpageQuery$data;
@@ -65,6 +66,11 @@ return {
           }
         ],
         "storageKey": "pokemon_v2_pokemon(limit:50,order_by:{\"id\":\"asc\"})"
+      },
+      {
+        "args": null,
+        "kind": "FragmentSpread",
+        "name": "MaximazedPokeInfoFragment"
       }
     ],
     "type": "query_root",
@@ -124,20 +130,85 @@ return {
           }
         ],
         "storageKey": "pokemon_v2_pokemon(limit:50,order_by:{\"id\":\"asc\"})"
+      },
+      {
+        "alias": null,
+        "args": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "kind": "Literal",
+                    "name": "_eq",
+                    "value": ""
+                  }
+                ],
+                "kind": "ObjectValue",
+                "name": "name"
+              }
+            ],
+            "kind": "ObjectValue",
+            "name": "where"
+          }
+        ],
+        "concreteType": "pokemon_v2_pokemonspecies",
+        "kind": "LinkedField",
+        "name": "pokemon_v2_pokemonspecies",
+        "plural": true,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_pokemon",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_pokemons",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "pokemon_v2_pokemonsprites",
+                "kind": "LinkedField",
+                "name": "pokemon_v2_pokemonsprites",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "sprites",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "pokemon_id",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"\"}})"
       }
     ]
   },
   "params": {
-    "cacheID": "aeb16fc2f1bac1045a13ee14d784a394",
+    "cacheID": "96d7ea6ffa1c0fb3f3285d41706d8260",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 50, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 50, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    ...PokeInfoSpriteFragment\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    pokemon_v2_pokemonsprites {\n      sprites\n      pokemon_id\n    }\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "06e31a64b9ab23ae1eb1e74f4596e612";
+(node as any).hash = "ec2cf6978491d9fb1623f0bfe6277615";
 
 export default node;

@@ -9,7 +9,7 @@ export type InfoSettings = {
   sprite: { hasBack: true; facingFront: true; isShiny: false };
 };
 
-export type PokeCardClickHandler = (pokemonData: Pokemon | undefined) => void;
+export type PokeCardClickHandler = (pokemonData: string) => void;
 
 export type SpriteHas = {
   shiny: false;

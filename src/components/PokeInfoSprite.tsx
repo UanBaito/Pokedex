@@ -5,23 +5,52 @@ import {
   HiOutlineSparkles,
   HiOutlineSwitchHorizontal,
 } from "react-icons/hi";
+import { graphql, useFragment } from "react-relay";
+import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
+
+const PokeInfoSpriteFragment = graphql`
+  fragment PokeInfoSpriteFragment on pokemon_v2_pokemonspecies
+  @relay(plural: true) {
+    pokemon_v2_pokemons {
+      pokemon_v2_pokemonsprites {
+        sprites
+        pokemon_id
+      }
+    }
+  }
+`;
 
 export default function PokeInfoSprite({
   selectedSpecies,
   handleVariantToggle,
-  pokemon,
+  sprites,
 }: {
   handleVariantToggle: () => void;
   isVariant: boolean;
   selectedSpecies: PokemonSpecies | undefined;
-  pokemon: Pokemon | undefined;
+  sprites: PokeInfoSpriteFragment$key;
 }) {
+  const data = useFragment(PokeInfoSpriteFragment, sprites);
   const [spriteSettings, setSpriteSettings] = useState({
     facingFront: true,
     isShiny: false,
     isFemale: false,
   });
 
+  console.log(data);
+
+  let spritesList: any;
+  let pokeID: number | null;
+
+  if (data[0]) {
+    pokeID =
+      data[0].pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].pokemon_id;
+    spritesList = JSON.parse(
+      data[0].pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].sprites
+    );
+  }
+
+  console.log(spritesList);
   let spriteString: string | undefined = "";
 
   function shouldReverseGray() {
@@ -29,7 +58,8 @@ export default function PokeInfoSprite({
       createSpriteString(
         spriteSettings.isShiny,
         !spriteSettings.isFemale,
-        !spriteSettings.facingFront
+        !spriteSettings.facingFront,
+        spritesList
       )
     ) {
       return false;
@@ -43,7 +73,8 @@ export default function PokeInfoSprite({
       createSpriteString(
         !spriteSettings.isShiny,
         !spriteSettings.isFemale,
-        spriteSettings.facingFront
+        spriteSettings.facingFront,
+        spritesList
       )
     ) {
       return false;
@@ -85,29 +116,46 @@ export default function PokeInfoSprite({
   function createSpriteString(
     isShiny: boolean,
     isMale: boolean,
-    isFacingFront: boolean
+    isFacingFront: boolean,
+    sprites: any
   ) {
     let spriteString = "";
-    if (pokemon) {
+    if (sprites) {
       if (!isFacingFront) {
         if (isShiny && isMale) {
-          spriteString = pokemon.sprites.back_shiny ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${pokeID}.png` ??
+            "";
         } else if (isShiny && !isMale) {
-          spriteString = pokemon.sprites.back_shiny_female ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/female/${pokeID}.png` ??
+            "";
         } else if (isMale) {
-          spriteString = pokemon.sprites.back_default ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokeID}.png` ??
+            "";
         } else {
-          spriteString = pokemon.sprites.back_female ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/female/${pokeID}.png` ??
+            "";
         }
       } else {
         if (isShiny && isMale) {
-          spriteString = pokemon.sprites.front_shiny ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokeID}.png` ??
+            "";
         } else if (isShiny && !isMale) {
-          spriteString = pokemon.sprites.front_shiny_female ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/female/${pokeID}.png` ??
+            "";
         } else if (isMale) {
-          spriteString = pokemon.sprites.front_default ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeID}.png` ??
+            "";
         } else {
-          spriteString = pokemon.sprites.front_female ?? "";
+          spriteString =
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/${pokeID}.png` ??
+            "";
         }
       }
       return spriteString;
@@ -117,7 +165,8 @@ export default function PokeInfoSprite({
   spriteString = createSpriteString(
     spriteSettings.isShiny,
     !spriteSettings.isFemale,
-    spriteSettings.facingFront
+    spriteSettings.facingFront,
+    spritesList
   );
 
   return (

@@ -22,24 +22,24 @@ export default function Pokecard({
   handlePokecardClick: PokeCardClickHandler;
   pokemon: PokecardFragment$key;
 }) {
-  const data = useFragment(PokecardFragment, pokemon);
+  const pokemonData = useFragment(PokecardFragment, pokemon);
 
-  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.pokeID}.png
+  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.pokeID}.png
 `;
-  const typeOne = data.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
+  const typeOne = pokemonData.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
   const typeOneString = `src/components/assets/types/${typeOne}.svg`;
   let typeTwo: undefined | string;
   let typeTwoString: undefined | string;
-  if (data.pokemon_v2_pokemontypes[1]) {
-    typeTwo = data.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
+  if (pokemonData.pokemon_v2_pokemontypes[1]) {
+    typeTwo = pokemonData.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
     typeTwoString = `src/components/assets/types/${typeTwo}.svg`;
   }
   return (
     <div
       className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
-      // onClick={() => {
-      //   handlePokecardClick(pokemon);
-      // }}
+      onClick={() => {
+        handlePokecardClick(pokemonData.name);
+      }}
     >
       <div className="col-span-2 row-span-4">
         <img
@@ -49,11 +49,11 @@ export default function Pokecard({
         ></img>
       </div>
       <span className="text-center capitalize font-bold text-lg col-span-2 row-span-2">
-        {data.name}
+        {pokemonData.name}
       </span>
       <span className="col-span-2 text-center row-start-6">
         N.º
-        {data.pokeID}
+        {pokemonData.pokeID}
       </span>
 
       <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 mr-1">
