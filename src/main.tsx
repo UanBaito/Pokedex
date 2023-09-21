@@ -22,12 +22,9 @@ import { RelayEnvironmentProvider } from "react-relay";
  * @param {Variables} variables - Variables used in the GraphQL query.
  */
 function fetchFunction(params: any, variables: any) {
-  const response = fetch("https://graphql-pokeapi.vercel.app/api/graphql", {
+  const response = fetch("https://beta.pokeapi.co/graphql/v1beta", {
     method: "POST",
-    headers: [
-      ["Content-Type", "application/json"],
-      ["accept", "*/*"],
-    ],
+    headers: [["Content-Type", "application/json"]],
     body: JSON.stringify({
       query: params.text,
       variables,

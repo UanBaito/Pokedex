@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1897f904433edd162720de76180463cd>>
+ * @generated SignedSource<<dc047f5cd368581399d2ae9e91adc24f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,13 +9,12 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
+import { FragmentRefs } from "relay-runtime";
 export type MainpageQuery$variables = {};
 export type MainpageQuery$data = {
-  readonly pokemons: {
-    readonly results: ReadonlyArray<{
-      readonly name: string | null;
-    } | null> | null;
-  } | null;
+  readonly pokemon_v2_pokemon: ReadonlyArray<{
+    readonly " $fragmentSpreads": FragmentRefs<"PokeListFragment">;
+  }>;
 };
 export type MainpageQuery = {
   response: MainpageQuery$data;
@@ -25,39 +24,16 @@ export type MainpageQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Literal",
-        "name": "limit",
-        "value": 151
-      }
-    ],
-    "concreteType": "PokemonList",
-    "kind": "LinkedField",
-    "name": "pokemons",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "PokemonItem",
-        "kind": "LinkedField",
-        "name": "results",
-        "plural": true,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "name",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "storageKey": "pokemons(limit:151)"
+    "kind": "Literal",
+    "name": "limit",
+    "value": 20
+  },
+  {
+    "kind": "Literal",
+    "name": "order_by",
+    "value": {
+      "id": "asc"
+    }
   }
 ];
 return {
@@ -66,8 +42,25 @@ return {
     "kind": "Fragment",
     "metadata": null,
     "name": "MainpageQuery",
-    "selections": (v0/*: any*/),
-    "type": "Query",
+    "selections": [
+      {
+        "alias": null,
+        "args": (v0/*: any*/),
+        "concreteType": "pokemon_v2_pokemon",
+        "kind": "LinkedField",
+        "name": "pokemon_v2_pokemon",
+        "plural": true,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "PokeListFragment"
+          }
+        ],
+        "storageKey": "pokemon_v2_pokemon(limit:20,order_by:{\"id\":\"asc\"})"
+      }
+    ],
+    "type": "query_root",
     "abstractKey": null
   },
   "kind": "Request",
@@ -75,19 +68,63 @@ return {
     "argumentDefinitions": [],
     "kind": "Operation",
     "name": "MainpageQuery",
-    "selections": (v0/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v0/*: any*/),
+        "concreteType": "pokemon_v2_pokemon",
+        "kind": "LinkedField",
+        "name": "pokemon_v2_pokemon",
+        "plural": true,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "name",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_pokemontype",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_pokemontypes",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "slot",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "type_id",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": "pokemon_v2_pokemon(limit:20,order_by:{\"id\":\"asc\"})"
+      }
+    ]
   },
   "params": {
-    "cacheID": "d3d638927e482070640a92fc04c4b6cc",
+    "cacheID": "f21668efcbf3b57be463574a5fb8f944",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemons(limit: 151) {\n    results {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 20, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  pokemon_v2_pokemontypes {\n    slot\n    type_id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b6ac934026a63b6b9ddb9a9bbd1dc828";
+(node as any).hash = "c7ed95694776827141616961f96cdd29";
 
 export default node;

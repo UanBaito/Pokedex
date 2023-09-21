@@ -1,28 +1,57 @@
-import { Pokedex } from "pokenode-ts";
 import { PokeCardClickHandler } from "./typings";
 import Pokecard from "./Pokecard";
+import { useMemo, useState } from "react";
+import Searchbar from "./Searchbar";
+import { graphql, useFragment } from "react-relay";
+import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
+
+const PokeListFragment = graphql`
+  fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
+    name
+    pokemon_v2_pokemontypes {
+      slot
+      type_id
+    }
+  }
+`;
 
 export default function Pokelist({
-  pokedex,
   handlePokecardClick,
   isMinimized,
+  pokeList,
 }: {
-  pokedex: Pokedex;
   handlePokecardClick: PokeCardClickHandler;
   isMinimized: boolean;
+  pokeList: PokeListFragment$key;
 }) {
-  const mappedPokeList = pokedex.pokemon_entries.map((v, i) => {
-    i++;
-    if (i > 50) {
+  const data = useFragment(PokeListFragment, pokeList);
+  console.log(data);
+
+  const [searchState, setSearchState] = useState("");
+  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchState((e.target as HTMLInputElement).value);
+  }
+
+  const regSearch = new RegExp(`^${searchState}`);
+
+  const MemoizedList = useMemo(() => {
+    return data.map((v) => {
+      return (
+        <Pokecard
+          key={v.name}
+          name={v.name}
+          handlePokecardClick={handlePokecardClick}
+        />
+      );
+    });
+  }, [data, handlePokecardClick]);
+
+  const visiblePokeCards = MemoizedList.map((v) => {
+    const { name } = v.props;
+    if (!regSearch.test(name)) {
       return;
     }
-    return (
-      <Pokecard
-        key={v.pokemon_species.name}
-        name={v.pokemon_species.name}
-        handlePokecardClick={handlePokecardClick}
-      />
-    );
+    return v;
   });
 
   return (
@@ -31,7 +60,8 @@ export default function Pokelist({
         isMinimized ? "flex flex-col flex-wrap justify-center mb-14" : "hidden"
       }
     >
-      {mappedPokeList}
+      <Searchbar searchState={searchState} handleInput={handleInput} />
+      {visiblePokeCards}
     </div>
   );
 }

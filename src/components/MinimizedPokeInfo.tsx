@@ -15,7 +15,7 @@ export default function MinimizedPokeInfo({
   return (
     <div
       className={
-        "flex flex-row flex-row-reverse fixed bottom-0 bg-primary h-12 w-full z-50 " +
+        "flex flex-row-reverse fixed bottom-0 bg-primary h-12 w-full z-50 " +
         (isMinimized ? "" : "hidden")
       }
     >
