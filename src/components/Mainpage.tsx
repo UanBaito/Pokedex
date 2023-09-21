@@ -10,7 +10,7 @@ import type { MainpageQuery as MainpageQueryType } from "./__generated__/Mainpag
 
 const MainpageQuery = graphql`
   query MainpageQuery {
-    pokemon_v2_pokemon(limit: 20, order_by: { id: asc }) {
+    pokemon_v2_pokemon(limit: 5, order_by: { id: asc }) {
       ...PokeListFragment
     }
   }

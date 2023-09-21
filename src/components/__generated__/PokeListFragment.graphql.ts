@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ab82c4da68e7d0eb00f7800c458e0205>>
+ * @generated SignedSource<<0ecdecffdb8803c00fd5104b555843f1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,9 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PokeListFragment$data = ReadonlyArray<{
   readonly name: string;
+  readonly pokemon_v2_pokemonsprites: ReadonlyArray<{
+    readonly sprites: string;
+  }>;
   readonly pokemon_v2_pokemontypes: ReadonlyArray<{
     readonly slot: number;
     readonly type_id: number | null;
@@ -62,12 +65,30 @@ const node: ReaderFragment = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "pokemon_v2_pokemonsprites",
+      "kind": "LinkedField",
+      "name": "pokemon_v2_pokemonsprites",
+      "plural": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "sprites",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
     }
   ],
   "type": "pokemon_v2_pokemon",
   "abstractKey": null
 };
 
-(node as any).hash = "08e35c34c86a55df4031e0d95f538b25";
+(node as any).hash = "aa31c20683ecdfbe175e572f98547db8";
 
 export default node;

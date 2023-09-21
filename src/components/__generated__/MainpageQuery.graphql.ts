@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<dc047f5cd368581399d2ae9e91adc24f>>
+ * @generated SignedSource<<b2d542035f0537d7db0cb8863964cd5b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -26,7 +26,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "limit",
-    "value": 20
+    "value": 5
   },
   {
     "kind": "Literal",
@@ -57,7 +57,7 @@ return {
             "name": "PokeListFragment"
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:20,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
       }
     ],
     "type": "query_root",
@@ -108,23 +108,41 @@ return {
               }
             ],
             "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_pokemonsprites",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_pokemonsprites",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "sprites",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:20,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
       }
     ]
   },
   "params": {
-    "cacheID": "f21668efcbf3b57be463574a5fb8f944",
+    "cacheID": "281e0a5d2957251563b626fd4e264fde",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 20, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  pokemon_v2_pokemontypes {\n    slot\n    type_id\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 5, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  pokemon_v2_pokemontypes {\n    slot\n    type_id\n  }\n  pokemon_v2_pokemonsprites {\n    sprites\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c7ed95694776827141616961f96cdd29";
+(node as any).hash = "c51eb7b2c6e292f5a15010e55fbf6c0c";
 
 export default node;

@@ -1,6 +1,6 @@
 import { PokeCardClickHandler } from "./typings";
 import Pokecard from "./Pokecard";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
@@ -11,6 +11,9 @@ const PokeListFragment = graphql`
     pokemon_v2_pokemontypes {
       slot
       type_id
+    }
+    pokemon_v2_pokemonsprites {
+      sprites
     }
   }
 `;
@@ -25,7 +28,6 @@ export default function Pokelist({
   pokeList: PokeListFragment$key;
 }) {
   const data = useFragment(PokeListFragment, pokeList);
-  console.log(data);
 
   const [searchState, setSearchState] = useState("");
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,24 +36,19 @@ export default function Pokelist({
 
   const regSearch = new RegExp(`^${searchState}`);
 
-  const MemoizedList = useMemo(() => {
-    return data.map((v) => {
-      return (
-        <Pokecard
-          key={v.name}
-          name={v.name}
-          handlePokecardClick={handlePokecardClick}
-        />
-      );
-    });
-  }, [data, handlePokecardClick]);
-
-  const visiblePokeCards = MemoizedList.map((v) => {
-    const { name } = v.props;
-    if (!regSearch.test(name)) {
+  const visiblePokeCards = data.map((v) => {
+    if (!regSearch.test(v.name)) {
       return;
     }
-    return v;
+    const sprites = JSON.parse(v.pokemon_v2_pokemonsprites[0].sprites);
+    return (
+      <Pokecard
+        sprite={sprites.front_default}
+        key={v.name}
+        name={v.name}
+        handlePokecardClick={handlePokecardClick}
+      />
+    );
   });
 
   return (

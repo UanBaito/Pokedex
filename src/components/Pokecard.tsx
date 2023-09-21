@@ -5,9 +5,11 @@ import { PokeCardClickHandler } from "./typings";
 export default function Pokecard({
   name,
   handlePokecardClick,
+  sprite,
 }: {
   name: string;
   handlePokecardClick: PokeCardClickHandler;
+  sprite: any;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemon, setPokemon] = useState<Pokemon>();
