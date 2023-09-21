@@ -8,12 +8,11 @@ import type { PokeListFragment$key } from "./__generated__/PokeListFragment.grap
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
     name
+    ...PokecardFragment
     pokemon_v2_pokemontypes {
-      slot
-      type_id
-    }
-    pokemon_v2_pokemonsprites {
-      sprites
+      pokemon_v2_type {
+        name
+      }
     }
   }
 `;
@@ -40,12 +39,11 @@ export default function Pokelist({
     if (!regSearch.test(v.name)) {
       return;
     }
-    const sprites = JSON.parse(v.pokemon_v2_pokemonsprites[0].sprites);
+
     return (
       <Pokecard
-        sprite={sprites.front_default}
+        pokemon={v}
         key={v.name}
-        name={v.name}
         handlePokecardClick={handlePokecardClick}
       />
     );

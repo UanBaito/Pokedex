@@ -1,91 +1,86 @@
-import { Pokemon, PokemonClient } from "pokenode-ts";
-import { useEffect, useState } from "react";
 import { PokeCardClickHandler } from "./typings";
+import { graphql, useFragment } from "react-relay";
+import { PokecardFragment$key } from "./__generated__/PokecardFragment.graphql";
+
+const PokecardFragment = graphql`
+  fragment PokecardFragment on pokemon_v2_pokemon {
+    name
+    pokeID: id
+    pokemon_v2_pokemontypes {
+      slot
+      pokemon_v2_type {
+        name
+      }
+    }
+  }
+`;
 
 export default function Pokecard({
-  name,
   handlePokecardClick,
-  sprite,
+  pokemon,
 }: {
-  name: string;
   handlePokecardClick: PokeCardClickHandler;
-  sprite: any;
+  pokemon: PokecardFragment$key;
 }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [pokemon, setPokemon] = useState<Pokemon>();
+  const data = useFragment(PokecardFragment, pokemon);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const api = new PokemonClient();
-    api.getPokemonByName(`${name}`).then((response) => {
-      setPokemon(response);
-      setIsLoading(false);
-    });
-  }, [name]);
+  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.pokeID}.png
+`;
+  const typeOne = data.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
+  const typeOneString = `src/components/assets/types/${typeOne}.svg`;
+  let typeTwo: undefined | string;
+  let typeTwoString: undefined | string;
+  if (data.pokemon_v2_pokemontypes[1]) {
+    typeTwo = data.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
+    typeTwoString = `src/components/assets/types/${typeTwo}.svg`;
+  }
+  return (
+    <div
+      className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
+      // onClick={() => {
+      //   handlePokecardClick(pokemon);
+      // }}
+    >
+      <div className="col-span-2 row-span-4">
+        <img
+          className="object-contain mx-auto object-right"
+          loading="lazy"
+          src={sprite}
+        ></img>
+      </div>
+      <span className="text-center capitalize font-bold text-lg col-span-2 row-span-2">
+        {data.name}
+      </span>
+      <span className="col-span-2 text-center row-start-6">
+        N.º
+        {data.pokeID}
+      </span>
 
-  if (!isLoading && pokemon) {
-    const typeOne = pokemon.types[0].type.name;
-    const typeOneString = `src/components/assets/types/${typeOne}.svg`;
-    let typeTwo: undefined | string;
-    let typeTwoString: undefined | string;
-    if (pokemon.types[1]) {
-      typeTwo = pokemon.types[1].type.name;
-      typeTwoString = `src/components/assets/types/${typeTwo}.svg`;
-    }
-    return (
-      <div
-        className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
-        onClick={() => {
-          handlePokecardClick(pokemon);
-        }}
-      >
-        <div className="col-span-2 row-span-4">
+      <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 mr-1">
+        <img
+          src={typeOneString}
+          className="relative z-10 object-fit w-full h-full p-2"
+        ></img>
+        <span
+          className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeOne} `}
+        ></span>
+      </div>
+
+      {typeTwo ? (
+        <div className="relative my-1 col-start-6 row-start-4 row-span-3 col-span-3 mr-1">
           <img
-            className="object-contain mx-auto object-right"
-            loading="lazy"
-            src={
-              pokemon.sprites.front_default ? pokemon.sprites.front_default : ""
-            }
-          ></img>
-        </div>
-        <span className="text-center capitalize font-bold text-lg col-span-2 row-span-2">
-          {name}
-        </span>
-        <span className="col-span-2 text-center row-start-6">
-          N.º
-          {pokemon.id}
-        </span>
-
-        <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 mr-1">
-          <img
-            src={typeOneString}
+            src={typeTwoString}
             className="relative z-10 object-fit w-full h-full p-2"
           ></img>
           <span
-            className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeOne} `}
+            className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeTwo} `}
           ></span>
         </div>
-
-        {/* <span className={`z-10 col-start-6 row-start-4 m-2`}>
-          {typeTwo ? <img src={typeTwoString}></img> : ""}
-        </span> */}
-
-        {typeTwo ? (
-          <div className="relative my-1 col-start-6 row-start-4 row-span-3 col-span-3 mr-1">
-            <img
-              src={typeTwoString}
-              className="relative z-10 object-fit w-full h-full p-2"
-            ></img>
-            <span
-              className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeTwo} `}
-            ></span>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
-    );
-  }
+      ) : (
+        ""
+      )}
+    </div>
+  );
 
   /**
    * With dynamic classnames, Tailwind needs the class to be mentioned,

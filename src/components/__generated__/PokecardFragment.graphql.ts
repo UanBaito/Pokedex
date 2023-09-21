@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<47bfebf5dabd07eafbca8d96e726df6f>>
+ * @generated SignedSource<<588607155ff97a1fcac0704d407d3d2c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,20 +10,21 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type PokeListFragment$data = ReadonlyArray<{
+export type PokecardFragment$data = {
   readonly name: string;
+  readonly pokeID: number;
   readonly pokemon_v2_pokemontypes: ReadonlyArray<{
     readonly pokemon_v2_type: {
       readonly name: string;
     } | null;
+    readonly slot: number;
   }>;
+  readonly " $fragmentType": "PokecardFragment";
+};
+export type PokecardFragment$key = {
+  readonly " $data"?: PokecardFragment$data;
   readonly " $fragmentSpreads": FragmentRefs<"PokecardFragment">;
-  readonly " $fragmentType": "PokeListFragment";
-}>;
-export type PokeListFragment$key = ReadonlyArray<{
-  readonly " $data"?: PokeListFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"PokeListFragment">;
-}>;
+};
 
 const node: ReaderFragment = (function(){
 var v0 = {
@@ -36,16 +37,16 @@ var v0 = {
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": {
-    "plural": true
-  },
-  "name": "PokeListFragment",
+  "metadata": null,
+  "name": "PokecardFragment",
   "selections": [
     (v0/*: any*/),
     {
+      "alias": "pokeID",
       "args": null,
-      "kind": "FragmentSpread",
-      "name": "PokecardFragment"
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
     },
     {
       "alias": null,
@@ -55,6 +56,13 @@ return {
       "name": "pokemon_v2_pokemontypes",
       "plural": true,
       "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "slot",
+          "storageKey": null
+        },
         {
           "alias": null,
           "args": null,
@@ -76,6 +84,6 @@ return {
 };
 })();
 
-(node as any).hash = "da86cd3245d9544dfaa7cb7203a68e56";
+(node as any).hash = "e87ec8ab093331433cfe1a914ddbb10b";
 
 export default node;
