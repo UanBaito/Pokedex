@@ -52,7 +52,9 @@ export default function Pokelist({
   return (
     <div
       className={
-        isMinimized ? "flex flex-col flex-wrap justify-center mb-14" : "hidden"
+        isMinimized
+          ? "flex flex-col flex-wrap justify-center mb-14"
+          : "overflow-clip "
       }
     >
       <Searchbar searchState={searchState} handleInput={handleInput} />

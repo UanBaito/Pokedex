@@ -1,9 +1,10 @@
 import { Pokemon, PokemonSpecies } from "pokenode-ts";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { graphql, useRefetchableFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
+import SpriteLoader from "./SpriteLoader";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on query_root
@@ -31,7 +32,6 @@ export default function MaximazedPokeInfo({
   isMinimized: boolean;
 }) {
   const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
-  const [pokemon, setPokemon] = useState<Pokemon>();
   const [data, refetch] = useRefetchableFragment(
     MaximazedPokeInfoFragment,
     pokeSpecies
@@ -51,13 +51,22 @@ export default function MaximazedPokeInfo({
       >
         <HiOutlineChevronDown />
       </button>
+
       <PokeInfoSprite
         sprites={data.pokemon_v2_pokemonspecies}
-        pokemon={pokemon}
         selectedSpecies={pokemonSpecies}
-        isVariant={isVariant}
         handleVariantToggle={handleVariantToggle}
       />
+
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
+        blanditiis excepturi assumenda cumque officia obcaecati, dolorem illo
+        illum, atque at delectus iusto aperiam commodi amet eos quasi sit
+        veritatis facilis? Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Blanditiis quisquam nihil iure illo iusto reprehenderit labore
+        modi doloremque nobis. Accusantium incidunt deleniti corporis a, nobis
+        repudiandae distinctio ea aperiam ad.
+      </div>
     </div>
   );
 }

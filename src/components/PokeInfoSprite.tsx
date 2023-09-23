@@ -26,7 +26,6 @@ export default function PokeInfoSprite({
   sprites,
 }: {
   handleVariantToggle: () => void;
-  isVariant: boolean;
   selectedSpecies: PokemonSpecies | undefined;
   sprites: PokeInfoSpriteFragment$key;
 }) {
@@ -36,8 +35,6 @@ export default function PokeInfoSprite({
     isShiny: false,
     isFemale: false,
   });
-
-  console.log(data);
 
   let spritesList: any;
   let pokeID: number | null;
@@ -50,7 +47,6 @@ export default function PokeInfoSprite({
     );
   }
 
-  console.log(spritesList);
   let spriteString: string | undefined = "";
 
   function shouldReverseGray() {

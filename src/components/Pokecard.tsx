@@ -36,7 +36,7 @@ export default function Pokecard({
   }
   return (
     <div
-      className="bg-contrast grid justify-center grid-flow-col grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
+      className="bg-contrast grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
