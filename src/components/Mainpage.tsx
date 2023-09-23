@@ -1,6 +1,5 @@
 import { Suspense, useRef, useState } from "react";
 import Navbar from "./Navbar";
-import { Pokemon } from "pokenode-ts";
 import Pokelist from "./PokeList";
 import MinimizedPokeInfo from "./MinimizedPokeInfo";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -22,13 +21,11 @@ export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
   const pokeid = 19;
 
-  const [selectedPoke, setSelectedPoke] = useState("");
   const [isMinimized, setIsMinimized] = useState(true);
   const [isVariant, setIsVariant] = useState(false);
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>();
 
   function handlePokecardClick(pokemonName: string) {
-    setSelectedPoke(pokemonName);
     if (refetchMaxInfoQuery.current)
       refetchMaxInfoQuery.current({ pokeName: pokemonName });
     setIsMinimized(false);
@@ -56,7 +53,6 @@ export default function Mainpage() {
             <MaximazedPokeInfo
               refetchMaxInfoQuery={refetchMaxInfoQuery}
               pokeSpecies={data}
-              isVariant={isVariant}
               handleVariantToggle={handleVariantToggle}
               handleClickMinimize={handleClickMinimize}
               isMinimized={isMinimized}

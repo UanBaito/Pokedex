@@ -4,14 +4,16 @@ import PokeInfoSprite from "./PokeInfoSprite";
 import { Suspense, useState } from "react";
 import { graphql, useRefetchableFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
-import SpriteLoader from "./SpriteLoader";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on query_root
   @refetchable(queryName: "MaximazedPokeInfoRefetchQuery")
-  @argumentDefinitions(pokeName: { type: "String", defaultValue: "" }) {
+  @argumentDefinitions(pokeName: { type: "String", defaultValue: "pikachu" }) {
     pokemon_v2_pokemonspecies(where: { name: { _eq: $pokeName } }) {
-      ...PokeInfoSpriteFragment
+      pokemon_v2_pokemons {
+        ...PokeInfoSpriteFragment
+        name
+      }
     }
   }
 `;
@@ -20,7 +22,6 @@ export default function MaximazedPokeInfo({
   refetchMaxInfoQuery,
   pokeSpecies,
   handleClickMinimize,
-  isVariant,
   handleVariantToggle,
   isMinimized,
 }: {
@@ -28,7 +29,6 @@ export default function MaximazedPokeInfo({
   pokeSpecies: MaximazedPokeInfoFragment$key;
   handleClickMinimize: () => void;
   handleVariantToggle: () => void;
-  isVariant: boolean;
   isMinimized: boolean;
 }) {
   const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
@@ -53,7 +53,7 @@ export default function MaximazedPokeInfo({
       </button>
 
       <PokeInfoSprite
-        sprites={data.pokemon_v2_pokemonspecies}
+        sprites={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
         selectedSpecies={pokemonSpecies}
         handleVariantToggle={handleVariantToggle}
       />

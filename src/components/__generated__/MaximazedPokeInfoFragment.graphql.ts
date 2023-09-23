@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<20eb5c31350880220c0d0d29a3f9ca4d>>
+ * @generated SignedSource<<a7686dea9601b64ee4821eb90a7e1ff2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,10 @@ import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type MaximazedPokeInfoFragment$data = {
   readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
-    readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
+    readonly pokemon_v2_pokemons: ReadonlyArray<{
+      readonly name: string;
+      readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
+    }>;
   }>;
   readonly " $fragmentType": "MaximazedPokeInfoFragment";
 };
@@ -26,7 +29,7 @@ import MaximazedPokeInfoRefetchQuery_graphql from './MaximazedPokeInfoRefetchQue
 const node: ReaderFragment = {
   "argumentDefinitions": [
     {
-      "defaultValue": "",
+      "defaultValue": "pikachu",
       "kind": "LocalArgument",
       "name": "pokeName"
     }
@@ -68,9 +71,27 @@ const node: ReaderFragment = {
       "plural": true,
       "selections": [
         {
+          "alias": null,
           "args": null,
-          "kind": "FragmentSpread",
-          "name": "PokeInfoSpriteFragment"
+          "concreteType": "pokemon_v2_pokemon",
+          "kind": "LinkedField",
+          "name": "pokemon_v2_pokemons",
+          "plural": true,
+          "selections": [
+            {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "PokeInfoSpriteFragment"
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "name",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -80,6 +101,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "a3daf2f669e2c93d7661d7512d434143";
+(node as any).hash = "bb587500d2286642dd8c054b5c04dbb2";
 
 export default node;

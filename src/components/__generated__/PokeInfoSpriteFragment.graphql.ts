@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<edc436042bb1b40088e2d1e361b32760>>
+ * @generated SignedSource<<0c013316780cddc77065ab85d27b3a89>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,69 +10,54 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type PokeInfoSpriteFragment$data = ReadonlyArray<{
-  readonly pokemon_v2_pokemons: ReadonlyArray<{
-    readonly pokemon_v2_pokemonsprites: ReadonlyArray<{
-      readonly pokemon_id: number | null;
-      readonly sprites: string;
-    }>;
+export type PokeInfoSpriteFragment$data = {
+  readonly pokemon_v2_pokemonsprites: ReadonlyArray<{
+    readonly pokemon_id: number | null;
+    readonly sprites: string;
   }>;
   readonly " $fragmentType": "PokeInfoSpriteFragment";
-}>;
-export type PokeInfoSpriteFragment$key = ReadonlyArray<{
+};
+export type PokeInfoSpriteFragment$key = {
   readonly " $data"?: PokeInfoSpriteFragment$data;
   readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
-}>;
+};
 
 const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": {
-    "plural": true
-  },
+  "metadata": null,
   "name": "PokeInfoSpriteFragment",
   "selections": [
     {
       "alias": null,
       "args": null,
-      "concreteType": "pokemon_v2_pokemon",
+      "concreteType": "pokemon_v2_pokemonsprites",
       "kind": "LinkedField",
-      "name": "pokemon_v2_pokemons",
+      "name": "pokemon_v2_pokemonsprites",
       "plural": true,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "concreteType": "pokemon_v2_pokemonsprites",
-          "kind": "LinkedField",
-          "name": "pokemon_v2_pokemonsprites",
-          "plural": true,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "sprites",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "pokemon_id",
-              "storageKey": null
-            }
-          ],
+          "kind": "ScalarField",
+          "name": "sprites",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "pokemon_id",
           "storageKey": null
         }
       ],
       "storageKey": null
     }
   ],
-  "type": "pokemon_v2_pokemonspecies",
+  "type": "pokemon_v2_pokemon",
   "abstractKey": null
 };
 
-(node as any).hash = "14c51fc780abebc5f869055cd0fd7fd1";
+(node as any).hash = "93eb82e2d7c77430a10fd9b201e3e6e6";
 
 export default node;

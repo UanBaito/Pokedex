@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1a6c1630759630d856105d233d1bbfc1>>
+ * @generated SignedSource<<0cc2229678084b3f931e20a85f15212c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -141,7 +141,7 @@ return {
                   {
                     "kind": "Literal",
                     "name": "_eq",
-                    "value": ""
+                    "value": "pikachu"
                   }
                 ],
                 "kind": "ObjectValue",
@@ -189,22 +189,23 @@ return {
                   }
                 ],
                 "storageKey": null
-              }
+              },
+              (v1/*: any*/)
             ],
             "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"\"}})"
+        "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"pikachu\"}})"
       }
     ]
   },
   "params": {
-    "cacheID": "96d7ea6ffa1c0fb3f3285d41706d8260",
+    "cacheID": "48fc98e7ff21af7d6ec92321f4165be5",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 50, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    ...PokeInfoSpriteFragment\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    pokemon_v2_pokemonsprites {\n      sprites\n      pokemon_id\n    }\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 50, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"pikachu\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n      name\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();

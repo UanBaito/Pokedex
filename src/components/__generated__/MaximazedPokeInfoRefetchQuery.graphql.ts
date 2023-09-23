@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<36c89bd2979c08fcc39889d0361c4d74>>
+ * @generated SignedSource<<d24594129902ef7f56a05c09ef348356>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -24,7 +24,7 @@ export type MaximazedPokeInfoRefetchQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": "",
+    "defaultValue": "pikachu",
     "kind": "LocalArgument",
     "name": "pokeName"
   }
@@ -115,6 +115,13 @@ return {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "name",
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -125,16 +132,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6712e198973228109882c2424c38a32c",
+    "cacheID": "a1d475c7dbd6b041c4a33066475a051b",
     "id": null,
     "metadata": {},
     "name": "MaximazedPokeInfoRefetchQuery",
     "operationKind": "query",
-    "text": "query MaximazedPokeInfoRefetchQuery(\n  $pokeName: String = \"\"\n) {\n  ...MaximazedPokeInfoFragment_117dRO\n}\n\nfragment MaximazedPokeInfoFragment_117dRO on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $pokeName}}) {\n    ...PokeInfoSpriteFragment\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    pokemon_v2_pokemonsprites {\n      sprites\n      pokemon_id\n    }\n  }\n}\n"
+    "text": "query MaximazedPokeInfoRefetchQuery(\n  $pokeName: String = \"pikachu\"\n) {\n  ...MaximazedPokeInfoFragment_117dRO\n}\n\nfragment MaximazedPokeInfoFragment_117dRO on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $pokeName}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n      name\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "a3daf2f669e2c93d7661d7512d434143";
+(node as any).hash = "bb587500d2286642dd8c054b5c04dbb2";
 
 export default node;

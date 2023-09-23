@@ -9,13 +9,10 @@ import { graphql, useFragment } from "react-relay";
 import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
 
 const PokeInfoSpriteFragment = graphql`
-  fragment PokeInfoSpriteFragment on pokemon_v2_pokemonspecies
-  @relay(plural: true) {
-    pokemon_v2_pokemons {
-      pokemon_v2_pokemonsprites {
-        sprites
-        pokemon_id
-      }
+  fragment PokeInfoSpriteFragment on pokemon_v2_pokemon {
+    pokemon_v2_pokemonsprites {
+      sprites
+      pokemon_id
     }
   }
 `;
@@ -39,12 +36,10 @@ export default function PokeInfoSprite({
   let spritesList: any;
   let pokeID: number | null;
 
-  if (data[0]) {
-    pokeID =
-      data[0].pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].pokemon_id;
-    spritesList = JSON.parse(
-      data[0].pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].sprites
-    );
+  if (data) {
+    console.log(data);
+    pokeID = data.pokemon_v2_pokemonsprites[0].pokemon_id;
+    spritesList = JSON.parse(data.pokemon_v2_pokemonsprites[0].sprites);
   }
 
   let spriteString: string | undefined = "";
