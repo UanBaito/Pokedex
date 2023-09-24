@@ -5,6 +5,7 @@ import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
 import TypeFilterInput from "./TypeFilterInput";
+import GenFilterInput from "./GenFilterInput";
 
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
@@ -12,6 +13,11 @@ const PokeListFragment = graphql`
     ...PokecardFragment
     pokemon_v2_pokemontypes {
       pokemon_v2_type {
+        name
+      }
+    }
+    pokemon_v2_pokemonspecy {
+      pokemon_v2_generation {
         name
       }
     }
@@ -30,19 +36,25 @@ export default function Pokelist({
   const data = useFragment(PokeListFragment, pokeList);
   const [searchState, setSearchState] = useState("");
   const [typeFilter, setTypeFilter] = useState("default");
+  const [genFilter, setGenFilter] = useState("default");
   const regSearch = new RegExp(`^${searchState}`);
 
   const visiblePokemon = data.filter((pokemon) => {
+    const gen = pokemon.pokemon_v2_pokemonspecy?.pokemon_v2_generation?.name;
     const typeOne = pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
     let typeTwo: string | undefined;
+
     if (pokemon.pokemon_v2_pokemontypes[1]) {
       typeTwo = pokemon.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
     }
     if (regSearch.test(pokemon.name)) {
-      if (typeFilter === "default") {
-        return true;
-      } else if (typeOne === typeFilter || typeTwo === typeFilter) {
-        return true;
+      console.log(gen, genFilter);
+      if (gen === genFilter || genFilter === "default") {
+        if (typeFilter === "default") {
+          return true;
+        } else if (typeOne === typeFilter || typeTwo === typeFilter) {
+          return true;
+        }
       }
     }
     return false;
@@ -72,6 +84,7 @@ export default function Pokelist({
           typeFilter={typeFilter}
           setTypeFilter={setTypeFilter}
         />
+        <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </div>
       {visiblePokeCards}
     </div>

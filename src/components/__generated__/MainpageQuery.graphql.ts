@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c1eb09e4c9109a16296a519225f152b3>>
+ * @generated SignedSource<<03c47f0fbf3fdf94ab0b305847d885a0>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -27,7 +27,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "limit",
-    "value": 3
+    "value": 5
   },
   {
     "kind": "Literal",
@@ -43,7 +43,10 @@ v1 = {
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
-};
+},
+v2 = [
+  (v1/*: any*/)
+];
 return {
   "fragment": {
     "argumentDefinitions": [],
@@ -65,7 +68,7 @@ return {
             "name": "PokeListFragment"
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:3,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
       },
       {
         "args": null,
@@ -120,16 +123,35 @@ return {
                 "kind": "LinkedField",
                 "name": "pokemon_v2_type",
                 "plural": false,
-                "selections": [
-                  (v1/*: any*/)
-                ],
+                "selections": (v2/*: any*/),
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_pokemonspecies",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_pokemonspecy",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "pokemon_v2_generation",
+                "kind": "LinkedField",
+                "name": "pokemon_v2_generation",
+                "plural": false,
+                "selections": (v2/*: any*/),
                 "storageKey": null
               }
             ],
             "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:3,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
       },
       {
         "alias": null,
@@ -199,16 +221,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "51aa3b264303aab08be5c6449c4421d0",
+    "cacheID": "bb71ec7d7df55a32c083de4731da9e61",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 3, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 5, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "45da5e348f1bd06dcb36014b4e7e9eb3";
+(node as any).hash = "7921d4537433a8a38287356ac903be03";
 
 export default node;
