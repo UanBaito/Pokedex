@@ -4,7 +4,7 @@ import { useState } from "react";
 import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
-import React from "react";
+import Filters from "./Filters";
 
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
@@ -59,6 +59,7 @@ export default function Pokelist({
       }
     >
       <Searchbar searchState={searchState} handleInput={handleInput} />
+      <Filters />
       {visiblePokeCards}
     </div>
   );

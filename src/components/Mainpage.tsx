@@ -6,7 +6,6 @@ import { RefetchFnDynamic, useLazyLoadQuery } from "react-relay";
 import { graphql } from "react-relay";
 import type { MainpageQuery as MainpageQueryType } from "./__generated__/MainpageQuery.graphql";
 import SpriteLoader from "./SpriteLoader";
-import React from "react";
 
 const MainpageQuery = graphql`
   query MainpageQuery {
@@ -19,6 +18,7 @@ const MainpageQuery = graphql`
 
 export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
+  const [filterByType, setFilterByType] = useState("");
 
   const [isPokeInfoOpen, setIsPokeInfoClosed] = useState(true);
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>();
