@@ -2,6 +2,7 @@ import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
 import { graphql, useRefetchableFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
+import React from "react";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on query_root

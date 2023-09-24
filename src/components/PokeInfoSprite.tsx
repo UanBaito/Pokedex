@@ -1,12 +1,8 @@
-import { Pokemon, PokemonSpecies } from "pokenode-ts";
 import { useState } from "react";
-import {
-  HiRefresh,
-  HiOutlineSparkles,
-  HiOutlineSwitchHorizontal,
-} from "react-icons/hi";
+import { HiRefresh, HiOutlineSparkles } from "react-icons/hi";
 import { graphql, useFragment } from "react-relay";
 import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
+import React from "react";
 
 const PokeInfoSpriteFragment = graphql`
   fragment PokeInfoSpriteFragment on pokemon_v2_pokemon {
@@ -29,7 +25,7 @@ export default function PokeInfoSprite({
     isFemale: false,
   });
 
-  let spritesList: any;
+  let spritesList: unknown;
   let pokeID: number | null;
 
   if (data) {
@@ -69,22 +65,6 @@ export default function PokeInfoSprite({
     }
   }
 
-  function clearSpriteSettings() {
-    setSpriteSettings({
-      facingFront: true,
-      isShiny: false,
-      isFemale: false,
-    });
-  }
-
-  // function checkVariant() {
-  //   let hasVariant = false;
-  //   if (selectedSpecies && selectedSpecies.varieties.length - 1 > 0) {
-  //     hasVariant = true;
-  //   }
-  //   return hasVariant;
-  // }
-
   function handleReverseSprite() {
     setSpriteSettings((prevState) => ({
       ...prevState,
@@ -103,7 +83,7 @@ export default function PokeInfoSprite({
     isShiny: boolean,
     isMale: boolean,
     isFacingFront: boolean,
-    sprites: any
+    sprites: unknown
   ) {
     let spriteString = "";
     if (sprites) {

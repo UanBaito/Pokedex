@@ -6,6 +6,7 @@ import { RefetchFnDynamic, useLazyLoadQuery } from "react-relay";
 import { graphql } from "react-relay";
 import type { MainpageQuery as MainpageQueryType } from "./__generated__/MainpageQuery.graphql";
 import SpriteLoader from "./SpriteLoader";
+import React from "react";
 
 const MainpageQuery = graphql`
   query MainpageQuery {
