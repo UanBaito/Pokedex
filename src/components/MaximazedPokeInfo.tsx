@@ -1,18 +1,15 @@
-import { Pokemon, PokemonSpecies } from "pokenode-ts";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
-import { Suspense, useState } from "react";
 import { graphql, useRefetchableFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on query_root
   @refetchable(queryName: "MaximazedPokeInfoRefetchQuery")
-  @argumentDefinitions(pokeName: { type: "String", defaultValue: "pikachu" }) {
-    pokemon_v2_pokemonspecies(where: { name: { _eq: $pokeName } }) {
+  @argumentDefinitions(speciesName: { type: "String", defaultValue: "" }) {
+    pokemon_v2_pokemonspecies(where: { name: { _eq: $speciesName } }) {
       pokemon_v2_pokemons {
         ...PokeInfoSpriteFragment
-        name
       }
     }
   }
@@ -20,33 +17,35 @@ const MaximazedPokeInfoFragment = graphql`
 
 export default function MaximazedPokeInfo({
   refetchMaxInfoQuery,
-  pokeSpecies,
-  handleClickMinimize,
-  handleVariantToggle,
-  isMinimized,
+  mainPokeQueryResults,
+  handleClickClosePKInfo,
+  isPokeInfoOpen,
 }: {
   refetchMaxInfoQuery: React.MutableRefObject<undefined | any>;
-  pokeSpecies: MaximazedPokeInfoFragment$key;
-  handleClickMinimize: () => void;
-  handleVariantToggle: () => void;
-  isMinimized: boolean;
+  mainPokeQueryResults: MaximazedPokeInfoFragment$key;
+  handleClickClosePKInfo: () => void;
+  isPokeInfoOpen: boolean;
 }) {
-  const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
   const [data, refetch] = useRefetchableFragment(
     MaximazedPokeInfoFragment,
-    pokeSpecies
+    mainPokeQueryResults
   );
   refetchMaxInfoQuery.current = refetch;
+
+  if (!data.pokemon_v2_pokemonspecies[0]) {
+    console.log("elpepe");
+    return;
+  }
 
   return (
     <div
       className={
         "fixed overflow-y-scroll bottom-0 left-0 w-full h-full bg-gray-800 z-40 " +
-        (isMinimized ? "hidden" : "")
+        (isPokeInfoOpen ? "hidden" : "")
       }
     >
       <button
-        onClick={handleClickMinimize}
+        onClick={handleClickClosePKInfo}
         className="absolute top-0 right-0 bg-white rounded-full z-50 w-6 h-6 inline-flex justify-center items-center m-4"
       >
         <HiOutlineChevronDown />
@@ -54,8 +53,6 @@ export default function MaximazedPokeInfo({
 
       <PokeInfoSprite
         sprites={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
-        selectedSpecies={pokemonSpecies}
-        handleVariantToggle={handleVariantToggle}
       />
 
       <div>

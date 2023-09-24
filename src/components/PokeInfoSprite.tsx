@@ -18,12 +18,8 @@ const PokeInfoSpriteFragment = graphql`
 `;
 
 export default function PokeInfoSprite({
-  selectedSpecies,
-  handleVariantToggle,
   sprites,
 }: {
-  handleVariantToggle: () => void;
-  selectedSpecies: PokemonSpecies | undefined;
   sprites: PokeInfoSpriteFragment$key;
 }) {
   const data = useFragment(PokeInfoSpriteFragment, sprites);
@@ -37,7 +33,6 @@ export default function PokeInfoSprite({
   let pokeID: number | null;
 
   if (data) {
-    console.log(data);
     pokeID = data.pokemon_v2_pokemonsprites[0].pokemon_id;
     spritesList = JSON.parse(data.pokemon_v2_pokemonsprites[0].sprites);
   }
@@ -82,13 +77,13 @@ export default function PokeInfoSprite({
     });
   }
 
-  function checkVariant() {
-    let hasVariant = false;
-    if (selectedSpecies && selectedSpecies.varieties.length - 1 > 0) {
-      hasVariant = true;
-    }
-    return hasVariant;
-  }
+  // function checkVariant() {
+  //   let hasVariant = false;
+  //   if (selectedSpecies && selectedSpecies.varieties.length - 1 > 0) {
+  //     hasVariant = true;
+  //   }
+  //   return hasVariant;
+  // }
 
   function handleReverseSprite() {
     setSpriteSettings((prevState) => ({
@@ -182,20 +177,6 @@ export default function PokeInfoSprite({
             }
           >
             <HiOutlineSparkles />
-          </button>
-          <button
-            className={
-              "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute -top-2 disabled:bg-gray-900"
-            }
-            onClick={() => {
-              if (checkVariant()) {
-                clearSpriteSettings();
-                handleVariantToggle();
-              }
-            }}
-            disabled={!checkVariant()}
-          >
-            <HiOutlineSwitchHorizontal />
           </button>
         </div>
       </div>

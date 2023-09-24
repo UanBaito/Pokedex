@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0cc2229678084b3f931e20a85f15212c>>
+ * @generated SignedSource<<c1eb09e4c9109a16296a519225f152b3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -27,7 +27,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "limit",
-    "value": 50
+    "value": 3
   },
   {
     "kind": "Literal",
@@ -65,7 +65,7 @@ return {
             "name": "PokeListFragment"
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:50,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:3,order_by:{\"id\":\"asc\"})"
       },
       {
         "args": null,
@@ -129,7 +129,7 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:50,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:3,order_by:{\"id\":\"asc\"})"
       },
       {
         "alias": null,
@@ -141,7 +141,7 @@ return {
                   {
                     "kind": "Literal",
                     "name": "_eq",
-                    "value": "pikachu"
+                    "value": ""
                   }
                 ],
                 "kind": "ObjectValue",
@@ -189,27 +189,26 @@ return {
                   }
                 ],
                 "storageKey": null
-              },
-              (v1/*: any*/)
+              }
             ],
             "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"pikachu\"}})"
+        "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"\"}})"
       }
     ]
   },
   "params": {
-    "cacheID": "48fc98e7ff21af7d6ec92321f4165be5",
+    "cacheID": "51aa3b264303aab08be5c6449c4421d0",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 50, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"pikachu\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n      name\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 3, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "ec2cf6978491d9fb1623f0bfe6277615";
+(node as any).hash = "45da5e348f1bd06dcb36014b4e7e9eb3";
 
 export default node;

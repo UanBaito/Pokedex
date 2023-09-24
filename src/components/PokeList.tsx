@@ -19,11 +19,11 @@ const PokeListFragment = graphql`
 
 export default function Pokelist({
   handlePokecardClick,
-  isMinimized,
+  isPokeInfoOpen,
   pokeList,
 }: {
   handlePokecardClick: PokeCardClickHandler;
-  isMinimized: boolean;
+  isPokeInfoOpen: boolean;
   pokeList: PokeListFragment$key;
 }) {
   const data = useFragment(PokeListFragment, pokeList);
@@ -52,7 +52,7 @@ export default function Pokelist({
   return (
     <div
       className={
-        isMinimized
+        isPokeInfoOpen
           ? "flex flex-col flex-wrap justify-center mb-14"
           : "overflow-clip "
       }

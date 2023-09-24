@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d24594129902ef7f56a05c09ef348356>>
+ * @generated SignedSource<<3a03c49bb369e05297d789591b0db20b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,7 +11,7 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type MaximazedPokeInfoRefetchQuery$variables = {
-  pokeName?: string | null;
+  speciesName?: string | null;
 };
 export type MaximazedPokeInfoRefetchQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"MaximazedPokeInfoFragment">;
@@ -24,9 +24,9 @@ export type MaximazedPokeInfoRefetchQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": "pikachu",
+    "defaultValue": "",
     "kind": "LocalArgument",
-    "name": "pokeName"
+    "name": "speciesName"
   }
 ];
 return {
@@ -40,8 +40,8 @@ return {
         "args": [
           {
             "kind": "Variable",
-            "name": "pokeName",
-            "variableName": "pokeName"
+            "name": "speciesName",
+            "variableName": "speciesName"
           }
         ],
         "kind": "FragmentSpread",
@@ -67,7 +67,7 @@ return {
                   {
                     "kind": "Variable",
                     "name": "_eq",
-                    "variableName": "pokeName"
+                    "variableName": "speciesName"
                   }
                 ],
                 "kind": "ObjectValue",
@@ -115,13 +115,6 @@ return {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "name",
-                "storageKey": null
               }
             ],
             "storageKey": null
@@ -132,16 +125,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a1d475c7dbd6b041c4a33066475a051b",
+    "cacheID": "cdf5e90a2d606b2d5e596c4ebc9d981d",
     "id": null,
     "metadata": {},
     "name": "MaximazedPokeInfoRefetchQuery",
     "operationKind": "query",
-    "text": "query MaximazedPokeInfoRefetchQuery(\n  $pokeName: String = \"pikachu\"\n) {\n  ...MaximazedPokeInfoFragment_117dRO\n}\n\nfragment MaximazedPokeInfoFragment_117dRO on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $pokeName}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n      name\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n"
+    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MaximazedPokeInfoFragment_1IjDk4\n}\n\nfragment MaximazedPokeInfoFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "bb587500d2286642dd8c054b5c04dbb2";
+(node as any).hash = "7ba2bcd47196fbd0f4dc91b776135558";
 
 export default node;

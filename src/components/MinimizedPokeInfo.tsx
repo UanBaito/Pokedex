@@ -6,17 +6,17 @@ import { Pokemon } from "pokenode-ts";
 export default function MinimizedPokeInfo({
   handleClickMaximize,
   selectedPoke,
-  isMinimized,
+  isPokeInfoOpen,
 }: {
   handleClickMaximize: MouseEventHandler;
   selectedPoke: Pokemon;
-  isMinimized: boolean;
+  isPokeInfoOpen: boolean;
 }) {
   return (
     <div
       className={
         "flex flex-row-reverse fixed bottom-0 bg-primary h-12 w-full z-50 " +
-        (isMinimized ? "" : "hidden")
+        (isPokeInfoOpen ? "" : "hidden")
       }
     >
       <button

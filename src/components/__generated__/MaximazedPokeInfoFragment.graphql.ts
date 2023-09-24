@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a7686dea9601b64ee4821eb90a7e1ff2>>
+ * @generated SignedSource<<17dd3b8e6e71d8dfd371928315ad3230>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,6 @@ import { FragmentRefs } from "relay-runtime";
 export type MaximazedPokeInfoFragment$data = {
   readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
     readonly pokemon_v2_pokemons: ReadonlyArray<{
-      readonly name: string;
       readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
     }>;
   }>;
@@ -29,9 +28,9 @@ import MaximazedPokeInfoRefetchQuery_graphql from './MaximazedPokeInfoRefetchQue
 const node: ReaderFragment = {
   "argumentDefinitions": [
     {
-      "defaultValue": "pikachu",
+      "defaultValue": "",
       "kind": "LocalArgument",
-      "name": "pokeName"
+      "name": "speciesName"
     }
   ],
   "kind": "Fragment",
@@ -54,7 +53,7 @@ const node: ReaderFragment = {
                 {
                   "kind": "Variable",
                   "name": "_eq",
-                  "variableName": "pokeName"
+                  "variableName": "speciesName"
                 }
               ],
               "kind": "ObjectValue",
@@ -82,13 +81,6 @@ const node: ReaderFragment = {
               "args": null,
               "kind": "FragmentSpread",
               "name": "PokeInfoSpriteFragment"
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "name",
-              "storageKey": null
             }
           ],
           "storageKey": null
@@ -101,6 +93,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "bb587500d2286642dd8c054b5c04dbb2";
+(node as any).hash = "7ba2bcd47196fbd0f4dc91b776135558";
 
 export default node;

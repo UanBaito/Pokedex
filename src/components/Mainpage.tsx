@@ -1,7 +1,6 @@
 import { Suspense, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
-import MinimizedPokeInfo from "./MinimizedPokeInfo";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
 import { RefetchFnDynamic, useLazyLoadQuery } from "react-relay";
 import { graphql } from "react-relay";
@@ -10,7 +9,7 @@ import SpriteLoader from "./SpriteLoader";
 
 const MainpageQuery = graphql`
   query MainpageQuery {
-    pokemon_v2_pokemon(limit: 50, order_by: { id: asc }) {
+    pokemon_v2_pokemon(limit: 3, order_by: { id: asc }) {
       ...PokeListFragment
     }
     ...MaximazedPokeInfoFragment
@@ -19,29 +18,19 @@ const MainpageQuery = graphql`
 
 export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
-  const pokeid = 19;
 
-  const [isMinimized, setIsMinimized] = useState(true);
-  const [isVariant, setIsVariant] = useState(false);
+  const [isPokeInfoOpen, setIsPokeInfoClosed] = useState(true);
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>();
 
   function handlePokecardClick(pokemonName: string) {
     if (refetchMaxInfoQuery.current)
-      refetchMaxInfoQuery.current({ pokeName: pokemonName });
-    setIsMinimized(false);
+      refetchMaxInfoQuery.current({ speciesName: pokemonName });
+    setIsPokeInfoClosed(false);
     return;
   }
 
-  function handleClickMinimize() {
-    setIsMinimized(true);
-  }
-
-  function handleClickMaximize() {
-    setIsMinimized(false);
-  }
-
-  function handleVariantToggle() {
-    setIsVariant((prevState) => !prevState);
+  function handleClickClosePKInfo() {
+    setIsPokeInfoClosed(true);
   }
 
   return (
@@ -52,17 +41,16 @@ export default function Mainpage() {
           <>
             <MaximazedPokeInfo
               refetchMaxInfoQuery={refetchMaxInfoQuery}
-              pokeSpecies={data}
-              handleVariantToggle={handleVariantToggle}
-              handleClickMinimize={handleClickMinimize}
-              isMinimized={isMinimized}
+              mainPokeQueryResults={data}
+              handleClickClosePKInfo={handleClickClosePKInfo}
+              isPokeInfoOpen={isPokeInfoOpen}
             />
           </>
         </Suspense>
         <Pokelist
           pokeList={data.pokemon_v2_pokemon}
           handlePokecardClick={handlePokecardClick}
-          isMinimized={isMinimized}
+          isPokeInfoOpen={isPokeInfoOpen}
         />
       </div>
     </div>
