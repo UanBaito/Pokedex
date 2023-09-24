@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react";
+import { HiOutlineSearch } from "react-icons/hi";
 
 export default function Searchbar({
   searchState,
@@ -8,15 +9,15 @@ export default function Searchbar({
   handleInput: ChangeEventHandler;
 }) {
   return (
-    <div className="sticky top-0">
-      <label>
-        searchbar:
-        <input
-          name="searchbar"
-          value={searchState}
-          onChange={(e) => handleInput(e)}
-        />
-      </label>
+    <div className="rounded-none w-full flex text-white border-b border-primary">
+      <input
+        placeholder="Search pokemon..."
+        type="text"
+        className="input w-full rounded-none grow"
+        name="searchbar"
+        value={searchState}
+        onChange={(e) => handleInput(e)}
+      />
     </div>
   );
 }

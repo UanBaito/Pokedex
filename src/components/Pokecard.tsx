@@ -36,7 +36,7 @@ export default function Pokecard({
   }
   return (
     <div
-      className="bg-contrast grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 bg rounded-md shadow-2xl m-2 cursor-pointer"
+      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 rounded-md shadow-2xl m-2 cursor-pointer bg-gradient-to-r from-${typeOne} to-${typeTwo}`}
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
@@ -103,5 +103,44 @@ export default function Pokecard({
       bg-dragon: "#7038F8",
       bg-dark: "#705848",
       bg-steel: "#B8B8D0",
-      bg-fairy: "#EE99AC" */
+      bg-fairy: "#EE99AC" 
+      
+      from-normal: "#A8A878",
+      from-fire: "#F08030",
+      from-water: "#6890F0",
+      from-electric: "#F8D030",
+      from-grass: "#78C850",
+      from-ice: "#98D8D8",
+      from-fighting: "#C03028",
+      from-poison: "#A040A0",
+      from-ground: "#E0C068",
+      from-flying: "#A890F0",
+      from-psychic: "#F85888",
+      from-bug: "#A8B820",
+      from-rock: "#B8A038",
+      from-ghost: "#705898",
+      from-dragon: "#7038F8",
+      from-dark: "#705848",
+      from-steel: "#B8B8D0",
+      from-fairy: "#EE99AC" 
+
+      to-normal: "#A8A878",
+      to-fire: "#F08030",
+      to-water: "#6890F0",
+      to-electric: "#F8D030",
+      to-grass: "#78C850",
+      to-ice: "#98D8D8",
+      to-fighting: "#C03028",
+      to-poison: "#A040A0",
+      to-ground: "#E0C068",
+      to-flying: "#A890F0",
+      to-psychic: "#F85888",
+      to-bug: "#A8B820",
+      to-rock: "#B8A038",
+      to-ghost: "#705898",
+      to-dragon: "#7038F8",
+      to-dark: "#705848",
+      to-steel: "#B8B8D0",
+      to-fairy: "#EE99AC" 
+      */
 }

@@ -5,7 +5,7 @@ import PageLoader from "./PageLoader";
 function App() {
   return (
     <Suspense fallback={<PageLoader />}>
-      <div className="bg-primary">
+      <div className="bg-gray-300 text-slate-950">
         <Mainpage />
       </div>
     </Suspense>

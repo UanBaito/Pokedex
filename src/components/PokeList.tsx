@@ -28,8 +28,9 @@ export default function Pokelist({
   pokeList: PokeListFragment$key;
 }) {
   const data = useFragment(PokeListFragment, pokeList);
-
   const [searchState, setSearchState] = useState("");
+  const [typeFilter, setTypeFilter] = useState();
+
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchState((e.target as HTMLInputElement).value);
   }
@@ -54,12 +55,14 @@ export default function Pokelist({
     <div
       className={
         isPokeInfoOpen
-          ? "flex flex-col flex-wrap justify-center mb-14"
+          ? "flex flex-col flex-wrap justify-center mb-14 "
           : "overflow-clip "
       }
     >
-      <Searchbar searchState={searchState} handleInput={handleInput} />
-      <Filters />
+      <div>
+        <Searchbar searchState={searchState} handleInput={handleInput} />
+        <Filters typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
+      </div>
       {visiblePokeCards}
     </div>
   );
