@@ -1,6 +1,4 @@
-import { ChangeEvent, ReactEventHandler } from "react";
-
-export default function Filters({
+export default function TypeFilterInput({
   typeFilter,
   setTypeFilter,
 }: {

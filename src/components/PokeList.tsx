@@ -4,7 +4,7 @@ import { useState } from "react";
 import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
-import Filters from "./Filters";
+import TypeFilterInput from "./TypeFilterInput";
 
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
@@ -29,19 +29,26 @@ export default function Pokelist({
 }) {
   const data = useFragment(PokeListFragment, pokeList);
   const [searchState, setSearchState] = useState("");
-  const [typeFilter, setTypeFilter] = useState();
-
-  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchState((e.target as HTMLInputElement).value);
-  }
-
+  const [typeFilter, setTypeFilter] = useState("default");
   const regSearch = new RegExp(`^${searchState}`);
 
-  const visiblePokeCards = data.map((v) => {
-    if (!regSearch.test(v.name)) {
-      return;
+  const visiblePokemon = data.filter((pokemon) => {
+    const typeOne = pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
+    let typeTwo: string | undefined;
+    if (pokemon.pokemon_v2_pokemontypes[1]) {
+      typeTwo = pokemon.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
     }
+    if (regSearch.test(pokemon.name)) {
+      if (typeFilter === "default") {
+        return true;
+      } else if (typeOne === typeFilter || typeTwo === typeFilter) {
+        return true;
+      }
+    }
+    return false;
+  });
 
+  const visiblePokeCards = visiblePokemon.map((v) => {
     return (
       <Pokecard
         pokemon={v}
@@ -60,8 +67,11 @@ export default function Pokelist({
       }
     >
       <div>
-        <Searchbar searchState={searchState} handleInput={handleInput} />
-        <Filters typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
+        <Searchbar searchState={searchState} setSearchState={setSearchState} />
+        <TypeFilterInput
+          typeFilter={typeFilter}
+          setTypeFilter={setTypeFilter}
+        />
       </div>
       {visiblePokeCards}
     </div>

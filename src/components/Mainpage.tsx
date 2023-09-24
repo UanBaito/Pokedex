@@ -18,7 +18,6 @@ const MainpageQuery = graphql`
 
 export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
-  const [filterByType, setFilterByType] = useState("");
 
   const [isPokeInfoOpen, setIsPokeInfoClosed] = useState(true);
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>();

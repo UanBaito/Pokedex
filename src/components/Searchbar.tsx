@@ -1,12 +1,9 @@
-import { ChangeEventHandler } from "react";
-import { HiOutlineSearch } from "react-icons/hi";
-
 export default function Searchbar({
   searchState,
-  handleInput,
+  setSearchState,
 }: {
   searchState: string;
-  handleInput: ChangeEventHandler;
+  setSearchState: (e: string) => void;
 }) {
   return (
     <div className="rounded-none w-full flex text-white border-b border-primary">
@@ -16,7 +13,7 @@ export default function Searchbar({
         className="input w-full rounded-none grow"
         name="searchbar"
         value={searchState}
-        onChange={(e) => handleInput(e)}
+        onChange={(e) => setSearchState(e.target.value)}
       />
     </div>
   );
