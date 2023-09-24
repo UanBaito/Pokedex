@@ -14,6 +14,7 @@ export default function GenFilterInput({
       <option value={"default"} disabled>
         Generation
       </option>
+      <option value={"default"}>All</option>
       <option value={"generation-i"}>Kanto</option>
       <option value={"generation-ii"}>Johto</option>
       <option value={"generation-iii"}>Hoenn</option>

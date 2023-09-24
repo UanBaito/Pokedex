@@ -34,7 +34,7 @@ export default function Mainpage() {
   }
 
   return (
-    <div className="relative overflow-y-hidden">
+    <div className="relative">
       <Navbar />
       <div>
         <Suspense fallback={<SpriteLoader />}>

@@ -48,7 +48,6 @@ export default function Pokelist({
       typeTwo = pokemon.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
     }
     if (regSearch.test(pokemon.name)) {
-      console.log(gen, genFilter);
       if (gen === genFilter || genFilter === "default") {
         if (typeFilter === "default") {
           return true;

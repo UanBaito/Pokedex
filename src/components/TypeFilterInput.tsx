@@ -15,6 +15,7 @@ export default function TypeFilterInput({
         <option value={"default"} disabled>
           Type
         </option>
+        <option value={"default"}>All</option>
         <option value={"normal"}>Normal</option>
         <option value={"fire"}>Fire</option>
         <option value={"water"}>Water</option>
