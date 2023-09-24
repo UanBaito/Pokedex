@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<03c47f0fbf3fdf94ab0b305847d885a0>>
+ * @generated SignedSource<<d841fc5ffe6bac18520b6c6e9b1a78ec>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -27,7 +27,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "limit",
-    "value": 5
+    "value": 150
   },
   {
     "kind": "Literal",
@@ -68,7 +68,7 @@ return {
             "name": "PokeListFragment"
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:150,order_by:{\"id\":\"asc\"})"
       },
       {
         "args": null,
@@ -151,7 +151,7 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "pokemon_v2_pokemon(limit:5,order_by:{\"id\":\"asc\"})"
+        "storageKey": "pokemon_v2_pokemon(limit:150,order_by:{\"id\":\"asc\"})"
       },
       {
         "alias": null,
@@ -221,16 +221,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "bb71ec7d7df55a32c083de4731da9e61",
+    "cacheID": "2d1ce017ebce9af0f478b768d5333f13",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 5, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(limit: 150, order_by: {id: asc}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "7921d4537433a8a38287356ac903be03";
+(node as any).hash = "28fcaec00ff8111aa2eefe1270a73181";
 
 export default node;

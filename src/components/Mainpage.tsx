@@ -9,7 +9,7 @@ import SpriteLoader from "./SpriteLoader";
 
 const MainpageQuery = graphql`
   query MainpageQuery {
-    pokemon_v2_pokemon(limit: 5, order_by: { id: asc }) {
+    pokemon_v2_pokemon(limit: 150, order_by: { id: asc }) {
       ...PokeListFragment
     }
     ...MaximazedPokeInfoFragment
@@ -18,9 +18,14 @@ const MainpageQuery = graphql`
 
 export default function Mainpage() {
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
+  const [isPokeInfoClosed, setIsPokeInfoClosed] = useState(true);
+  const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>(null);
 
-  const [isPokeInfoOpen, setIsPokeInfoClosed] = useState(true);
-  const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>();
+  if (!isPokeInfoClosed) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
 
   function handlePokecardClick(pokemonName: string) {
     if (refetchMaxInfoQuery.current)
@@ -34,7 +39,7 @@ export default function Mainpage() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative overflow-y-clip">
       <Navbar />
       <div>
         <Suspense fallback={<SpriteLoader />}>
@@ -43,14 +48,14 @@ export default function Mainpage() {
               refetchMaxInfoQuery={refetchMaxInfoQuery}
               mainPokeQueryResults={data}
               handleClickClosePKInfo={handleClickClosePKInfo}
-              isPokeInfoOpen={isPokeInfoOpen}
+              isPokeInfoClosed={isPokeInfoClosed}
             />
           </>
         </Suspense>
         <Pokelist
           pokeList={data.pokemon_v2_pokemon}
           handlePokecardClick={handlePokecardClick}
-          isPokeInfoOpen={isPokeInfoOpen}
+          isPokeInfoClosed={isPokeInfoClosed}
         />
       </div>
     </div>

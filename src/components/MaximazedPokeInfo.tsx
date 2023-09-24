@@ -2,6 +2,7 @@ import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
 import { graphql, useRefetchableFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
+import { useRef } from "react";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on query_root
@@ -19,12 +20,12 @@ export default function MaximazedPokeInfo({
   refetchMaxInfoQuery,
   mainPokeQueryResults,
   handleClickClosePKInfo,
-  isPokeInfoOpen,
+  isPokeInfoClosed,
 }: {
   refetchMaxInfoQuery: React.MutableRefObject<undefined | any>;
   mainPokeQueryResults: MaximazedPokeInfoFragment$key;
   handleClickClosePKInfo: () => void;
-  isPokeInfoOpen: boolean;
+  isPokeInfoClosed: boolean;
 }) {
   const [data, refetch] = useRefetchableFragment(
     MaximazedPokeInfoFragment,
@@ -40,8 +41,8 @@ export default function MaximazedPokeInfo({
   return (
     <div
       className={
-        "fixed overflow-y-scroll bottom-0 left-0 w-full h-full bg-gray-800 z-40 " +
-        (isPokeInfoOpen ? "hidden" : "")
+        "fixed bottom-0 left-0 w-full h-full bg-gray-800 z-40 overflow-y-scroll " +
+        (isPokeInfoClosed ? "hidden" : "")
       }
     >
       <button

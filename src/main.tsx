@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import App from "./components/App.tsx";
 import "./index.css";
 import {
@@ -10,6 +8,8 @@ import {
   Observable,
 } from "relay-runtime";
 import { RelayEnvironmentProvider } from "react-relay";
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
 
 /**
  * Custom fetch function to handle GraphQL requests for a Relay environment.

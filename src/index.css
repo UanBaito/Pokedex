@@ -1,3 +1,17 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind base;
+
+@keyframes fadein {
+  from {
+    transform: translate(0, 100vh);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+.Pokeinfo {
+  animation: fadein 10s linear;
+}

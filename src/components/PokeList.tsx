@@ -1,6 +1,6 @@
 import { PokeCardClickHandler } from "./typings";
 import Pokecard from "./Pokecard";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
@@ -26,11 +26,11 @@ const PokeListFragment = graphql`
 
 export default function Pokelist({
   handlePokecardClick,
-  isPokeInfoOpen,
+  isPokeInfoClosed,
   pokeList,
 }: {
   handlePokecardClick: PokeCardClickHandler;
-  isPokeInfoOpen: boolean;
+  isPokeInfoClosed: boolean;
   pokeList: PokeListFragment$key;
 }) {
   const data = useFragment(PokeListFragment, pokeList);
@@ -38,6 +38,7 @@ export default function Pokelist({
   const [typeFilter, setTypeFilter] = useState("default");
   const [genFilter, setGenFilter] = useState("default");
   const regSearch = new RegExp(`^${searchState}`);
+  const listDivRef = useRef<HTMLDivElement>(null);
 
   const visiblePokemon = data.filter((pokemon) => {
     const gen = pokemon.pokemon_v2_pokemonspecy?.pokemon_v2_generation?.name;
@@ -71,10 +72,10 @@ export default function Pokelist({
 
   return (
     <div
+      ref={listDivRef}
       className={
-        isPokeInfoOpen
-          ? "flex flex-col flex-wrap justify-center mb-14 "
-          : "overflow-clip "
+        "flex flex-col flex-wrap justify-center mb-14 " +
+        (isPokeInfoClosed ? "" : "overflow-hidden")
       }
     >
       <div>
