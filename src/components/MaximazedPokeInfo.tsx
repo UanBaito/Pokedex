@@ -33,7 +33,6 @@ export default function MaximazedPokeInfo({
   refetchMaxInfoQuery.current = refetch;
 
   if (!data.pokemon_v2_pokemonspecies[0]) {
-    console.log("elpepe");
     return;
   }
 

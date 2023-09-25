@@ -34,13 +34,9 @@ export default function Pokecard({
   const hasExecutedRef = useRef(false);
 
   useEffect(() => {
-    if (hasExecutedRef.current) {
-      return;
-    }
-
     const options = {
       root: null,
-      rootMargin: "0px",
+      rootMargin: "10px",
       threshold: 0,
     };
     const observer = new IntersectionObserver(handleIntersection, options);
@@ -50,7 +46,9 @@ export default function Pokecard({
   }, [pokemonRef]);
 
   function handleIntersection(entries: IntersectionObserverEntry[]) {
-    console.log("a");
+    if (hasExecutedRef.current) {
+      return;
+    }
     entries.forEach((entry: IntersectionObserverEntry) => {
       if (entry.isIntersecting) {
         pokemonRef.current?.classList.add("slide_left");
