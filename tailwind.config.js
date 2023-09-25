@@ -350,6 +350,7 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
+      Squarefont: ["Squarefont"]
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
