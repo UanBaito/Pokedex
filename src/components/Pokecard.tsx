@@ -27,12 +27,12 @@ export default function Pokecard({
   const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.pokeID}.png
 `;
   const typeOne = pokemonData.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
-  const typeOneString = `src/components/assets/types/${typeOne}.svg`;
+  const typeOneString = `/types/${typeOne}.svg`;
   let typeTwo: undefined | string;
   let typeTwoString: undefined | string;
   if (pokemonData.pokemon_v2_pokemontypes[1]) {
     typeTwo = pokemonData.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
-    typeTwoString = `src/components/assets/types/${typeTwo}.svg`;
+    typeTwoString = `/types/${typeTwo}.svg`;
   }
   return (
     <div
