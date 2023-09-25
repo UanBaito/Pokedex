@@ -15,3 +15,8 @@
 .Pokeinfo {
   animation: fadein 10s linear;
 }
+
+html {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}

@@ -93,7 +93,7 @@ export default function Pokelist({
     <div
       ref={listDivRef}
       className={
-        "flex flex-col flex-wrap justify-center mb-14 " +
+        "flex flex-col flex-wrap justify-center " +
         (isPokeInfoClosed ? "" : "overflow-hidden")
       }
     >
