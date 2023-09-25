@@ -108,7 +108,47 @@ export default function MaximazedPokeInfo({
       </div>
       <div className="bg-black bg-opacity-30 p-1 m-1 border">
         <h2 className="font-semibold mb-1 text-secondary">Description</h2>
-        <p>{replacedFlavorText}</p>
+        <p>
+          {replacedFlavorText} Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Consequuntur exercitationem veritatis ea numquam
+          maxime quas voluptates quo quasi dolorem, dolores ex deserunt quos,
+          nesciunt, eos laudantium. Ipsum vel eos minima. Lorem ipsum dolor sit
+          amet consectetur, adipisicing elit. Corrupti distinctio neque deserunt
+          nesciunt quia recusandae voluptates inventore atque numquam provident
+          incidunt necessitatibus optio, quos, velit dolores! Nihil voluptas
+          praesentium eveniet! Lorem ipsum dolor sit amet consectetur,
+          adipisicing elit. Quisquam excepturi debitis ullam inventore eaque
+          quos maxime, alias, provident, reprehenderit nobis expedita sed
+          temporibus harum architecto enim voluptatum delectus? Eveniet,
+          placeat. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Laboriosam illum, aspernatur quo quasi blanditiis unde tempore alias
+          reprehenderit quibusdam incidunt laudantium, magni pariatur expedita
+          harum architecto exercitationem error vero enim? Lorem ipsum dolor sit
+          amet, consectetur adipisicing elit. Fugit reprehenderit mollitia
+          accusamus nulla saepe cumque, eum vero magnam, vitae laboriosam
+          voluptates! Modi quibusdam corporis nam voluptatum dolore. Aspernatur,
+          consequuntur iusto. Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Qui quas adipisci, labore deserunt eius ipsa impedit
+          dolor hic eligendi sit laudantium quod cumque architecto magni
+          perferendis in corrupti, non vel! Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Illum laborum quae nesciunt! Repellat
+          minima nam dicta, eius ab nisi tempore similique veritatis incidunt
+          minus ut in repellendus maxime omnis facilis. Lorem, ipsum dolor sit
+          amet consectetur adipisicing elit. Quas aut quisquam quae dolores
+          incidunt. Eaque necessitatibus temporibus cupiditate accusamus optio
+          est dicta possimus, illo vero ad ab libero cum. Numquam? Lorem ipsum
+          dolor sit, amet consectetur adipisicing elit. Non aut aliquid quis
+          perspiciatis architecto hic facilis iure blanditiis alias voluptate
+          delectus, ullam molestias repellendus ex? Omnis a iure labore sequi.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
+          vitae inventore necessitatibus debitis ipsum distinctio fugiat ducimus
+          temporibus? Illo neque, voluptate distinctio culpa dolorem non illum
+          rem. Nulla, numquam amet. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Voluptatum laborum laudantium est maiores
+          necessitatibus veritatis inventore! Itaque praesentium, asperiores,
+          nisi deserunt sequi dolor assumenda adipisci neque dolores
+          consequuntur ullam cum?
+        </p>
       </div>
     </div>
   );

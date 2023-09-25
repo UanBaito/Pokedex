@@ -26,10 +26,10 @@ export default function Mainpage() {
 
   if (!isPokeInfoClosed) {
     document.body.classList.add("hide-overflow");
-    document.getElementById("App")?.classList.add("hide-overflow");
+    document.getElementById("root")?.classList.add("hide-overflow");
   } else {
     document.body.classList.remove("hide-overflow");
-    document.getElementById("App")?.classList.remove("hide-overflow");
+    document.getElementById("root")?.classList.remove("hide-overflow");
   }
 
   function handlePokecardClick(pokemonName: string) {
