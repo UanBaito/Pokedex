@@ -6,6 +6,7 @@ import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";
 import TypeFilterInput from "./TypeFilterInput";
 import GenFilterInput from "./GenFilterInput";
+import LoadMorePokemonsButton from "./LoadMorePokemonsButton";
 
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
@@ -39,6 +40,19 @@ export default function Pokelist({
   const [genFilter, setGenFilter] = useState("default");
   const regSearch = new RegExp(`^${searchState}`);
   const listDivRef = useRef<HTMLDivElement>(null);
+  const [pokemonsLoadedCount, setpokemonsLoadedCount] = useState(20);
+
+  function loadMorePokemons() {
+    setpokemonsLoadedCount((prevCount) => prevCount + 20);
+  }
+
+  function hasNextPage() {
+    if (pokemonsLoadedCount >= pokemonCount) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const visiblePokemon = data.filter((pokemon) => {
     const gen = pokemon.pokemon_v2_pokemonspecy?.pokemon_v2_generation?.name;
@@ -60,7 +74,12 @@ export default function Pokelist({
     return false;
   });
 
-  const visiblePokeCards = visiblePokemon.map((v) => {
+  const pokemonCount = visiblePokemon.length;
+
+  const visiblePokeCards = visiblePokemon.map((v, i) => {
+    if (i > pokemonsLoadedCount) {
+      return;
+    }
     return (
       <Pokecard
         pokemon={v}
@@ -87,6 +106,10 @@ export default function Pokelist({
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </div>
       {visiblePokeCards}
+      <LoadMorePokemonsButton
+        hasNextPage={hasNextPage}
+        loadMorePokemons={loadMorePokemons}
+      />
     </div>
   );
 }

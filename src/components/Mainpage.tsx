@@ -9,7 +9,10 @@ import SpriteLoader from "./SpriteLoader";
 
 const MainpageQuery = graphql`
   query MainpageQuery {
-    pokemon_v2_pokemon(limit: 150, order_by: { id: asc }) {
+    pokemon_v2_pokemon(
+      order_by: { id: asc }
+      where: { is_default: { _eq: true } }
+    ) {
       ...PokeListFragment
     }
     ...MaximazedPokeInfoFragment
@@ -61,3 +64,9 @@ export default function Mainpage() {
     </div>
   );
 }
+
+// query samplePokeAPIquery {
+//   pokemon_v2_pokemon(where: {name: {_iregex: "^ve"}, is_default: {_eq: true}, pokemon_v2_pokemontypes: {type_id: {_eq: 4}}, pokemon_v2_pokemonspecy: {generation_id: {_eq: 1}}}, limit: 20) {
+//     name
+//   }
+// }
