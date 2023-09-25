@@ -10,15 +10,13 @@ const MaximazedPokeInfoFragment = graphql`
     pokemon_v2_pokemonspecies(where: { name: { _eq: $speciesName } }) {
       pokemon_v2_pokemons {
         name
+        height
+        weight
         ...PokeInfoSpriteFragment
       }
 
-      pokemon_v2_pokemonspecies {
-        pokemon_v2_pokemonspeciesflavortexts(
-          where: { language_id: { _eq: 9 } }
-        ) {
-          flavor_text
-        }
+      pokemon_v2_pokemonspeciesflavortexts(where: { language_id: { _eq: 9 } }) {
+        flavor_text
       }
     }
   }
@@ -44,10 +42,38 @@ export default function MaximazedPokeInfo({
   if (!data.pokemon_v2_pokemonspecies[0]) {
     return;
   }
-  const pokemonInfo = data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0];
+
   const flavorText =
-    data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonspecies[0]
-      .pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
+    data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonspeciesflavortexts[0]
+      .flavor_text;
+  const replacedFlavorText = flavorText.replace(/\n|\f|\t/g, " ");
+
+  function getPokemonInfo() {
+    const dataResults =
+      data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0];
+
+    const heightResult = dataResults.height;
+    const weightResult = dataResults.weight;
+    const name = dataResults.name;
+    let a;
+    let b;
+
+    if (heightResult) {
+      a = heightResult / 10 + "m";
+    } else {
+      a = "???";
+    }
+    if (weightResult) {
+      b = weightResult / 10 + "kg";
+    } else {
+      b = "???";
+    }
+
+    return { height: a, weight: b, name: name };
+  }
+
+  const pokemonInfo = getPokemonInfo();
+
   return (
     <div
       className={
@@ -62,13 +88,30 @@ export default function MaximazedPokeInfo({
         <HiOutlineChevronDown />
       </button>
 
-      <PokeInfoSprite sprites={pokemonInfo} />
+      <PokeInfoSprite
+        sprites={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
+      />
       <div className="self-center">
-        <h1 className="capitalize mb-2 font-bold">{pokemonInfo.name}</h1>
+        <h1 className="capitalize mb-2 font-bold text-primary">
+          {pokemonInfo.name}
+        </h1>
       </div>
-      <div>
-        <p>{flavorText}</p>
+      <div className="bg-black bg-opacity-30 p-1 m-1 border flex justify-between">
+        <div className="w-1/2">
+          <h2 className="inline text-secondary font-semibold">Height: </h2>
+          <p className="inline">{pokemonInfo.height}</p>
+        </div>
+        <div className="w-1/2 text-right">
+          <h2 className="inline text-secondary font-semibold">Weight: </h2>
+          <p className="inline">{pokemonInfo.weight}</p>
+        </div>
+      </div>
+      <div className="bg-black bg-opacity-30 p-1 m-1 border">
+        <h2 className="font-semibold mb-1 text-secondary">Description</h2>
+        <p>{replacedFlavorText}</p>
       </div>
     </div>
   );
 }
+
+// ;

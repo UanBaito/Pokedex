@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5fc68486605843ae9c6e973a778a257f>>
+ * @generated SignedSource<<a57a268200f06abd35892a0acf2c2144>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -101,6 +101,20 @@ return {
               {
                 "alias": null,
                 "args": null,
+                "kind": "ScalarField",
+                "name": "height",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "weight",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
                 "concreteType": "pokemon_v2_pokemonsprites",
                 "kind": "LinkedField",
                 "name": "pokemon_v2_pokemonsprites",
@@ -128,42 +142,31 @@ return {
           },
           {
             "alias": null,
-            "args": null,
-            "concreteType": "pokemon_v2_pokemonspecies",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "where",
+                "value": {
+                  "language_id": {
+                    "_eq": 9
+                  }
+                }
+              }
+            ],
+            "concreteType": "pokemon_v2_pokemonspeciesflavortext",
             "kind": "LinkedField",
-            "name": "pokemon_v2_pokemonspecies",
+            "name": "pokemon_v2_pokemonspeciesflavortexts",
             "plural": true,
             "selections": [
               {
                 "alias": null,
-                "args": [
-                  {
-                    "kind": "Literal",
-                    "name": "where",
-                    "value": {
-                      "language_id": {
-                        "_eq": 9
-                      }
-                    }
-                  }
-                ],
-                "concreteType": "pokemon_v2_pokemonspeciesflavortext",
-                "kind": "LinkedField",
-                "name": "pokemon_v2_pokemonspeciesflavortexts",
-                "plural": true,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "flavor_text",
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+                "args": null,
+                "kind": "ScalarField",
+                "name": "flavor_text",
+                "storageKey": null
               }
             ],
-            "storageKey": null
+            "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
           }
         ],
         "storageKey": null
@@ -171,16 +174,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "43eaa080188312e64935482dfd40bc4a",
+    "cacheID": "75f3867b9d90b8dd72b850310c907de8",
     "id": null,
     "metadata": {},
     "name": "MaximazedPokeInfoRefetchQuery",
     "operationKind": "query",
-    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MaximazedPokeInfoFragment_1IjDk4\n}\n\nfragment MaximazedPokeInfoFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    pokemon_v2_pokemons {\n      name\n      ...PokeInfoSpriteFragment\n    }\n    pokemon_v2_pokemonspecies {\n      pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n        flavor_text\n      }\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n"
+    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MaximazedPokeInfoFragment_1IjDk4\n}\n\nfragment MaximazedPokeInfoFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    pokemon_v2_pokemons {\n      name\n      height\n      weight\n      ...PokeInfoSpriteFragment\n    }\n    pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n      flavor_text\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b3d348ae0d364a0eb52001ac2d9d9ba9";
+(node as any).hash = "e318393b6b08b82b4e63b7a2a8da344c";
 
 export default node;

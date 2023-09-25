@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b6636f6ed79945aae7e44b11c8630b0a>>
+ * @generated SignedSource<<4398b0c093b2b229bcbc0cfeb8112647>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,13 +13,13 @@ import { FragmentRefs } from "relay-runtime";
 export type MaximazedPokeInfoFragment$data = {
   readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
     readonly pokemon_v2_pokemons: ReadonlyArray<{
+      readonly height: number | null;
       readonly name: string;
+      readonly weight: number | null;
       readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
     }>;
-    readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
-      readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
-        readonly flavor_text: string;
-      }>;
+    readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
+      readonly flavor_text: string;
     }>;
   }>;
   readonly " $fragmentType": "MaximazedPokeInfoFragment";
@@ -91,6 +91,20 @@ const node: ReaderFragment = {
               "storageKey": null
             },
             {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "height",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "weight",
+              "storageKey": null
+            },
+            {
               "args": null,
               "kind": "FragmentSpread",
               "name": "PokeInfoSpriteFragment"
@@ -100,42 +114,31 @@ const node: ReaderFragment = {
         },
         {
           "alias": null,
-          "args": null,
-          "concreteType": "pokemon_v2_pokemonspecies",
+          "args": [
+            {
+              "kind": "Literal",
+              "name": "where",
+              "value": {
+                "language_id": {
+                  "_eq": 9
+                }
+              }
+            }
+          ],
+          "concreteType": "pokemon_v2_pokemonspeciesflavortext",
           "kind": "LinkedField",
-          "name": "pokemon_v2_pokemonspecies",
+          "name": "pokemon_v2_pokemonspeciesflavortexts",
           "plural": true,
           "selections": [
             {
               "alias": null,
-              "args": [
-                {
-                  "kind": "Literal",
-                  "name": "where",
-                  "value": {
-                    "language_id": {
-                      "_eq": 9
-                    }
-                  }
-                }
-              ],
-              "concreteType": "pokemon_v2_pokemonspeciesflavortext",
-              "kind": "LinkedField",
-              "name": "pokemon_v2_pokemonspeciesflavortexts",
-              "plural": true,
-              "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "flavor_text",
-                  "storageKey": null
-                }
-              ],
-              "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+              "args": null,
+              "kind": "ScalarField",
+              "name": "flavor_text",
+              "storageKey": null
             }
           ],
-          "storageKey": null
+          "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
         }
       ],
       "storageKey": null
@@ -145,6 +148,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "b3d348ae0d364a0eb52001ac2d9d9ba9";
+(node as any).hash = "e318393b6b08b82b4e63b7a2a8da344c";
 
 export default node;
