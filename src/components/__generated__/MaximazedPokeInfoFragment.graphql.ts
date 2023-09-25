@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4398b0c093b2b229bcbc0cfeb8112647>>
+ * @generated SignedSource<<e04d4ba6591e9c11abf0c1e17421a291>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,12 @@ export type MaximazedPokeInfoFragment$data = {
     readonly pokemon_v2_pokemons: ReadonlyArray<{
       readonly height: number | null;
       readonly name: string;
+      readonly pokemon_v2_pokemontypes: ReadonlyArray<{
+        readonly pokemon_v2_type: {
+          readonly name: string;
+        } | null;
+        readonly slot: number;
+      }>;
       readonly weight: number | null;
       readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
     }>;
@@ -31,7 +37,15 @@ export type MaximazedPokeInfoFragment$key = {
 
 import MaximazedPokeInfoRefetchQuery_graphql from './MaximazedPokeInfoRefetchQuery.graphql';
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [
     {
       "defaultValue": "",
@@ -83,13 +97,7 @@ const node: ReaderFragment = {
           "name": "pokemon_v2_pokemons",
           "plural": true,
           "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "name",
-              "storageKey": null
-            },
+            (v0/*: any*/),
             {
               "alias": null,
               "args": null,
@@ -102,6 +110,36 @@ const node: ReaderFragment = {
               "args": null,
               "kind": "ScalarField",
               "name": "weight",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "pokemon_v2_pokemontype",
+              "kind": "LinkedField",
+              "name": "pokemon_v2_pokemontypes",
+              "plural": true,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "slot",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "pokemon_v2_type",
+                  "kind": "LinkedField",
+                  "name": "pokemon_v2_type",
+                  "plural": false,
+                  "selections": [
+                    (v0/*: any*/)
+                  ],
+                  "storageKey": null
+                }
+              ],
               "storageKey": null
             },
             {
@@ -147,7 +185,8 @@ const node: ReaderFragment = {
   "type": "query_root",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "e318393b6b08b82b4e63b7a2a8da344c";
+(node as any).hash = "bac959a4995bc6c73b45b77fc7d116a8";
 
 export default node;

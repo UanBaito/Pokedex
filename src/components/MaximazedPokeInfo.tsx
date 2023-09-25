@@ -12,6 +12,12 @@ const MaximazedPokeInfoFragment = graphql`
         name
         height
         weight
+        pokemon_v2_pokemontypes {
+          slot
+          pokemon_v2_type {
+            name
+          }
+        }
         ...PokeInfoSpriteFragment
       }
 
@@ -55,6 +61,8 @@ export default function MaximazedPokeInfo({
     const heightResult = dataResults.height;
     const weightResult = dataResults.weight;
     const name = dataResults.name;
+    const typeOne =
+      dataResults.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
     let a;
     let b;
 
@@ -96,6 +104,10 @@ export default function MaximazedPokeInfo({
           {pokemonInfo.name}
         </h1>
       </div>
+      <div className="flex justify-center">
+        <span className="type-badge w-16">Fire</span>
+      </div>
+      {}
       <div className="bg-black bg-opacity-30 p-1 m-1 border flex justify-between">
         <div className="w-1/2">
           <h2 className="inline text-secondary font-semibold">Height: </h2>
@@ -107,7 +119,7 @@ export default function MaximazedPokeInfo({
         </div>
       </div>
       <div className="bg-black bg-opacity-30 p-1 m-1 border">
-        <h2 className="font-semibold mb-1 text-secondary">Description</h2>
+        <h2 className="font-semibold mb-1 text-secondary ">Description</h2>
         <p>
           {replacedFlavorText} Lorem ipsum dolor, sit amet consectetur
           adipisicing elit. Consequuntur exercitationem veritatis ea numquam

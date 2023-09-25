@@ -2,6 +2,14 @@
 @tailwind utilities;
 @tailwind base;
 
+@font-face {
+  font-family: "squarefont";
+  src: local("squarefont"),
+    url(./components/assets/fonts/Square.ttf) format("truetype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
 @keyframes slide_left {
   from {
     transform: translate(-100vw);
@@ -25,3 +33,17 @@ html {
   position: relative !important;
   overflow: hidden !important;
 }
+
+.type-badge {
+  background-color: blue;
+  border-radius: 9999px;
+  width: 4rem;
+  text-align: center;
+  border: 1px solid white;
+  -webkit-text-stroke: 1px black;
+  font-family: squarefont;
+  font-size: 20px;
+  box-shadow: rgb(44, 46, 47) 0 0 15px inset;
+}
+
+/* bg-red-600 rounded-full w-16 text-center border-white border outline outline-1 outline-black font-Squarefont text-s */
