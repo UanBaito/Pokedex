@@ -13,7 +13,7 @@
 }
 
 .slide_left {
-  animation: slide_left 0.7s ease;
+  animation: slide_left 0.5s ease;
 }
 
 html {
