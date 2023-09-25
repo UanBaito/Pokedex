@@ -77,13 +77,13 @@ export default function MaximazedPokeInfo({
   return (
     <div
       className={
-        "fixed bottom-0 left-0 w-full h-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col" +
+        "fixed top-0 h-full w-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col" +
         (isPokeInfoClosed ? " hidden" : "")
       }
     >
       <button
         onClick={handleClickClosePKInfo}
-        className="absolute top-0 right-0 bg-white rounded-full z-50 w-6 h-6 inline-flex justify-center items-center m-4"
+        className="fixed top-0 right-0 bg-white rounded-full z-50 w-6 h-6 inline-flex justify-center items-center m-4"
       >
         <HiOutlineChevronDown />
       </button>

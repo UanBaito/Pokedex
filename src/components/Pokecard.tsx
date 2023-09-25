@@ -1,7 +1,6 @@
 import { PokeCardClickHandler } from "./typings";
 import { graphql, useFragment } from "react-relay";
 import { PokecardFragment$key } from "./__generated__/PokecardFragment.graphql";
-import { useEffect, useRef } from "react";
 
 const PokecardFragment = graphql`
   fragment PokecardFragment on pokemon_v2_pokemon {
@@ -30,33 +29,33 @@ export default function Pokecard({
   let typeTwo: undefined | string;
   let typeTwoString: undefined | string;
 
-  const pokemonRef = useRef<HTMLDivElement>(null);
-  const hasExecutedRef = useRef(false);
+  // const pokemonRef = useRef<HTMLDivElement>(null);
+  // const hasExecutedRef = useRef(false);
 
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "10px",
-      threshold: 0,
-    };
-    const observer = new IntersectionObserver(handleIntersection, options);
-    if (pokemonRef.current) {
-      observer.observe(pokemonRef.current);
-    }
-  }, [pokemonRef]);
+  // useEffect(() => {
+  //   const options = {
+  //     root: null,
+  //     rootMargin: "10px",
+  //     threshold: 0,
+  //   };
+  //   const observer = new IntersectionObserver(handleIntersection, options);
+  //   if (pokemonRef.current) {
+  //     observer.observe(pokemonRef.current);
+  //   }
+  // }, [pokemonRef]);
 
-  function handleIntersection(entries: IntersectionObserverEntry[]) {
-    if (hasExecutedRef.current) {
-      return;
-    }
-    entries.forEach((entry: IntersectionObserverEntry) => {
-      if (entry.isIntersecting) {
-        pokemonRef.current?.classList.add("slide_left");
-        hasExecutedRef.current = true;
-      }
-    });
-    return;
-  }
+  // function handleIntersection(entries: IntersectionObserverEntry[]) {
+  //   if (hasExecutedRef.current) {
+  //     return;
+  //   }
+  //   entries.forEach((entry: IntersectionObserverEntry) => {
+  //     if (entry.isIntersecting) {
+  //       pokemonRef.current?.classList.add("slide_left");
+  //       hasExecutedRef.current = true;
+  //     }
+  //   });
+  //   return;
+  // }
 
   if (pokemonData.pokemon_v2_pokemontypes[1]) {
     typeTwo = pokemonData.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
@@ -68,7 +67,7 @@ export default function Pokecard({
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
-      ref={pokemonRef}
+      // ref={pokemonRef}
     >
       <div className="col-span-2 row-span-4">
         <img

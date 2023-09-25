@@ -27,11 +27,9 @@ const PokeListFragment = graphql`
 
 export default function Pokelist({
   handlePokecardClick,
-  isPokeInfoClosed,
   pokeList,
 }: {
   handlePokecardClick: PokeCardClickHandler;
-  isPokeInfoClosed: boolean;
   pokeList: PokeListFragment$key;
 }) {
   const data = useFragment(PokeListFragment, pokeList);
@@ -90,13 +88,7 @@ export default function Pokelist({
   });
 
   return (
-    <div
-      ref={listDivRef}
-      className={
-        "flex flex-col flex-wrap justify-center " +
-        (isPokeInfoClosed ? "" : "overflow-hidden")
-      }
-    >
+    <div ref={listDivRef} className="flex flex-col flex-wrap justify-center ">
       <div>
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput

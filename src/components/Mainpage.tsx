@@ -25,9 +25,11 @@ export default function Mainpage() {
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>(null);
 
   if (!isPokeInfoClosed) {
-    document.body.classList.add("overflow-y-hidden");
+    document.body.classList.add("hide-overflow");
+    document.getElementById("App")?.classList.add("hide-overflow");
   } else {
-    document.body.classList.remove("overflow-y-hidden");
+    document.body.classList.remove("hide-overflow");
+    document.getElementById("App")?.classList.remove("hide-overflow");
   }
 
   function handlePokecardClick(pokemonName: string) {
@@ -42,31 +44,22 @@ export default function Mainpage() {
   }
 
   return (
-    <div className="relative overflow-y-clip">
+    <div className="relative">
       <Navbar />
       <div>
         <Suspense fallback={<SpriteLoader />}>
-          <>
-            <MaximazedPokeInfo
-              refetchMaxInfoQuery={refetchMaxInfoQuery}
-              mainPokeQueryResults={data}
-              handleClickClosePKInfo={handleClickClosePKInfo}
-              isPokeInfoClosed={isPokeInfoClosed}
-            />
-          </>
+          <MaximazedPokeInfo
+            refetchMaxInfoQuery={refetchMaxInfoQuery}
+            mainPokeQueryResults={data}
+            handleClickClosePKInfo={handleClickClosePKInfo}
+            isPokeInfoClosed={isPokeInfoClosed}
+          />
         </Suspense>
         <Pokelist
           pokeList={data.pokemon_v2_pokemon}
           handlePokecardClick={handlePokecardClick}
-          isPokeInfoClosed={isPokeInfoClosed}
         />
       </div>
     </div>
   );
 }
-
-// query samplePokeAPIquery {
-//   pokemon_v2_pokemon(where: {name: {_iregex: "^ve"}, is_default: {_eq: true}, pokemon_v2_pokemontypes: {type_id: {_eq: 4}}, pokemon_v2_pokemonspecy: {generation_id: {_eq: 1}}}, limit: 20) {
-//     name
-//   }
-// }
