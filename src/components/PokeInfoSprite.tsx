@@ -135,7 +135,7 @@ export default function PokeInfoSprite({
   );
 
   return (
-    <div className="flex flex-col my-4">
+    <div className="flex flex-col ">
       <div className="flex justify-center h-44 relative">
         <div className="w-3/5 inline-flex justify-center relative">
           <img className="h-full object-contain" src={spriteString}></img>
@@ -159,7 +159,6 @@ export default function PokeInfoSprite({
           </button>
         </div>
       </div>
-      <h3 className="text-white">"{}"</h3>
     </div>
   );
 }

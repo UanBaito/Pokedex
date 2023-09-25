@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c61b5a26989a2eb3732721f59edd1467>>
+ * @generated SignedSource<<c53597a75c4abc2d028650a2368f0e70>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -191,6 +191,7 @@ return {
             "name": "pokemon_v2_pokemons",
             "plural": true,
             "selections": [
+              (v1/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -218,6 +219,45 @@ return {
               }
             ],
             "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_pokemonspecies",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_pokemonspecies",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "where",
+                    "value": {
+                      "language_id": {
+                        "_eq": 9
+                      }
+                    }
+                  }
+                ],
+                "concreteType": "pokemon_v2_pokemonspeciesflavortext",
+                "kind": "LinkedField",
+                "name": "pokemon_v2_pokemonspeciesflavortexts",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "flavor_text",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": "pokemon_v2_pokemonspecies(where:{\"name\":{\"_eq\":\"\"}})"
@@ -225,12 +265,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "c0b898860340f8ab6eb417ed78d89400",
+    "cacheID": "6bd62d04d09cd8b5db505fc36144fd5b",
     "id": null,
     "metadata": {},
     "name": "MainpageQuery",
     "operationKind": "query",
-    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      ...PokeInfoSpriteFragment\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
+    "text": "query MainpageQuery {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  ...MaximazedPokeInfoFragment\n}\n\nfragment MaximazedPokeInfoFragment on query_root {\n  pokemon_v2_pokemonspecies(where: {name: {_eq: \"\"}}) {\n    pokemon_v2_pokemons {\n      name\n      ...PokeInfoSpriteFragment\n    }\n    pokemon_v2_pokemonspecies {\n      pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n        flavor_text\n      }\n    }\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n"
   }
 };
 })();

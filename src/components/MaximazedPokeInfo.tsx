@@ -9,7 +9,16 @@ const MaximazedPokeInfoFragment = graphql`
   @argumentDefinitions(speciesName: { type: "String", defaultValue: "" }) {
     pokemon_v2_pokemonspecies(where: { name: { _eq: $speciesName } }) {
       pokemon_v2_pokemons {
+        name
         ...PokeInfoSpriteFragment
+      }
+
+      pokemon_v2_pokemonspecies {
+        pokemon_v2_pokemonspeciesflavortexts(
+          where: { language_id: { _eq: 9 } }
+        ) {
+          flavor_text
+        }
       }
     }
   }
@@ -35,12 +44,15 @@ export default function MaximazedPokeInfo({
   if (!data.pokemon_v2_pokemonspecies[0]) {
     return;
   }
-
+  const pokemonInfo = data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0];
+  const flavorText =
+    data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonspecies[0]
+      .pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
   return (
     <div
       className={
-        "fixed bottom-0 left-0 w-full h-full bg-gray-800 z-40 overflow-y-scroll " +
-        (isPokeInfoClosed ? "hidden" : "")
+        "fixed bottom-0 left-0 w-full h-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col" +
+        (isPokeInfoClosed ? " hidden" : "")
       }
     >
       <button
@@ -50,18 +62,12 @@ export default function MaximazedPokeInfo({
         <HiOutlineChevronDown />
       </button>
 
-      <PokeInfoSprite
-        sprites={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
-      />
-
+      <PokeInfoSprite sprites={pokemonInfo} />
+      <div className="self-center">
+        <h1 className="capitalize mb-2 font-bold">{pokemonInfo.name}</h1>
+      </div>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-        blanditiis excepturi assumenda cumque officia obcaecati, dolorem illo
-        illum, atque at delectus iusto aperiam commodi amet eos quasi sit
-        veritatis facilis? Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Blanditiis quisquam nihil iure illo iusto reprehenderit labore
-        modi doloremque nobis. Accusantium incidunt deleniti corporis a, nobis
-        repudiandae distinctio ea aperiam ad.
+        <p>{flavorText}</p>
       </div>
     </div>
   );

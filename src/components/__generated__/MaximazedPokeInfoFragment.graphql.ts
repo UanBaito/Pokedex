@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<17dd3b8e6e71d8dfd371928315ad3230>>
+ * @generated SignedSource<<b6636f6ed79945aae7e44b11c8630b0a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,13 @@ import { FragmentRefs } from "relay-runtime";
 export type MaximazedPokeInfoFragment$data = {
   readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
     readonly pokemon_v2_pokemons: ReadonlyArray<{
+      readonly name: string;
       readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment">;
+    }>;
+    readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
+      readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
+        readonly flavor_text: string;
+      }>;
     }>;
   }>;
   readonly " $fragmentType": "MaximazedPokeInfoFragment";
@@ -78,9 +84,55 @@ const node: ReaderFragment = {
           "plural": true,
           "selections": [
             {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "name",
+              "storageKey": null
+            },
+            {
               "args": null,
               "kind": "FragmentSpread",
               "name": "PokeInfoSpriteFragment"
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "pokemon_v2_pokemonspecies",
+          "kind": "LinkedField",
+          "name": "pokemon_v2_pokemonspecies",
+          "plural": true,
+          "selections": [
+            {
+              "alias": null,
+              "args": [
+                {
+                  "kind": "Literal",
+                  "name": "where",
+                  "value": {
+                    "language_id": {
+                      "_eq": 9
+                    }
+                  }
+                }
+              ],
+              "concreteType": "pokemon_v2_pokemonspeciesflavortext",
+              "kind": "LinkedField",
+              "name": "pokemon_v2_pokemonspeciesflavortexts",
+              "plural": true,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "flavor_text",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
             }
           ],
           "storageKey": null
@@ -93,6 +145,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "7ba2bcd47196fbd0f4dc91b776135558";
+(node as any).hash = "b3d348ae0d364a0eb52001ac2d9d9ba9";
 
 export default node;
