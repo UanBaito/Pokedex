@@ -1,6 +1,7 @@
 import { PokeCardClickHandler } from "./typings";
 import { graphql, useFragment } from "react-relay";
 import { PokecardFragment$key } from "./__generated__/PokecardFragment.graphql";
+import { useRef } from "react";
 
 const PokecardFragment = graphql`
   fragment PokecardFragment on pokemon_v2_pokemon {
@@ -23,13 +24,31 @@ export default function Pokecard({
   pokemon: PokecardFragment$key;
 }) {
   const pokemonData = useFragment(PokecardFragment, pokemon);
-
-  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.pokeID}.png
-`;
+  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.pokeID}.png`;
   const typeOne = pokemonData.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
   const typeOneString = `/types/${typeOne}.svg`;
   let typeTwo: undefined | string;
   let typeTwoString: undefined | string;
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0,
+  };
+  const observer = new IntersectionObserver(handleIntersection, options);
+  const pokemonRef = useRef<HTMLDivElement>(null);
+  if (pokemonRef.current) {
+    observer.observe(pokemonRef.current);
+  }
+
+  function handleIntersection(entries: IntersectionObserverEntry[]) {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (entry.isIntersecting) {
+        pokemonRef.current?.classList.add("slide_left");
+      }
+    });
+    return;
+  }
+
   if (pokemonData.pokemon_v2_pokemontypes[1]) {
     typeTwo = pokemonData.pokemon_v2_pokemontypes[1].pokemon_v2_type?.name;
     typeTwoString = `/types/${typeTwo}.svg`;
@@ -40,6 +59,7 @@ export default function Pokecard({
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
+      ref={pokemonRef}
     >
       <div className="col-span-2 row-span-4">
         <img

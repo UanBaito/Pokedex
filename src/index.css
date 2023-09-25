@@ -2,9 +2,9 @@
 @tailwind utilities;
 @tailwind base;
 
-@keyframes fadein {
+@keyframes slide_left {
   from {
-    transform: translate(0, 100vh);
+    transform: translate(-100vw);
   }
 
   to {
@@ -12,8 +12,8 @@
   }
 }
 
-.Pokeinfo {
-  animation: fadein 10s linear;
+.slide_left {
+  animation: slide_left 0.7s ease;
 }
 
 html {
