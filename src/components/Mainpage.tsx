@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState, useTransition } from "react";
+import { Suspense, useCallback, useRef, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -40,8 +40,6 @@ export default function Mainpage() {
       }
     });
     setIsPokeInfoClosed(false);
-
-    return;
   }
 
   function handleClickClosePKInfo() {
@@ -51,21 +49,20 @@ export default function Mainpage() {
   return (
     <div className="relative">
       <Navbar />
-      <div>
-        <Suspense fallback={<SpriteLoader />}>
-          <MaximazedPokeInfo
-            refetchMaxInfoQuery={refetchMaxInfoQuery}
-            mainPokeQueryResults={data}
-            handleClickClosePKInfo={handleClickClosePKInfo}
-            isPokeInfoClosed={isPokeInfoClosed}
-            isPending={isPending}
-          />
-        </Suspense>
-        <Pokelist
-          pokeList={data.pokemon_v2_pokemon}
-          handlePokecardClick={handlePokecardClick}
+
+      <Suspense fallback={<SpriteLoader />}>
+        <MaximazedPokeInfo
+          refetchMaxInfoQuery={refetchMaxInfoQuery}
+          mainPokeQueryResults={data}
+          handleClickClosePKInfo={handleClickClosePKInfo}
+          isPokeInfoClosed={isPokeInfoClosed}
+          isPending={isPending}
         />
-      </div>
+      </Suspense>
+      <Pokelist
+        pokeList={data.pokemon_v2_pokemon}
+        handlePokecardClick={handlePokecardClick}
+      />
     </div>
   );
 }

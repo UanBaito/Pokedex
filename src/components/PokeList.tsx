@@ -37,7 +37,6 @@ export default function Pokelist({
   const [typeFilter, setTypeFilter] = useState("default");
   const [genFilter, setGenFilter] = useState("default");
   const regSearch = new RegExp(`^${searchState}`);
-  const listDivRef = useRef<HTMLDivElement>(null);
   const [pokemonsLoadedCount, setpokemonsLoadedCount] = useState(20);
 
   function loadMorePokemons() {
@@ -88,7 +87,7 @@ export default function Pokelist({
   });
 
   return (
-    <div ref={listDivRef} className="flex flex-col flex-wrap justify-center ">
+    <div className="flex flex-col flex-wrap justify-center ">
       <div>
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput
