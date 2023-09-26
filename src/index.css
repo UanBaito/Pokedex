@@ -20,8 +20,22 @@
   }
 }
 
+@keyframes slide_down {
+  from {
+    transform: translate(0, 100vw);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
 .slide_left {
   animation: slide_left 0.5s ease;
+}
+
+.slide_down {
+  animation: slide_down 0.5s ease;
 }
 
 html {
@@ -35,15 +49,13 @@ html {
 }
 
 .type-badge {
-  background-color: blue;
   border-radius: 9999px;
-  width: 4rem;
+  width: 5rem;
   text-align: center;
   border: 1px solid white;
   -webkit-text-stroke: 1px black;
   font-family: squarefont;
-  font-size: 20px;
+  font-size: 17px;
   box-shadow: rgb(44, 46, 47) 0 0 15px inset;
+  margin: 2px 2px;
 }
-
-/* bg-red-600 rounded-full w-16 text-center border-white border outline outline-1 outline-black font-Squarefont text-s */

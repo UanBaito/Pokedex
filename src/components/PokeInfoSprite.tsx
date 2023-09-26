@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HiRefresh, HiOutlineSparkles } from "react-icons/hi";
 import { graphql, useFragment } from "react-relay";
 import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
@@ -14,25 +13,23 @@ const PokeInfoSpriteFragment = graphql`
 
 export default function PokeInfoSprite({
   sprites,
+  spriteSettings,
+  handleReverseSprite,
+  handleShinyToggle,
 }: {
   sprites: PokeInfoSpriteFragment$key;
+  spriteSettings: any;
+  handleReverseSprite: () => void;
+  handleShinyToggle: () => void;
 }) {
   const data = useFragment(PokeInfoSpriteFragment, sprites);
-  const [spriteSettings, setSpriteSettings] = useState({
-    facingFront: true,
-    isShiny: false,
-    isFemale: false,
-  });
 
-  let spritesList: unknown;
-  let pokeID: number | null;
-
-  if (data) {
-    pokeID = data.pokemon_v2_pokemonsprites[0].pokemon_id;
-    spritesList = JSON.parse(data.pokemon_v2_pokemonsprites[0].sprites);
+  if (!data) {
+    return;
   }
 
-  let spriteString: string | undefined = "";
+  const pokeID = data.pokemon_v2_pokemonsprites[0].pokemon_id;
+  const spritesList = JSON.parse(data.pokemon_v2_pokemonsprites[0].sprites);
 
   function shouldReverseGray() {
     if (
@@ -62,20 +59,6 @@ export default function PokeInfoSprite({
     } else {
       return true;
     }
-  }
-
-  function handleReverseSprite() {
-    setSpriteSettings((prevState) => ({
-      ...prevState,
-      facingFront: !prevState.facingFront,
-    }));
-  }
-
-  function handleShinyToggle() {
-    setSpriteSettings((prevState) => ({
-      ...prevState,
-      isShiny: !prevState.isShiny,
-    }));
   }
 
   function createSpriteString(
@@ -127,7 +110,7 @@ export default function PokeInfoSprite({
     }
   }
 
-  spriteString = createSpriteString(
+  const spriteString = createSpriteString(
     spriteSettings.isShiny,
     !spriteSettings.isFemale,
     spriteSettings.facingFront,

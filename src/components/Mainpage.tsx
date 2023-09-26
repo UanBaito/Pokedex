@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -20,6 +20,7 @@ const MainpageQuery = graphql`
 `;
 
 export default function Mainpage() {
+  const [isPending, startTransition] = useTransition();
   const data = useLazyLoadQuery<MainpageQueryType>(MainpageQuery, {});
   const [isPokeInfoClosed, setIsPokeInfoClosed] = useState(true);
   const refetchMaxInfoQuery = useRef<RefetchFnDynamic<any, any>>(null);
@@ -33,9 +34,13 @@ export default function Mainpage() {
   }
 
   function handlePokecardClick(pokemonName: string) {
-    if (refetchMaxInfoQuery.current)
-      refetchMaxInfoQuery.current({ speciesName: pokemonName });
+    startTransition(() => {
+      if (refetchMaxInfoQuery.current) {
+        refetchMaxInfoQuery.current({ speciesName: pokemonName });
+      }
+    });
     setIsPokeInfoClosed(false);
+
     return;
   }
 
@@ -53,6 +58,7 @@ export default function Mainpage() {
             mainPokeQueryResults={data}
             handleClickClosePKInfo={handleClickClosePKInfo}
             isPokeInfoClosed={isPokeInfoClosed}
+            isPending={isPending}
           />
         </Suspense>
         <Pokelist
