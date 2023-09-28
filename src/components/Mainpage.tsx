@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useRef, useState, useTransition } from "react";
+import { Suspense, useRef, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
