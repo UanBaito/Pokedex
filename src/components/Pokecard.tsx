@@ -62,52 +62,53 @@ export default function Pokecard({
     typeTwoString = `/types/${typeTwo}.svg`;
   }
   return (
-    <div
-      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 rounded-md shadow-2xl m-2 cursor-pointer bg-gradient-to-r from-${typeOne} to-${typeTwo} pokeCard`}
+    <li
+      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 shadow-2xl m-2 cursor-pointer bg-gradient-to-r from-${typeOne} to-${typeTwo} pokeCard`}
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
       // ref={pokemonRef}
     >
-      <div className="col-span-2 row-span-4">
+      <div className="col-span-2 row-span-4 col-start-3">
         <img
           className="object-contain mx-auto object-right"
           loading="lazy"
           src={sprite}
         ></img>
       </div>
-      <span className="text-center capitalize font-bold text-lg col-span-2 row-span-2">
-        {pokemonData.name}
+      <span className=" col-span-4 row-span-2 row-start-6 col-start-2 flex justify-center">
+        <h1 className="inline bg-white text-center capitalize font-bold text-lg leading-5 shadow-lg outline outline-1 bg-opacity-50 px-2 font-mono">
+          {pokemonData.name}
+        </h1>
       </span>
-      <span className="col-span-2 text-center row-start-6">
-        N.º
-        {pokemonData.pokeID}
+      <span className="col-span-2 row-start-3">
+        <h2 className="shadow-lg outline outline-1 bg-opacity-50 px-1 bg-white inline leading-5">
+          N.º
+          {pokemonData.pokeID}
+        </h2>
       </span>
 
-      <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 mr-1">
-        <img
-          src={typeOneString}
-          className="relative z-10 object-fit w-full h-full p-2"
-        ></img>
+      <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 rounded-full outline outline-1 shadow-black shadow-2xl">
+        <img src={typeOneString} className="absolute z-10 w-12 h-12 p-2"></img>
         <span
-          className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeOne} `}
+          className={`absolute h-12 w-12 left-0 top-0 rounded-full bg-${typeOne} `}
         ></span>
       </div>
 
       {typeTwo ? (
-        <div className="relative my-1 col-start-6 row-start-4 row-span-3 col-span-3 mr-1">
+        <div className="relative my-1 col-start-6 row-start-4 row-span-3 col-span-3 rounded-full outline outline-1 shadow-black shadow-2xl">
           <img
             src={typeTwoString}
             className="relative z-10 object-fit w-full h-full p-2"
           ></img>
           <span
-            className={`absolute h-full w-full left-0 top-0 rounded-full bg-${typeTwo} `}
+            className={`absolute h-12 w-12 left-0 top-0 rounded-full bg-${typeTwo} `}
           ></span>
         </div>
       ) : (
         ""
       )}
-    </div>
+    </li>
   );
 
   /**

@@ -96,7 +96,7 @@ export default function Pokelist({
         />
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </div>
-      {visiblePokeCards}
+      <ul>{visiblePokeCards}</ul>
       <LoadMorePokemonsButton
         hasNextPage={hasNextPage}
         loadMorePokemons={loadMorePokemons}
