@@ -7,13 +7,15 @@ export default function LoadMorePokemonsButton({
 }) {
   return (
     <>
-      <button
-        className="btn btn-primary transition-none"
-        disabled={!hasNextPage()}
-        onClick={loadMorePokemons}
-      >
-        Load more
-      </button>
+      {hasNextPage() && (
+        <button
+          className="btn btn-primary transition-none m-2"
+          disabled={!hasNextPage()}
+          onClick={loadMorePokemons}
+        >
+          Load more
+        </button>
+      )}
     </>
   );
 }
