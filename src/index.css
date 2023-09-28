@@ -30,12 +30,29 @@
   }
 }
 
+@keyframes slide_up {
+  from {
+    transform: translate(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translate(0, 110vw);
+    opacity: 0;
+  }
+}
+
 .slide_left {
   animation: slide_left 0.5s ease;
+  translate: 0, 100vw;
 }
 
 .slide_down {
   animation: slide_down 0.3s ease;
+}
+
+.slide_up {
+  animation: slide_up 0.3s ease;
 }
 
 html {

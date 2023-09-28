@@ -25,14 +25,12 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
   const data = useFragment(StatsFragment, stats);
 
   const mappedStats = data.pokemon_v2_pokemonstats.map((v) => {
-    const maxStatByType =
-      v.pokemon_v2_stat?.pokemon_v2_pokemonstats_aggregate.aggregate?.max
-        ?.base_stat ?? 255;
+    // const maxStatByType =
+    //   v.pokemon_v2_stat?.pokemon_v2_pokemonstats_aggregate.aggregate?.max
+    //     ?.base_stat ?? 255;
     const baseStat = v.base_stat;
     const fillWidth = baseStat / (230 / 100);
     const percentage = fillWidth + "%";
-
-    console.log(maxStatByType);
 
     function getBgColor() {
       if (fillWidth <= 25) {

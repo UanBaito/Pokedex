@@ -126,7 +126,7 @@ export default function PokeInfoSprite({
             onClick={handleReverseSprite}
             disabled={shouldReverseGray()}
             className={
-              "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -left-2 disabled:bg-gray-900"
+              "bg-white text-black text-xl rounded-full w-8 h-8 inline-flex justify-center items-center absolute top-1/2 -left-4 disabled:bg-gray-900"
             }
           >
             <HiRefresh />
@@ -135,7 +135,7 @@ export default function PokeInfoSprite({
             onClick={handleShinyToggle}
             disabled={shouldShinyGray()}
             className={
-              "bg-white rounded-full w-6 h-6 inline-flex justify-center items-center absolute top-1/2 -right-2 disabled:bg-gray-900"
+              "bg-white text-black text-xl rounded-full w-8 h-8 inline-flex justify-center items-center absolute top-1/2 -right-4 disabled:bg-gray-900"
             }
           >
             <HiOutlineSparkles />

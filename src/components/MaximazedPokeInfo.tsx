@@ -68,8 +68,6 @@ export default function MaximazedPokeInfo({
     });
   }
 
-  console.log(data);
-
   if (!data[0]) {
     return;
   }
@@ -118,6 +116,7 @@ export default function MaximazedPokeInfo({
 
   return (
     <div
+      id="pokeInfoID"
       className={
         "fixed w-screen top-0 h-screen bg-transparent z-30" +
         (isPokeInfoClosed ? " hidden" : "")
@@ -134,7 +133,7 @@ export default function MaximazedPokeInfo({
             handleClickClosePKInfo();
             handleClearSpriteSettings();
           }}
-          className="fixed top-0 right-0 bg-white rounded-full z-50 w-6 h-6 inline-flex justify-center items-center m-4"
+          className="fixed top-0 right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center m-4 text-2xl"
         >
           <HiOutlineChevronDown />
         </button>

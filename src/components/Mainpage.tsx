@@ -48,8 +48,24 @@ export default function Mainpage({
     setIsPokeInfoClosed(false);
   }
 
-  function handleClickClosePKInfo() {
-    setIsPokeInfoClosed(true);
+  async function handleClickClosePKInfo() {
+    const node = document.getElementById("pokeInfoID");
+    document.body.classList.remove("hide-overflow");
+    document.getElementById("root")?.classList.remove("hide-overflow");
+    node?.classList.add("slide_up");
+    document
+      .getElementById("pokeInfoID")
+      ?.addEventListener("animationend", () => {
+        node?.classList.add("hidden");
+        setIsPokeInfoClosed(true);
+      });
+
+    // function timeout(ms: number) {
+    //   return new Promise((resolve) => setTimeout(resolve, ms));
+    // }
+    // document.getElementById("pokeInfoID")?.classList.add("slide_up");
+    // await timeout(300);
+    // setIsPokeInfoClosed(true);
   }
 
   return (
@@ -57,12 +73,14 @@ export default function Mainpage({
       <Navbar />
 
       <Suspense fallback={<SpriteLoader />}>
-        <MaximazedPokeInfo
-          mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
-          handleClickClosePKInfo={handleClickClosePKInfo}
-          isPokeInfoClosed={isPokeInfoClosed}
-          isPending={isPending}
-        />
+        {!isPokeInfoClosed && (
+          <MaximazedPokeInfo
+            mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
+            handleClickClosePKInfo={handleClickClosePKInfo}
+            isPokeInfoClosed={isPokeInfoClosed}
+            isPending={isPending}
+          />
+        )}
       </Suspense>
       <Pokelist
         pokeList={data.pokemon_v2_pokemon}
