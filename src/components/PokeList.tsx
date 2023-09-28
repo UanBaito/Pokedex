@@ -1,6 +1,6 @@
 import { PokeCardClickHandler } from "./typings";
 import Pokecard from "./Pokecard";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Searchbar from "./Searchbar";
 import { graphql, useFragment } from "react-relay";
 import type { PokeListFragment$key } from "./__generated__/PokeListFragment.graphql";

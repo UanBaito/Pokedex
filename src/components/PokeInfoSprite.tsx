@@ -1,7 +1,6 @@
 import { HiRefresh, HiOutlineSparkles } from "react-icons/hi";
 import { graphql, useFragment } from "react-relay";
 import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
-import SpriteLoader from "./SpriteLoader";
 
 const PokeInfoSpriteFragment = graphql`
   fragment PokeInfoSpriteFragment on pokemon_v2_pokemon {
