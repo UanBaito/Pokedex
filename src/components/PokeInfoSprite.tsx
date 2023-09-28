@@ -78,42 +78,30 @@ export default function PokeInfoSprite({
       return true;
     }
   }
-  console.log(spriteSettings.isFemale);
 
   function isSpriteAvailable(
     facingFront: boolean,
     isShiny: boolean,
     isFemale: boolean
   ) {
-    console.log("value2: " + isFemale);
     if (!facingFront) {
       if (isShiny && isFemale) {
-        console.log("a");
         return spritesList.back_shiny_female;
       } else if (isShiny && !isFemale) {
-        console.log("b");
         return spritesList.back_shiny;
       } else if (!isFemale) {
-        console.log("c");
         return spritesList.back_default;
       } else {
-        console.log("d");
         return spritesList.back_female;
       }
     } else {
       if (isShiny && isFemale) {
-        console.log("value: " + isFemale);
-        console.log("e");
         return spritesList.front_shiny_female;
       } else if (isShiny && !isFemale) {
-        console.log("f");
         return spritesList.front_shiny;
       } else if (!isFemale) {
-        console.log("g");
         return spritesList.front_default;
       } else {
-        console.log("value: " + isFemale);
-        console.log("h");
         return spritesList.front_female;
       }
     }
