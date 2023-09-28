@@ -36,7 +36,7 @@ export default function Pokelist({
   const [searchState, setSearchState] = useState("");
   const [typeFilter, setTypeFilter] = useState("default");
   const [genFilter, setGenFilter] = useState("default");
-  const regSearch = new RegExp(`^${searchState}`);
+  const regSearch = new RegExp(`${searchState}`);
   const [pokemonsLoadedCount, setpokemonsLoadedCount] = useState(20);
 
   function loadMorePokemons() {

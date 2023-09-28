@@ -1,8 +1,5 @@
 import { graphql, useFragment } from "react-relay";
-import {
-  StatsFragment$data,
-  StatsFragment$key,
-} from "./__generated__/StatsFragment.graphql";
+import { StatsFragment$key } from "./__generated__/StatsFragment.graphql";
 
 const StatsFragment = graphql`
   fragment StatsFragment on pokemon_v2_pokemon {
@@ -32,10 +29,10 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
       v.pokemon_v2_stat?.pokemon_v2_pokemonstats_aggregate.aggregate?.max
         ?.base_stat ?? 255;
     const baseStat = v.base_stat;
-    const fillWidth = baseStat / (maxStatByType / 100);
+    const fillWidth = baseStat / (230 / 100);
     const percentage = fillWidth + "%";
 
-    let bgColor: string;
+    console.log(maxStatByType);
 
     function getBgColor() {
       if (fillWidth <= 25) {

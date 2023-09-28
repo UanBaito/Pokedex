@@ -78,6 +78,7 @@ html {
 
 .stat-bar {
   background-color: transparent;
+  overflow-x: hidden;
 }
 
 .stat-number {
