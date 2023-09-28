@@ -1,53 +1,45 @@
 import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
-import { graphql, useRefetchableFragment } from "react-relay";
+import { graphql, useFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
 import { useState } from "react";
 import Stats from "./Stats";
 
 const MaximazedPokeInfoFragment = graphql`
-  fragment MaximazedPokeInfoFragment on query_root
-  @refetchable(queryName: "MaximazedPokeInfoRefetchQuery")
-  @argumentDefinitions(speciesName: { type: "String", defaultValue: "" }) {
-    pokemon_v2_pokemonspecies(where: { name: { _eq: $speciesName } }) {
-      pokemon_v2_pokemons {
-        name
-        height
-        weight
-        pokemon_v2_pokemontypes {
-          slot
-          pokemon_v2_type {
-            name
-          }
+  fragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies
+  @relay(plural: true) {
+    pokemon_v2_pokemons {
+      name
+      height
+      weight
+      pokemon_v2_pokemontypes {
+        slot
+        pokemon_v2_type {
+          name
         }
-        ...PokeInfoSpriteFragment
-        ...StatsFragment
       }
+      ...PokeInfoSpriteFragment
+      ...StatsFragment
+    }
 
-      pokemon_v2_pokemonspeciesflavortexts(where: { language_id: { _eq: 9 } }) {
-        flavor_text
-      }
+    pokemon_v2_pokemonspeciesflavortexts(where: { language_id: { _eq: 9 } }) {
+      flavor_text
     }
   }
 `;
 
 export default function MaximazedPokeInfo({
-  refetchMaxInfoQuery,
   mainPokeQueryResults,
   handleClickClosePKInfo,
   isPokeInfoClosed,
   isPending,
 }: {
-  refetchMaxInfoQuery: React.MutableRefObject<undefined | any>;
   mainPokeQueryResults: MaximazedPokeInfoFragment$key;
   handleClickClosePKInfo: () => void;
   isPokeInfoClosed: boolean;
   isPending: boolean;
 }) {
-  const [data, refetch] = useRefetchableFragment(
-    MaximazedPokeInfoFragment,
-    mainPokeQueryResults
-  );
+  const data = useFragment(MaximazedPokeInfoFragment, mainPokeQueryResults);
   const [spriteSettings, setSpriteSettings] = useState({
     facingFront: true,
     isShiny: false,
@@ -76,20 +68,18 @@ export default function MaximazedPokeInfo({
     });
   }
 
-  refetchMaxInfoQuery.current = refetch;
+  console.log(data);
 
-  if (!data.pokemon_v2_pokemonspecies[0]) {
+  if (!data[0]) {
     return;
   }
 
   const flavorText =
-    data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonspeciesflavortexts[0]
-      .flavor_text;
+    data[0].pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
   const replacedFlavorText = flavorText.replace(/\n|\f|\t/g, " ");
 
   function getPokemonInfo() {
-    const dataResults =
-      data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0];
+    const dataResults = data[0].pokemon_v2_pokemons[0];
 
     const heightResult = dataResults.height;
     const weightResult = dataResults.weight;
@@ -155,7 +145,7 @@ export default function MaximazedPokeInfo({
         ) : (
           <>
             <PokeInfoSprite
-              sprites={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
+              sprites={data[0].pokemon_v2_pokemons[0]}
               spriteSettings={spriteSettings}
               handleShinyToggle={handleShinyToggle}
               handleReverseSprite={handleReverseSprite}
@@ -196,9 +186,7 @@ export default function MaximazedPokeInfo({
               <p className="info-box">{replacedFlavorText}</p>
             </div>
 
-            <Stats
-              stats={data.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemons[0]}
-            />
+            <Stats stats={data[0].pokemon_v2_pokemons[0]} />
           </>
         )}
       </div>

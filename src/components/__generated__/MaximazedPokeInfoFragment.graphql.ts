@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<705921200f69d700755651a132adba80>>
+ * @generated SignedSource<<686892e7b8437cfcc24f6f1606e198b8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,34 +8,30 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
+import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type MaximazedPokeInfoFragment$data = {
-  readonly pokemon_v2_pokemonspecies: ReadonlyArray<{
-    readonly pokemon_v2_pokemons: ReadonlyArray<{
-      readonly height: number | null;
-      readonly name: string;
-      readonly pokemon_v2_pokemontypes: ReadonlyArray<{
-        readonly pokemon_v2_type: {
-          readonly name: string;
-        } | null;
-        readonly slot: number;
-      }>;
-      readonly weight: number | null;
-      readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment" | "StatsFragment">;
+export type MaximazedPokeInfoFragment$data = ReadonlyArray<{
+  readonly pokemon_v2_pokemons: ReadonlyArray<{
+    readonly height: number | null;
+    readonly name: string;
+    readonly pokemon_v2_pokemontypes: ReadonlyArray<{
+      readonly pokemon_v2_type: {
+        readonly name: string;
+      } | null;
+      readonly slot: number;
     }>;
-    readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
-      readonly flavor_text: string;
-    }>;
+    readonly weight: number | null;
+    readonly " $fragmentSpreads": FragmentRefs<"PokeInfoSpriteFragment" | "StatsFragment">;
+  }>;
+  readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
+    readonly flavor_text: string;
   }>;
   readonly " $fragmentType": "MaximazedPokeInfoFragment";
-};
-export type MaximazedPokeInfoFragment$key = {
+}>;
+export type MaximazedPokeInfoFragment$key = ReadonlyArray<{
   readonly " $data"?: MaximazedPokeInfoFragment$data;
   readonly " $fragmentSpreads": FragmentRefs<"MaximazedPokeInfoFragment">;
-};
-
-import MaximazedPokeInfoRefetchQuery_graphql from './MaximazedPokeInfoRefetchQuery.graphql';
+}>;
 
 const node: ReaderFragment = (function(){
 var v0 = {
@@ -46,152 +42,113 @@ var v0 = {
   "storageKey": null
 };
 return {
-  "argumentDefinitions": [
-    {
-      "defaultValue": "",
-      "kind": "LocalArgument",
-      "name": "speciesName"
-    }
-  ],
+  "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": {
-    "refetch": {
-      "connection": null,
-      "fragmentPathInResult": [],
-      "operation": MaximazedPokeInfoRefetchQuery_graphql
-    }
+    "plural": true
   },
   "name": "MaximazedPokeInfoFragment",
   "selections": [
     {
       "alias": null,
-      "args": [
-        {
-          "fields": [
-            {
-              "fields": [
-                {
-                  "kind": "Variable",
-                  "name": "_eq",
-                  "variableName": "speciesName"
-                }
-              ],
-              "kind": "ObjectValue",
-              "name": "name"
-            }
-          ],
-          "kind": "ObjectValue",
-          "name": "where"
-        }
-      ],
-      "concreteType": "pokemon_v2_pokemonspecies",
+      "args": null,
+      "concreteType": "pokemon_v2_pokemon",
       "kind": "LinkedField",
-      "name": "pokemon_v2_pokemonspecies",
+      "name": "pokemon_v2_pokemons",
       "plural": true,
       "selections": [
+        (v0/*: any*/),
         {
           "alias": null,
           "args": null,
-          "concreteType": "pokemon_v2_pokemon",
+          "kind": "ScalarField",
+          "name": "height",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "weight",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "pokemon_v2_pokemontype",
           "kind": "LinkedField",
-          "name": "pokemon_v2_pokemons",
+          "name": "pokemon_v2_pokemontypes",
           "plural": true,
           "selections": [
-            (v0/*: any*/),
             {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "height",
+              "name": "slot",
               "storageKey": null
             },
             {
               "alias": null,
               "args": null,
-              "kind": "ScalarField",
-              "name": "weight",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "pokemon_v2_pokemontype",
+              "concreteType": "pokemon_v2_type",
               "kind": "LinkedField",
-              "name": "pokemon_v2_pokemontypes",
-              "plural": true,
+              "name": "pokemon_v2_type",
+              "plural": false,
               "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "slot",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "pokemon_v2_type",
-                  "kind": "LinkedField",
-                  "name": "pokemon_v2_type",
-                  "plural": false,
-                  "selections": [
-                    (v0/*: any*/)
-                  ],
-                  "storageKey": null
-                }
+                (v0/*: any*/)
               ],
               "storageKey": null
-            },
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "PokeInfoSpriteFragment"
-            },
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "StatsFragment"
             }
           ],
           "storageKey": null
         },
         {
-          "alias": null,
-          "args": [
-            {
-              "kind": "Literal",
-              "name": "where",
-              "value": {
-                "language_id": {
-                  "_eq": 9
-                }
-              }
-            }
-          ],
-          "concreteType": "pokemon_v2_pokemonspeciesflavortext",
-          "kind": "LinkedField",
-          "name": "pokemon_v2_pokemonspeciesflavortexts",
-          "plural": true,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "flavor_text",
-              "storageKey": null
-            }
-          ],
-          "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "PokeInfoSpriteFragment"
+        },
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "StatsFragment"
         }
       ],
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "where",
+          "value": {
+            "language_id": {
+              "_eq": 9
+            }
+          }
+        }
+      ],
+      "concreteType": "pokemon_v2_pokemonspeciesflavortext",
+      "kind": "LinkedField",
+      "name": "pokemon_v2_pokemonspeciesflavortexts",
+      "plural": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "flavor_text",
+          "storageKey": null
+        }
+      ],
+      "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
     }
   ],
-  "type": "query_root",
+  "type": "pokemon_v2_pokemonspecies",
   "abstractKey": null
 };
 })();
 
-(node as any).hash = "a75692db1ede47aacba0bce0af6f180f";
+(node as any).hash = "fa54a0b72f9623ee5cc362f470b7f8a9";
 
 export default node;
