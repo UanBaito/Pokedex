@@ -69,7 +69,7 @@ export default function Mainpage({
   }
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col">
       <Navbar />
 
       <Suspense fallback={<SpriteLoader />}>

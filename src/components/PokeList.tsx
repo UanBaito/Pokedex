@@ -87,7 +87,7 @@ export default function Pokelist({
   });
 
   return (
-    <div className="flex flex-col flex-wrap justify-center ">
+    <div className="flex flex-col place-content-center">
       <div>
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput
@@ -96,7 +96,12 @@ export default function Pokelist({
         />
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </div>
-      <ul>{visiblePokeCards}</ul>
+      <div className=" w-full flex justify-center">
+        <ul className="flex flex-wrap justify-center max-w-5xl">
+          {visiblePokeCards}
+        </ul>
+      </div>
+
       <LoadMorePokemonsButton
         hasNextPage={hasNextPage}
         loadMorePokemons={loadMorePokemons}

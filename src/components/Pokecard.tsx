@@ -63,18 +63,14 @@ export default function Pokecard({
   }
   return (
     <li
-      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 shadow-2xl m-2 cursor-pointer bg-gradient-to-r from-${typeOne} to-${typeTwo} pokeCard`}
+      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 max-h-32 max-w-lg shadow-2xl m-2 cursor-pointer bg-gradient-to-r from-${typeOne} to-${typeTwo} pokeCard`}
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
       // ref={pokemonRef}
     >
       <div className="col-span-2 row-span-4 col-start-3">
-        <img
-          className="object-contain mx-auto object-right"
-          loading="lazy"
-          src={sprite}
-        ></img>
+        <img className="object-cover" loading="lazy" src={sprite}></img>
       </div>
       <span className=" col-span-4 row-span-2 row-start-6 col-start-2 flex justify-center">
         <h1 className="inline bg-white text-center capitalize font-bold text-lg leading-5 shadow-lg outline outline-1 bg-opacity-50 px-2 font-mono">
@@ -88,22 +84,21 @@ export default function Pokecard({
         </h2>
       </span>
 
-      <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 rounded-full outline outline-1 shadow-black shadow-2xl">
-        <img src={typeOneString} className="absolute z-10 w-12 h-12 p-2"></img>
-        <span
-          className={`absolute h-12 w-12 left-0 top-0 rounded-full bg-${typeOne} `}
-        ></span>
+      <div className="col-start-6 row-start-1 row-span-3 col-span-3 flex justify-end min-h-12 min-w-min">
+        <div
+          className={`rounded-full shadow-black shadow-2xl outline outline-1 bg-${typeOne} h-12 w-12`}
+        >
+          <img src={typeOneString} className="z-10 h-auto p-2 "></img>
+        </div>
       </div>
 
       {typeTwo ? (
-        <div className="relative my-1 col-start-6 row-start-4 row-span-3 col-span-3 rounded-full outline outline-1 shadow-black shadow-2xl">
-          <img
-            src={typeTwoString}
-            className="relative z-10 object-fit w-full h-full p-2"
-          ></img>
-          <span
-            className={`absolute h-12 w-12 left-0 top-0 rounded-full bg-${typeTwo} `}
-          ></span>
+        <div className="col-start-6 row-start-4 row-span-3 col-span-3 flex justify-end min-w-min">
+          <div
+            className={`rounded-full shadow-black shadow-2xl outline outline-1 bg-${typeTwo} h-12 w-12`}
+          >
+            <img src={typeTwoString} className="z-10 h-auto p-2 "></img>
+          </div>
         </div>
       ) : (
         ""
@@ -173,3 +168,10 @@ export default function Pokecard({
       to-fairy: "#EE99AC" 
       */
 }
+
+/* <div className="relative my-1 col-start-6 row-start-1 row-span-3 col-span-3 rounded-full outline outline-1 shadow-black shadow-2xl">
+        <img src={typeOneString} className="absolute z-10 w-12 h-12 p-2"></img>
+        <span
+          className={`absolute h-12 w-12 left-0 top-0 rounded-full bg-${typeOne} `}
+        ></span>
+      </div> */
