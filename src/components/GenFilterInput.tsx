@@ -7,7 +7,7 @@ export default function GenFilterInput({
 }) {
   return (
     <select
-      className="select rounded-none text-white w-80"
+      className="select rounded-none text-white filters"
       value={genFilter}
       onChange={(e) => setGenFilter(e.target.value)}
     >

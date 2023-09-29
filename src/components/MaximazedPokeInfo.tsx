@@ -2,7 +2,7 @@ import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
 import { graphql, useFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Stats from "./Stats";
 
 const MaximazedPokeInfoFragment = graphql`
@@ -33,11 +33,13 @@ export default function MaximazedPokeInfo({
   handleClickClosePKInfo,
   isPokeInfoClosed,
   isPending,
+  handleBackdropClick,
 }: {
   mainPokeQueryResults: MaximazedPokeInfoFragment$key;
   handleClickClosePKInfo: () => void;
   isPokeInfoClosed: boolean;
   isPending: boolean;
+  handleBackdropClick: any;
 }) {
   const data = useFragment(MaximazedPokeInfoFragment, mainPokeQueryResults);
   const [spriteSettings, setSpriteSettings] = useState({
@@ -45,6 +47,7 @@ export default function MaximazedPokeInfo({
     isShiny: false,
     isFemale: false,
   });
+  const backdropRefernce = useRef(null);
 
   function handleReverseSprite() {
     setSpriteSettings((prevState) => ({
@@ -116,7 +119,11 @@ export default function MaximazedPokeInfo({
 
   return (
     <div
-      id="pokeInfoID"
+      id="pokeInfoBgID"
+      ref={backdropRefernce}
+      onClick={(e) => {
+        handleBackdropClick(e, backdropRefernce);
+      }}
       className={
         "fixed w-screen top-0 h-screen bg-transparent z-30" +
         (isPokeInfoClosed ? " hidden" : "")
@@ -124,7 +131,7 @@ export default function MaximazedPokeInfo({
     >
       <div
         className={
-          "slide_down fixed top-0 h-full w-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col" +
+          "slide_down poke-info fixed top-0 h-full w-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col max-w-5xl" +
           (isPokeInfoClosed ? " hidden" : "")
         }
       >
@@ -133,7 +140,7 @@ export default function MaximazedPokeInfo({
             handleClickClosePKInfo();
             handleClearSpriteSettings();
           }}
-          className="fixed top-0 right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center m-4 text-2xl"
+          className="minimize-button fixed top-0 right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center m-4 text-2xl"
         >
           <HiOutlineChevronDown />
         </button>

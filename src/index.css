@@ -77,11 +77,26 @@ html {
   margin: 2px 2px;
 }
 
+/* =========================== Filters =========================== */
+
+.filters {
+  margin-top: 4px;
+}
+
+#filter-div {
+  background-color: rgb(209 213 219);
+}
+
+/* =========================== Poke Info =========================== */
+
 .info-box {
   background-color: #0000004f;
   padding: 0.25rem;
   margin: 0.25rem;
   border-width: 1px;
+}
+
+.poke-info {
 }
 
 /* =========================== Stats =========================== */
@@ -107,3 +122,55 @@ html {
 }
 
 /* bg-black bg-opacity-30 p-1 m-1 border flex justify-between */
+
+/* =========================== media-queries =========================== */
+
+@media screen and (min-width: 600px) {
+  @keyframes slide_down {
+    from {
+      transform: translate(-50%, 100vw);
+      opacity: 0;
+    }
+
+    to {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+
+  .poke-card {
+    margin: 0.5rem;
+  }
+
+  .poke-info {
+    width: 90vw;
+    height: 90vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2%;
+  }
+
+  #pokeInfoBgID {
+    backdrop-filter: brightness(0.5);
+  }
+}
+
+@media screen and (min-width: 660px) {
+  .poke-card {
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #filter-div {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+  .filters {
+    width: 320px !important;
+
+    border: 0.1rem solid rgb(100 116 139);
+  }
+}

@@ -63,7 +63,7 @@ export default function Pokecard({
   }
   return (
     <li
-      className={`grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 shadow-2xl h-52 w-80 m-2 cursor-pointer pokeCard border-4 hover:scale-110`}
+      className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 shadow-2xl h-52 grow mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
       onClick={() => {
         handlePokecardClick(pokemonData.name);
       }}
@@ -81,7 +81,7 @@ export default function Pokecard({
           {pokemonData.name}
         </h1>
       </span>
-      <span className="col-span-1 row-start-3">
+      <span className="absolute col-span-1 row-start-3">
         <h2 className="shadow-lg outline outline-1 bg-opacity-50 px-1 bg-white inline leading-5">
           N.º
           {pokemonData.pokeID}

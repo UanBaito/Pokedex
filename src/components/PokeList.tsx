@@ -88,7 +88,10 @@ export default function Pokelist({
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex justify-around bg-slate-800 p-2">
+      <div
+        id="filter-div"
+        className="flex flex-col justify-center bg-slate-800 p-2"
+      >
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput
           typeFilter={typeFilter}

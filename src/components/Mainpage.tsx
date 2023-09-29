@@ -1,4 +1,4 @@
-import { Suspense, useState, useTransition } from "react";
+import { RefObject, Suspense, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -48,13 +48,22 @@ export default function Mainpage({
     setIsPokeInfoClosed(false);
   }
 
+  function handleBackdropClick(
+    event: React.MouseEvent<HTMLDivElement>,
+    nodeRef: React.MutableRefObject<null | HTMLDivElement>
+  ) {
+    if (event.target === nodeRef.current) {
+      setIsPokeInfoClosed(true);
+    }
+  }
+
   async function handleClickClosePKInfo() {
-    const node = document.getElementById("pokeInfoID");
+    const node = document.getElementById("pokeInfoBgID");
     document.body.classList.remove("hide-overflow");
     document.getElementById("root")?.classList.remove("hide-overflow");
     node?.classList.add("slide_up");
     document
-      .getElementById("pokeInfoID")
+      .getElementById("pokeInfoBgID")
       ?.addEventListener("animationend", () => {
         node?.classList.add("hidden");
         setIsPokeInfoClosed(true);
@@ -63,7 +72,7 @@ export default function Mainpage({
     // function timeout(ms: number) {
     //   return new Promise((resolve) => setTimeout(resolve, ms));
     // }
-    // document.getElementById("pokeInfoID")?.classList.add("slide_up");
+    // document.getElementById("pokeInfoBgID")?.classList.add("slide_up");
     // await timeout(300);
     // setIsPokeInfoClosed(true);
   }
@@ -79,6 +88,7 @@ export default function Mainpage({
             handleClickClosePKInfo={handleClickClosePKInfo}
             isPokeInfoClosed={isPokeInfoClosed}
             isPending={isPending}
+            handleBackdropClick={handleBackdropClick}
           />
         )}
       </Suspense>
