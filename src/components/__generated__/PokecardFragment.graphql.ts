@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<588607155ff97a1fcac0704d407d3d2c>>
+ * @generated SignedSource<<d64cb111c2b52a790d88aa9b08473a73>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,9 @@ import { FragmentRefs } from "relay-runtime";
 export type PokecardFragment$data = {
   readonly name: string;
   readonly pokeID: number;
+  readonly pokemon_v2_pokemonspecy: {
+    readonly name: string;
+  } | null;
   readonly pokemon_v2_pokemontypes: ReadonlyArray<{
     readonly pokemon_v2_type: {
       readonly name: string;
@@ -33,7 +36,10 @@ var v0 = {
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
-};
+},
+v1 = [
+  (v0/*: any*/)
+];
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
@@ -70,12 +76,20 @@ return {
           "kind": "LinkedField",
           "name": "pokemon_v2_type",
           "plural": false,
-          "selections": [
-            (v0/*: any*/)
-          ],
+          "selections": (v1/*: any*/),
           "storageKey": null
         }
       ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "pokemon_v2_pokemonspecies",
+      "kind": "LinkedField",
+      "name": "pokemon_v2_pokemonspecy",
+      "plural": false,
+      "selections": (v1/*: any*/),
       "storageKey": null
     }
   ],
@@ -84,6 +98,6 @@ return {
 };
 })();
 
-(node as any).hash = "e87ec8ab093331433cfe1a914ddbb10b";
+(node as any).hash = "5fb32083ea7dc7a280144d1c5c4c2fae";
 
 export default node;

@@ -79,8 +79,19 @@ html {
 
 /* =========================== Filters =========================== */
 
+.individual-filter-div {
+}
+
+.filter-labels {
+  display: block;
+  text-align: center;
+  font-weight: 800;
+  margin-right: 5px;
+}
+
 .filters {
   margin-top: 4px;
+  width: 100%;
 }
 
 #filter-div {
@@ -124,6 +135,9 @@ html {
 /* bg-black bg-opacity-30 p-1 m-1 border flex justify-between */
 
 /* =========================== media-queries =========================== */
+
+@media screen and (min-width: 480px) {
+}
 
 @media screen and (min-width: 600px) {
   @keyframes slide_down {

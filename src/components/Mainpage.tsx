@@ -1,4 +1,4 @@
-import { RefObject, Suspense, useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -43,9 +43,16 @@ export default function Mainpage({
 
   function handlePokecardClick(pokemonName: string) {
     startTransition(() => {
-      refetch({ speciesName: pokemonName });
+      refetch({ speciesName: removeUnwantedWords(pokemonName) });
     });
     setIsPokeInfoClosed(false);
+  }
+
+  function removeUnwantedWords(name: string) {
+    const regex = new RegExp("-incarnate$");
+    const replacedString = name.replace(regex, "");
+    console.log(replacedString);
+    return replacedString;
   }
 
   function handleBackdropClick(

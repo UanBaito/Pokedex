@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<62362f7b2483bcb6a864b967b28c1b96>>
+ * @generated SignedSource<<b2ee9034e738a9ff5459c0feb3d2cef4>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -145,6 +145,7 @@ return {
             "name": "pokemon_v2_pokemonspecy",
             "plural": false,
             "selections": [
+              (v2/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -339,12 +340,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ac35f82415df10a89cb7e50ae0bb69e5",
+    "cacheID": "1fd10342a9f1da8e3ffe32e4c0986b80",
     "id": null,
     "metadata": {},
     "name": "MaximazedPokeInfoRefetchQuery",
     "operationKind": "query",
-    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MainpageFragment_1IjDk4\n}\n\nfragment MainpageFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    ...MaximazedPokeInfoFragment\n  }\n}\n\nfragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    name\n    height\n    weight\n    pokemon_v2_pokemontypes {\n      slot\n      pokemon_v2_type {\n        name\n      }\n    }\n    ...PokeInfoSpriteFragment\n    ...StatsFragment\n  }\n  pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n    flavor_text\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n}\n\nfragment StatsFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonstats {\n    base_stat\n    pokemon_v2_stat {\n      name\n      pokemon_v2_pokemonstats_aggregate(where: {pokemon_v2_pokemon: {is_default: {_eq: true}}}) {\n        aggregate {\n          max {\n            base_stat\n          }\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MainpageFragment_1IjDk4\n}\n\nfragment MainpageFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    ...MaximazedPokeInfoFragment\n  }\n}\n\nfragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    name\n    height\n    weight\n    pokemon_v2_pokemontypes {\n      slot\n      pokemon_v2_type {\n        name\n      }\n    }\n    ...PokeInfoSpriteFragment\n    ...StatsFragment\n  }\n  pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n    flavor_text\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    name\n  }\n}\n\nfragment StatsFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonstats {\n    base_stat\n    pokemon_v2_stat {\n      name\n      pokemon_v2_pokemonstats_aggregate(where: {pokemon_v2_pokemon: {is_default: {_eq: true}}}) {\n        aggregate {\n          max {\n            base_stat\n          }\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();

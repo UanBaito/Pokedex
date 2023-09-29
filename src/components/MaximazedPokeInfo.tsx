@@ -39,7 +39,10 @@ export default function MaximazedPokeInfo({
   handleClickClosePKInfo: () => void;
   isPokeInfoClosed: boolean;
   isPending: boolean;
-  handleBackdropClick: any;
+  handleBackdropClick: (
+    event: React.MouseEvent<HTMLDivElement>,
+    nodeRef: React.MutableRefObject<null | HTMLDivElement>
+  ) => void;
 }) {
   const data = useFragment(MaximazedPokeInfoFragment, mainPokeQueryResults);
   const [spriteSettings, setSpriteSettings] = useState({
@@ -129,7 +132,7 @@ export default function MaximazedPokeInfo({
         (isPokeInfoClosed ? " hidden" : "")
       }
     >
-      <div
+      <dialog
         className={
           "slide_down poke-info fixed top-0 h-full w-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col max-w-5xl" +
           (isPokeInfoClosed ? " hidden" : "")
@@ -195,7 +198,7 @@ export default function MaximazedPokeInfo({
             <Stats stats={data[0].pokemon_v2_pokemons[0]} />
           </>
         )}
-      </div>
+      </dialog>
     </div>
   );
 }

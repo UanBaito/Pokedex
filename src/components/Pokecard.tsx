@@ -12,6 +12,9 @@ const PokecardFragment = graphql`
         name
       }
     }
+    pokemon_v2_pokemonspecy {
+      name
+    }
   }
 `;
 
@@ -63,14 +66,23 @@ export default function Pokecard({
   }
   return (
     <li
-      className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 shadow-2xl h-52 grow mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
+      tabIndex={0}
+      className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 shadow-2xl h-52 mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
       onClick={() => {
-        handlePokecardClick(pokemonData.name);
+        handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
+      }}
+      onKeyDown={() => {
+        handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
       }}
       // ref={pokemonRef}
     >
       <div className="relative col-span-4 row-span-5 col-start-2 flex justify-center">
-        <img loading="lazy" src={sprite} className="z-10"></img>
+        <img
+          loading="lazy"
+          src={sprite}
+          className="z-10 h-40 w-40 object-cover text-transparent"
+          alt={pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
+        ></img>
         <img
           src="/pokeball.svg"
           className="bg-transparent absolute h-full opacity-40"
@@ -78,7 +90,7 @@ export default function Pokecard({
       </div>
       <span className=" col-span-4 row-span-2 row-start-6 col-start-2 flex justify-center">
         <h1 className="align-middle inline-block text-center capitalize font-bold text-lg px-2 font-mono bg-slate-500 shadow-2xl text-white ">
-          {pokemonData.name}
+          {pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
         </h1>
       </span>
       <span className="absolute col-span-1 row-start-3">
@@ -92,7 +104,11 @@ export default function Pokecard({
         <div
           className={`rounded-full shadow-black  outline outline-1 bg-${typeOne} h-12 w-12 self-center`}
         >
-          <img src={typeOneString} className="z-10 h-auto p-2 "></img>
+          <img
+            src={typeOneString}
+            alt={typeOne}
+            className="z-10 h-auto p-2 "
+          ></img>
         </div>
       </div>
 
@@ -101,7 +117,11 @@ export default function Pokecard({
           <div
             className={`rounded-full shadow-black  outline outline-1 bg-${typeTwo} h-12 w-12`}
           >
-            <img src={typeTwoString} className="z-10 h-auto p-2 "></img>
+            <img
+              src={typeTwoString}
+              alt={typeTwo}
+              className="z-10 h-auto p-2 "
+            ></img>
           </div>
         </div>
       ) : (

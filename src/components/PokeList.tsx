@@ -36,11 +36,11 @@ export default function Pokelist({
   const [searchState, setSearchState] = useState("");
   const [typeFilter, setTypeFilter] = useState("default");
   const [genFilter, setGenFilter] = useState("default");
-  const regSearch = new RegExp(`${searchState}`);
-  const [pokemonsLoadedCount, setpokemonsLoadedCount] = useState(20);
+  const regSearch = new RegExp(matchLetters(searchState));
+  const [pokemonsLoadedCount, setpokemonsLoadedCount] = useState(50);
 
   function loadMorePokemons() {
-    setpokemonsLoadedCount((prevCount) => prevCount + 20);
+    setpokemonsLoadedCount((prevCount) => prevCount + 50);
   }
 
   function hasNextPage() {
@@ -49,6 +49,12 @@ export default function Pokelist({
     } else {
       return true;
     }
+  }
+
+  function matchLetters(string: string) {
+    const letters = new RegExp("\\W*", "gi");
+    const replacedString = string.replace(letters, "");
+    return replacedString;
   }
 
   const visiblePokemon = data.filter((pokemon) => {
@@ -87,7 +93,7 @@ export default function Pokelist({
   });
 
   return (
-    <div className="flex flex-col justify-center">
+    <section className="flex flex-col justify-center">
       <div
         id="filter-div"
         className="flex flex-col justify-center bg-slate-800 p-2"
@@ -110,6 +116,6 @@ export default function Pokelist({
           loadMorePokemons={loadMorePokemons}
         />
       </div>
-    </div>
+    </section>
   );
 }
