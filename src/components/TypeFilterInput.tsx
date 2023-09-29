@@ -6,7 +6,7 @@ export default function TypeFilterInput({
   setTypeFilter: (e: string) => void;
 }) {
   return (
-    <div className="border-b border-primary">
+    <div className="border-b border-primary w-80">
       <select
         className="select w-full rounded-none text-white"
         value={typeFilter}

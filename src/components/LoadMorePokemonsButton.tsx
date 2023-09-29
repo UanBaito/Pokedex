@@ -9,7 +9,7 @@ export default function LoadMorePokemonsButton({
     <>
       {hasNextPage() && (
         <button
-          className="btn btn-primary transition-none m-2"
+          className="btn font-extrabold btn-accent transition-none m-2 w-80"
           disabled={!hasNextPage()}
           onClick={loadMorePokemons}
         >

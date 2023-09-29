@@ -6,7 +6,7 @@ export default function Searchbar({
   setSearchState: (e: string) => void;
 }) {
   return (
-    <div className="rounded-none w-full flex text-white border-b border-primary">
+    <div className="rounded-none flex text-white border-b border-primary w-80">
       <input
         placeholder="Search pokemon..."
         type="text"

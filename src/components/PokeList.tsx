@@ -87,8 +87,8 @@ export default function Pokelist({
   });
 
   return (
-    <div className="flex flex-col place-content-center">
-      <div>
+    <div className="flex flex-col justify-center">
+      <div className="flex justify-around bg-slate-800 p-2">
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput
           typeFilter={typeFilter}
@@ -101,11 +101,12 @@ export default function Pokelist({
           {visiblePokeCards}
         </ul>
       </div>
-
-      <LoadMorePokemonsButton
-        hasNextPage={hasNextPage}
-        loadMorePokemons={loadMorePokemons}
-      />
+      <div className="flex justify-center">
+        <LoadMorePokemonsButton
+          hasNextPage={hasNextPage}
+          loadMorePokemons={loadMorePokemons}
+        />
+      </div>
     </div>
   );
 }
