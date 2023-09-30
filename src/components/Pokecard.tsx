@@ -104,7 +104,7 @@ export default function Pokecard({
             <img
               src={typeOneString}
               alt={typeOne}
-              className="z-10 h-auto p-2 "
+              className="z-10 p-2 h-12 w-12"
             ></img>
           </div>
         </div>

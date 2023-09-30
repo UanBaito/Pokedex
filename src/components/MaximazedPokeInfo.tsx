@@ -112,7 +112,7 @@ export default function MaximazedPokeInfo({
   const pokemonInfo = getPokemonInfo();
 
   return (
-    <div className="relative bg-slate-300  overflow-y-scroll text-white flex flex-col poke-info">
+    <div className="bg-slate-300  overflow-y-scroll text-white flex flex-col poke-info">
       <button
         onClick={() => {
           handleClickClosePKInfo();
@@ -124,7 +124,7 @@ export default function MaximazedPokeInfo({
       </button>
       {isPending ? (
         <>
-          <div className="flex justify-center col-span-full row-span-full">
+          <div className="flex justify-center h-full">
             <span className="loading loading-spinner loading-lg self-center "></span>
           </div>
           <form

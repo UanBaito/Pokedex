@@ -63,8 +63,7 @@ html {
 }
 
 .hide-overflow {
-  position: relative !important;
-  overflow: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .type-badge {
@@ -105,8 +104,8 @@ html {
   border-radius: 2%;
   overflow-x: hidden;
   z-index: 9999;
-  min-width: 100vw !important;
-  min-height: 100vh !important;
+  min-width: 100% !important;
+  min-height: 100dvh !important;
   border-radius: 0;
 }
 
@@ -117,7 +116,7 @@ html {
 .poke-info {
   z-index: 9999;
   width: 100% !important;
-  height: 100vh !important;
+  height: 100% !important;
 }
 
 .dialog-backdrop {
@@ -134,6 +133,11 @@ html {
   padding: 4px;
   margin: 4px;
   background-color: rgb(100 116 139);
+}
+
+#poke-list {
+  height: 100% !important;
+  overflow-y: hidden;
 }
 
 .info-title {
@@ -184,6 +188,10 @@ html {
     max-width: 1024px;
     border-radius: 5px;
     overflow-y: hidden;
+  }
+
+  body {
+    position: relative !important;
   }
 
   .minimize-button {

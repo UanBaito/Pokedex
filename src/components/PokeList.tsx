@@ -109,7 +109,7 @@ export default function Pokelist({
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </form>
 
-      <ul className="flex flex-wrap justify-center max-w-5xl ">
+      <ul className="flex flex-wrap justify-center max-w-5xl">
         {visiblePokeCards}
       </ul>
       <LoadMorePokemonsButton

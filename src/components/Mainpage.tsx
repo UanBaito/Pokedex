@@ -34,21 +34,15 @@ export default function Mainpage({
   const [isPokeInfoClosed, setIsPokeInfoClosed] = useState(true);
   const pokeinfoRef = useRef<HTMLDialogElement>(null);
 
-  if (!isPokeInfoClosed) {
-    document.body.classList.add("hide-overflow");
-    document.getElementById("root")?.classList.add("hide-overflow");
-  } else {
-    document.body.classList.remove("hide-overflow");
-    document.getElementById("root")?.classList.remove("hide-overflow");
-  }
-
   function handlePokecardClick(pokemonName: string) {
+    document.body.style.top = `-${window.scrollY}px`;
+    document.body.style.position = "fixed";
+
     startTransition(() => {
       refetch({ speciesName: pokemonName });
     });
-    pokeinfoRef.current?.classList.add("slide_up");
     pokeinfoRef.current?.showModal();
-    setIsPokeInfoClosed(false);
+    pokeinfoRef.current?.classList.add("slide_up");
     pokeinfoRef.current?.addEventListener("animationend", () => {
       pokeinfoRef.current?.classList.remove("slide_up");
     });
@@ -56,12 +50,15 @@ export default function Mainpage({
   }
 
   function handleClickClosePKInfo() {
+    const scrollY = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    window.scrollTo(0, parseInt(scrollY || "0") * -1);
     pokeinfoRef.current?.classList.add("slide_down");
     pokeinfoRef.current?.addEventListener(
       "animationend",
       () => {
         pokeinfoRef.current?.classList.remove("slide_down");
-
         pokeinfoRef.current?.close();
         setIsPokeInfoClosed(true);
       },
@@ -72,7 +69,7 @@ export default function Mainpage({
   return (
     <>
       <Navbar />
-      <main className="relative flex flex-col justify-center center items-center">
+      <main className="flex flex-col justify-center items-center">
         <dialog
           aria-label="Pokemon info"
           id="poke-info-dialog"
