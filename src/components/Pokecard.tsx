@@ -65,68 +65,65 @@ export default function Pokecard({
     typeTwoString = `/types/${typeTwo}.svg`;
   }
   return (
-    <li
-      tabIndex={0}
-      className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 shadow-2xl h-52 mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
-      onClick={() => {
-        handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
-      }}
-      // onKeyDown={() => {
-      //   handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
-      // }}
-      // ref={pokemonRef}
-    >
-      <div className="relative col-span-4 row-span-5 col-start-2 flex justify-center">
-        <img
-          loading="lazy"
-          src={sprite}
-          className="z-10 h-40 w-40 object-cover text-transparent"
-          alt={pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
-        ></img>
-        <img
-          src="/pokeball.svg"
-          className="bg-transparent absolute h-full opacity-40"
-        ></img>
-      </div>
-      <span className=" col-span-4 row-span-2 row-start-6 col-start-2 flex justify-center">
-        <h1 className="align-middle inline-block text-center capitalize font-bold text-lg px-2 font-mono bg-slate-500 shadow-2xl text-white ">
-          {pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
-        </h1>
-      </span>
-      <span className="absolute col-span-1 row-start-3">
-        <h2 className="shadow-lg outline outline-1 bg-opacity-50 px-1 bg-white inline leading-5">
-          N.º
-          {pokemonData.pokeID}
-        </h2>
-      </span>
-
-      <div className="col-start-6 row-start-1 row-span-3 col-span-3 flex justify-end min-h-12 min-w-min">
-        <div
-          className={`rounded-full shadow-black  outline outline-1 bg-${typeOne} h-12 w-12 self-center`}
-        >
+    <li className="grow flex justify-center">
+      <button
+        className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 grow shadow-2xl h-52 mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
+        onClick={() => {
+          handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
+          // ref={pokemonRef}
+        }}
+      >
+        <div className="relative col-span-4 row-span-5 col-start-2 flex justify-center">
           <img
-            src={typeOneString}
-            alt={typeOne}
-            className="z-10 h-auto p-2 "
+            loading="lazy"
+            src={sprite}
+            className="z-10 h-40 w-40 object-cover text-transparent"
+            alt={pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
+          ></img>
+          <img
+            src="/pokeball.svg"
+            className="bg-transparent absolute h-full opacity-40"
+            alt=""
           ></img>
         </div>
-      </div>
-
-      {typeTwo ? (
-        <div className="col-start-6 row-start-4 row-span-3 col-span-3 flex justify-end min-w-min">
+        <span className=" col-span-4 row-span-2 row-start-6 col-start-2 flex justify-center">
+          <h1 className="align-middle inline-block text-center capitalize font-bold text-lg px-2 font-mono bg-slate-500 shadow-2xl text-white ">
+            {pokemonData.pokemon_v2_pokemonspecy?.name ?? "???"}
+          </h1>
+        </span>
+        <span className="absolute col-span-1 row-start-3">
+          <h2 className="shadow-lg outline outline-1 bg-opacity-50 px-1 bg-white inline leading-5">
+            N.º
+            {pokemonData.pokeID}
+          </h2>
+        </span>
+        <div className="col-start-6 row-start-1 row-span-3 col-span-3 flex justify-end min-h-12 min-w-min">
           <div
-            className={`rounded-full shadow-black  outline outline-1 bg-${typeTwo} h-12 w-12`}
+            className={`rounded-full shadow-black  outline outline-1 bg-${typeOne} h-12 w-12 self-center`}
           >
             <img
-              src={typeTwoString}
-              alt={typeTwo}
+              src={typeOneString}
+              alt={typeOne}
               className="z-10 h-auto p-2 "
             ></img>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+        {typeTwo ? (
+          <div className="col-start-6 row-start-4 row-span-3 col-span-3 flex justify-end min-w-min">
+            <div
+              className={`rounded-full shadow-black  outline outline-1 bg-${typeTwo} h-12 w-12`}
+            >
+              <img
+                src={typeTwoString}
+                alt={typeTwo}
+                className="z-10 h-auto p-2 "
+              ></img>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </button>
     </li>
   );
 

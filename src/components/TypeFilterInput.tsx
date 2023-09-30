@@ -9,8 +9,8 @@ export default function TypeFilterInput({
 }) {
   const typeFilterID = useId();
   return (
-    <div className="individual-filter-div">
-      <label className="text-center filter-labels" htmlFor={typeFilterID}>
+    <>
+      <label className="filter-labels" htmlFor={typeFilterID}>
         Type
       </label>
       <select
@@ -39,6 +39,6 @@ export default function TypeFilterInput({
         <option value={"steel"}>Steel</option>
         <option value={"fairy"}>Fairy</option>
       </select>
-    </div>
+    </>
   );
 }

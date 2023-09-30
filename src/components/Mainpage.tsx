@@ -70,35 +70,38 @@ export default function Mainpage({
   }
 
   return (
-    <div className="relative flex flex-col">
+    <>
       <Navbar />
-      <dialog
-        id="poke-info-dialog"
-        ref={pokeinfoRef}
-        onKeyDown={(e) => {
-          if (e.key === "Escape") {
-            e.preventDefault();
-            e.stopPropagation();
-            handleClickClosePKInfo();
-          }
-        }}
-      >
-        {isPokeInfoClosed ? (
-          <></>
-        ) : (
-          <Suspense fallback={<SpriteLoader />}>
-            <MaximazedPokeInfo
-              mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
-              handleClickClosePKInfo={handleClickClosePKInfo}
-              isPending={isPending}
-            />
-          </Suspense>
-        )}
-      </dialog>
-      <Pokelist
-        pokeList={data.pokemon_v2_pokemon}
-        handlePokecardClick={handlePokecardClick}
-      />
-    </div>
+      <main className="relative flex flex-col justify-center center items-center">
+        <dialog
+          aria-label="Pokemon info"
+          id="poke-info-dialog"
+          ref={pokeinfoRef}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              e.preventDefault();
+              e.stopPropagation();
+              handleClickClosePKInfo();
+            }
+          }}
+        >
+          {isPokeInfoClosed ? (
+            <></>
+          ) : (
+            <Suspense fallback={<SpriteLoader />}>
+              <MaximazedPokeInfo
+                mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
+                handleClickClosePKInfo={handleClickClosePKInfo}
+                isPending={isPending}
+              />
+            </Suspense>
+          )}
+        </dialog>
+        <Pokelist
+          pokeList={data.pokemon_v2_pokemon}
+          handlePokecardClick={handlePokecardClick}
+        />
+      </main>
+    </>
   );
 }

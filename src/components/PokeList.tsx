@@ -93,10 +93,13 @@ export default function Pokelist({
   });
 
   return (
-    <section className="flex flex-col justify-center">
-      <div
+    <>
+      <form
         id="filter-div"
-        className="flex flex-col justify-center bg-slate-800 p-2"
+        aria-label="Filters"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
       >
         <Searchbar searchState={searchState} setSearchState={setSearchState} />
         <TypeFilterInput
@@ -104,18 +107,15 @@ export default function Pokelist({
           setTypeFilter={setTypeFilter}
         />
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
-      </div>
-      <div className=" w-full flex justify-center">
-        <ul className="flex flex-wrap justify-center max-w-5xl">
-          {visiblePokeCards}
-        </ul>
-      </div>
-      <div className="flex justify-center">
-        <LoadMorePokemonsButton
-          hasNextPage={hasNextPage}
-          loadMorePokemons={loadMorePokemons}
-        />
-      </div>
-    </section>
+      </form>
+
+      <ul className="flex flex-wrap justify-center max-w-5xl ">
+        {visiblePokeCards}
+      </ul>
+      <LoadMorePokemonsButton
+        hasNextPage={hasNextPage}
+        loadMorePokemons={loadMorePokemons}
+      />
+    </>
   );
 }

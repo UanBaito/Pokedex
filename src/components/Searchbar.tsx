@@ -9,8 +9,8 @@ export default function Searchbar({
 }) {
   const searchbarID = useId();
   return (
-    <div className="individual-filter-div">
-      <label className="text-center filter-labels" htmlFor={searchbarID}>
+    <>
+      <label className="filter-labels" htmlFor={searchbarID}>
         Search
       </label>
       <input
@@ -22,6 +22,6 @@ export default function Searchbar({
         value={searchState}
         onChange={(e) => setSearchState(e.target.value)}
       />
-    </div>
+    </>
   );
 }
