@@ -67,7 +67,7 @@ export default function Pokecard({
   return (
     <li className="grow flex justify-center">
       <button
-        className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 grow shadow-2xl h-52 mx-6 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
+        className={`relative grid justify-center grid-flow-col p-2 grid-cols-6 grid-rows-6 grow shadow-2xl h-52 mx-2 my-2 cursor-pointer poke-card bg-slate-300 border-4 hover:scale-105`}
         onClick={() => {
           handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
           // ref={pokemonRef}
