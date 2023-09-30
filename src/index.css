@@ -106,6 +106,7 @@ html {
   z-index: 9999;
   min-width: 100% !important;
   min-height: 100dvh !important;
+
   border-radius: 0;
 }
 
@@ -116,7 +117,14 @@ html {
 .poke-info {
   z-index: 9999;
   width: 100% !important;
-  height: 100% !important;
+  height: 100dvh !important;
+}
+
+.poke-info-loading {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dialog-backdrop {
@@ -184,14 +192,11 @@ html {
   #poke-info-dialog {
     min-width: 1024px !important;
     min-height: 380px !important;
-    max-height: 380px !important;
-    max-width: 1024px;
     border-radius: 5px;
-    overflow-y: hidden;
   }
 
   body {
-    position: relative !important;
+    position: static !important;
   }
 
   .minimize-button {
@@ -256,6 +261,11 @@ html {
       "w-h stats"
       ". stats"
       ". stats";
+  }
+
+  .poke-info-loading {
+    max-width: 1024px !important;
+    max-height: 380px !important;
   }
 
   /* =========================== filters =========================== */

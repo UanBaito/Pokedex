@@ -1,10 +1,9 @@
-import { Suspense, useRef, useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
 import { useRefetchableFragment } from "react-relay";
 import { graphql } from "react-relay";
-import SpriteLoader from "./SpriteLoader";
 import { MainpageFragment$key } from "./__generated__/MainpageFragment.graphql";
 
 const MainpageFragment = graphql`
@@ -37,7 +36,7 @@ export default function Mainpage({
   function handlePokecardClick(pokemonName: string) {
     document.body.style.top = `-${window.scrollY}px`;
     document.body.style.position = "fixed";
-
+    document.body.classList.add("hide-overflow");
     startTransition(() => {
       refetch({ speciesName: pokemonName });
     });
@@ -54,6 +53,7 @@ export default function Mainpage({
     document.body.style.position = "";
     document.body.style.top = "";
     window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    document.body.classList.remove("hide-overflow");
     pokeinfoRef.current?.classList.add("slide_down");
     pokeinfoRef.current?.addEventListener(
       "animationend",
@@ -71,7 +71,6 @@ export default function Mainpage({
       <Navbar />
       <main className="flex flex-col justify-center items-center">
         <dialog
-          className="grid grid-cols-1 grid-rows-1"
           aria-label="Pokemon info"
           id="poke-info-dialog"
           ref={pokeinfoRef}
@@ -86,13 +85,11 @@ export default function Mainpage({
           {isPokeInfoClosed ? (
             <></>
           ) : (
-            <Suspense fallback={<SpriteLoader />}>
-              <MaximazedPokeInfo
-                mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
-                handleClickClosePKInfo={handleClickClosePKInfo}
-                isPending={isPending}
-              />
-            </Suspense>
+            <MaximazedPokeInfo
+              mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
+              handleClickClosePKInfo={handleClickClosePKInfo}
+              isPending={isPending}
+            />
           )}
         </dialog>
         <Pokelist

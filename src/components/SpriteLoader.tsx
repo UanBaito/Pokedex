@@ -1,3 +1,36 @@
-export default function SpriteLoader() {
-  return <div className={"w-full h-full bg-gray-800 z-40"}></div>;
+import { HiOutlineChevronDown } from "react-icons/hi";
+
+type functionVoid = () => void;
+type props = {
+  handleClickClosePKInfo: functionVoid;
+  handleClearSpriteSettings: functionVoid;
+};
+
+export default function SpriteLoader({
+  handleClickClosePKInfo,
+  handleClearSpriteSettings,
+}: props) {
+  return (
+    <>
+      <div className="relative bg-slate-300 text-white poke-info-loading">
+        <span className="loading loading-spinner loading-lg"></span>
+
+        <button
+          onClick={() => {
+            handleClickClosePKInfo();
+            handleClearSpriteSettings();
+          }}
+          className="minimize-button fixed right-0 top-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
+        >
+          <HiOutlineChevronDown />
+        </button>
+      </div>
+
+      <form
+        method="dialog"
+        className="dialog-backdrop"
+        onClick={handleClickClosePKInfo}
+      ></form>
+    </>
+  );
 }
