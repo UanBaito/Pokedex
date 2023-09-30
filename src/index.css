@@ -20,24 +20,26 @@
   }
 }
 
-@keyframes slide_down {
+@keyframes slide_up {
   from {
-    transform: translate(0, 100vw);
+    opacity: 0;
+    transform: translate(0, 110vh);
   }
 
   to {
+    opacity: 1;
     transform: translate(0);
   }
 }
 
-@keyframes slide_up {
+@keyframes slide_down {
   from {
     transform: translate(0);
     opacity: 1;
   }
 
   to {
-    transform: translate(0, 110vw);
+    transform: translate(0, 110vh);
     opacity: 0;
   }
 }
@@ -47,12 +49,12 @@
   translate: 0, 100vw;
 }
 
-.slide_down {
-  animation: slide_down 0.3s ease;
-}
-
 .slide_up {
   animation: slide_up 0.3s ease;
+}
+
+.slide_down {
+  animation: slide_down 0.3s ease;
 }
 
 html {
@@ -68,6 +70,7 @@ html {
 .type-badge {
   border-radius: 9999px;
   width: 5rem;
+  height: 1.8rem;
   text-align: center;
   border: 1px solid white;
   -webkit-text-stroke: 1px black;
@@ -75,12 +78,10 @@ html {
   font-size: 17px;
   box-shadow: rgb(44, 46, 47) 0 0 15px inset;
   margin: 2px 2px;
+  z-index: 0;
 }
 
 /* =========================== Filters =========================== */
-
-.individual-filter-div {
-}
 
 .filter-labels {
   display: block;
@@ -100,20 +101,50 @@ html {
 
 /* =========================== Poke Info =========================== */
 
-.info-box {
-  background-color: #0000004f;
-  padding: 0.25rem;
-  margin: 0.25rem;
-  border-width: 1px;
+#poke-info-dialog {
+  border-radius: 2%;
+  overflow-x: hidden;
+  z-index: 9999;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  border-radius: 0;
+}
+
+#poke-info-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .poke-info {
+  z-index: 9999;
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+.dialog-backdrop {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1 !important;
+}
+
+.info-box {
+  padding: 4px;
+  margin: 4px;
+  background-color: rgb(100 116 139);
+}
+
+.info-title {
+  color: white;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 /* =========================== Stats =========================== */
-
-.stat-block {
-}
 
 .stat-label {
   text-transform: capitalize;
@@ -122,9 +153,6 @@ html {
 .stat-bar {
   background-color: transparent;
   overflow-x: hidden;
-}
-
-.stat-number {
 }
 
 .stat-fill {
@@ -140,43 +168,90 @@ html {
 }
 
 @media screen and (min-width: 600px) {
-  @keyframes slide_down {
-    from {
-      transform: translate(-50%, 100vw);
-      opacity: 0;
-    }
-
-    to {
-      transform: translate(-50%, -50%);
-      opacity: 1;
-    }
-  }
-
   .poke-card {
     margin: 0.5rem;
-  }
-
-  .poke-info {
-    width: 90vw;
-    height: 90vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 2%;
-  }
-
-  #pokeInfoBgID {
-    backdrop-filter: brightness(0.5);
   }
 }
 
 @media screen and (min-width: 660px) {
-  .poke-card {
-    margin: 0.5rem;
-  }
 }
 
 @media screen and (min-width: 1024px) {
+  #poke-info-dialog {
+    min-width: 1024px !important;
+    min-height: 380px !important;
+    max-height: 380px !important;
+    max-width: 1024px;
+    border-radius: 5px;
+    overflow-y: hidden;
+  }
+
+  .minimize-button {
+    position: absolute;
+  }
+
+  /* =========================== Poke-info Grid =========================== */
+
+  .poke-info-name {
+    grid-area: name;
+  }
+
+  .poke-info-sprite {
+    grid-area: sprite;
+  }
+
+  .poke-info-types {
+    grid-area: types;
+  }
+
+  .poke-info-weight-height {
+    grid-area: w-h;
+  }
+
+  .poke-info-description {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poke-info-stats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 30px repeat(6, 1fr);
+    grid-area: stats;
+  }
+
+  .stats-title {
+    grid-column: span 2;
+  }
+
+  .stat-block {
+    grid-column: span 1;
+  }
+
+  .stat-label {
+    text-transform: capitalize;
+  }
+
+  .poke-info {
+    max-width: 1024px !important;
+    max-height: 380px !important;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 180px 40px 40px 40px 40px 40px;
+    grid-template-areas:
+      "sprite description"
+      "name stats"
+      "types stats"
+      "w-h stats"
+      ". stats"
+      ". stats";
+  }
+
+  /* =========================== =========================== */
+
   #filter-div {
     flex-direction: row;
     justify-content: center;

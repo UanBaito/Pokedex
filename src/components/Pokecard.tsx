@@ -71,9 +71,9 @@ export default function Pokecard({
       onClick={() => {
         handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
       }}
-      onKeyDown={() => {
-        handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
-      }}
+      // onKeyDown={() => {
+      //   handlePokecardClick(pokemonData.pokemon_v2_pokemonspecy?.name ?? "");
+      // }}
       // ref={pokemonRef}
     >
       <div className="relative col-span-4 row-span-5 col-start-2 flex justify-center">

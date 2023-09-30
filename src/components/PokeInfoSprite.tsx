@@ -163,30 +163,27 @@ export default function PokeInfoSprite({
   );
 
   return (
-    <div className="flex flex-col ">
-      <div className="flex justify-center h-44 relative">
-        <div className="w-3/5 inline-flex justify-center relative">
-          <img className="h-full object-contain" src={spriteString}></img>
-          <button
-            onClick={handleReverseSprite}
-            disabled={shouldReverseGray()}
-            className={
-              "bg-white text-black text-xl rounded-full w-8 h-8 inline-flex justify-center items-center absolute top-1/2 -left-6 disabled:bg-gray-900"
-            }
-          >
-            <HiRefresh />
-          </button>
-          <button
-            onClick={handleShinyToggle}
-            disabled={shouldShinyGray()}
-            className={
-              "bg-white text-black text-xl rounded-full w-8 h-8 inline-flex justify-center items-center absolute top-1/2 -right-6 disabled:bg-gray-900"
-            }
-          >
-            <HiOutlineSparkles />
-          </button>
-        </div>
-      </div>
+    <div className="flex justify-center h-44 poke-info-sprite">
+      <button
+        onClick={handleReverseSprite}
+        disabled={shouldReverseGray()}
+        className={
+          "self-center mr-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-900"
+        }
+      >
+        <HiRefresh />
+      </button>
+      <img className="h-44 object-cover" src={spriteString}></img>
+
+      <button
+        onClick={handleShinyToggle}
+        disabled={shouldShinyGray()}
+        className={
+          "self-center ml-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-900"
+        }
+      >
+        <HiOutlineSparkles />
+      </button>
     </div>
   );
 }

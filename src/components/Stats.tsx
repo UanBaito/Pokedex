@@ -45,11 +45,11 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
     }
 
     return (
-      <div className="stat-block info-box" key={v.pokemon_v2_stat?.name}>
-        <h3 className="stat-label text-secondary inline">
+      <div className="stat-block" key={v.pokemon_v2_stat?.name}>
+        <h3 className="stat-label inline info-title">
           {v.pokemon_v2_stat?.name}:
         </h3>
-        <h4 className="stat-number inline"> {baseStat}</h4>
+        <h4 className="stat-number inline info-value"> {baseStat}</h4>
         <div className="stat-bar">
           <div
             className="stat-fill"
@@ -61,8 +61,8 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
   });
 
   return (
-    <div className="info-box">
-      <h2 className="text-secondary">Stats: </h2>
+    <div className="info-box poke-info-stats">
+      <h2 className="stats-title info-title">Stats: </h2>
       {mappedStats}
     </div>
   );

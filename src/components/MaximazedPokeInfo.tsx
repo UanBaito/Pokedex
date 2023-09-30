@@ -2,7 +2,7 @@ import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
 import { graphql, useFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Stats from "./Stats";
 
 const MaximazedPokeInfoFragment = graphql`
@@ -31,18 +31,13 @@ const MaximazedPokeInfoFragment = graphql`
 export default function MaximazedPokeInfo({
   mainPokeQueryResults,
   handleClickClosePKInfo,
-  isPokeInfoClosed,
+
   isPending,
-  handleBackdropClick,
 }: {
   mainPokeQueryResults: MaximazedPokeInfoFragment$key;
   handleClickClosePKInfo: () => void;
-  isPokeInfoClosed: boolean;
+
   isPending: boolean;
-  handleBackdropClick: (
-    event: React.MouseEvent<HTMLDivElement>,
-    nodeRef: React.MutableRefObject<null | HTMLDivElement>
-  ) => void;
 }) {
   const data = useFragment(MaximazedPokeInfoFragment, mainPokeQueryResults);
   const [spriteSettings, setSpriteSettings] = useState({
@@ -50,7 +45,6 @@ export default function MaximazedPokeInfo({
     isShiny: false,
     isFemale: false,
   });
-  const backdropRefernce = useRef(null);
 
   function handleReverseSprite() {
     setSpriteSettings((prevState) => ({
@@ -73,15 +67,6 @@ export default function MaximazedPokeInfo({
       isFemale: false,
     });
   }
-
-  if (!data[0]) {
-    return;
-  }
-
-  const flavorText =
-    data[0].pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
-  const replacedFlavorText = flavorText.replace(/\n|\f|\t/g, " ");
-
   function getPokemonInfo() {
     const dataResults = data[0].pokemon_v2_pokemons[0];
 
@@ -118,87 +103,82 @@ export default function MaximazedPokeInfo({
     };
   }
 
+  if (!data[0]) {
+    return <></>;
+  }
+  const flavorText =
+    data[0].pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
+  const replacedFlavorText = flavorText.replace(/\n|\f|\t/g, " ");
   const pokemonInfo = getPokemonInfo();
 
   return (
-    <div
-      id="pokeInfoBgID"
-      ref={backdropRefernce}
-      onClick={(e) => {
-        handleBackdropClick(e, backdropRefernce);
-      }}
-      className={
-        "fixed w-screen top-0 h-screen bg-transparent z-30" +
-        (isPokeInfoClosed ? " hidden" : "")
-      }
-    >
-      <dialog
-        className={
-          "slide_down poke-info fixed top-0 h-full w-full bg-gray-800 z-40 overflow-y-scroll text-white flex flex-col max-w-5xl" +
-          (isPokeInfoClosed ? " hidden" : "")
-        }
+    <div className="relative bg-slate-300  overflow-y-scroll text-white flex flex-col poke-info">
+      <button
+        onClick={() => {
+          handleClickClosePKInfo();
+          handleClearSpriteSettings();
+        }}
+        className="minimize-button fixed right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
       >
-        <button
-          onClick={() => {
-            handleClickClosePKInfo();
-            handleClearSpriteSettings();
-          }}
-          className="minimize-button fixed top-0 right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center m-4 text-2xl"
-        >
-          <HiOutlineChevronDown />
-        </button>
-        {isPending ? (
-          <div className="relative flex justify-center w-full h-full">
-            <span className="loading loading-spinner loading-lg self-center"></span>
+        <HiOutlineChevronDown />
+      </button>
+      {isPending ? (
+        <>
+          <div className="flex justify-center col-span-full row-span-full">
+            <span className="loading loading-spinner loading-lg self-center "></span>
           </div>
-        ) : (
-          <>
-            <PokeInfoSprite
-              sprites={data[0].pokemon_v2_pokemons[0]}
-              spriteSettings={spriteSettings}
-              handleShinyToggle={handleShinyToggle}
-              handleReverseSprite={handleReverseSprite}
-            />
-            <div className="self-center">
-              <h1 className="capitalize mb-2 font-bold text-primary text-lg">
-                {pokemonInfo.name}
-              </h1>
-            </div>
-            <div className="flex justify-center ">
-              <span className={`type-badge bg-${pokemonInfo.typeOne}`}>
-                {pokemonInfo.typeOne}
+          <form
+            method="dialog"
+            className="dialog-backdrop"
+            onClick={handleClickClosePKInfo}
+          ></form>
+        </>
+      ) : (
+        <>
+          <PokeInfoSprite
+            sprites={data[0].pokemon_v2_pokemons[0]}
+            spriteSettings={spriteSettings}
+            handleShinyToggle={handleShinyToggle}
+            handleReverseSprite={handleReverseSprite}
+          />
+          <div className="self-center poke-info-name">
+            <h1 className="text-center info-title info-box">
+              {pokemonInfo.name}
+            </h1>
+          </div>
+          <div className="flex justify-center items-center poke-info-types info-box">
+            <span className={`type-badge bg-${pokemonInfo.typeOne}`}>
+              {pokemonInfo.typeOne}
+            </span>
+            {pokemonInfo.typeTwo && (
+              <span className={`type-badge bg-${pokemonInfo.typeTwo}`}>
+                {pokemonInfo.typeTwo}
               </span>
-              {pokemonInfo.typeTwo && (
-                <span className={`type-badge bg-${pokemonInfo.typeTwo}`}>
-                  {pokemonInfo.typeTwo}
-                </span>
-              )}
+            )}
+          </div>
+          <div className="p-1 m-1 border flex justify-between poke-info-weight-height info-box">
+            <div className="w-1/2">
+              <h2 className="inline info-title">Height: </h2>
+              <p className="inline info-value">{pokemonInfo.height}</p>
             </div>
-            <div className="bg-black bg-opacity-30 p-1 m-1 border flex justify-between">
-              <div className="w-1/2">
-                <h2 className="inline text-secondary font-semibold">
-                  Height:{" "}
-                </h2>
-                <p className="inline">{pokemonInfo.height}</p>
-              </div>
-              <div className="w-1/2 text-right">
-                <h2 className="inline text-secondary font-semibold">
-                  Weight:{" "}
-                </h2>
-                <p className="inline">{pokemonInfo.weight}</p>
-              </div>
+            <div className="w-1/2 text-right">
+              <h2 className="inline  info-title">Weight: </h2>
+              <p className="inline info-value">{pokemonInfo.weight}</p>
             </div>
-            <div className="info-box">
-              <h2 className="font-semibold mb-1 text-secondary ">
-                Description
-              </h2>
-              <p className="info-box">{replacedFlavorText}</p>
-            </div>
+          </div>
+          <div className="info-box poke-info-description ">
+            <h2 className="font-semibold mb-1 ">Description</h2>
+            <p className="info-value">{replacedFlavorText}</p>
+          </div>
 
-            <Stats stats={data[0].pokemon_v2_pokemons[0]} />
-          </>
-        )}
-      </dialog>
+          <Stats stats={data[0].pokemon_v2_pokemons[0]} />
+          <form
+            method="dialog"
+            className="dialog-backdrop"
+            onClick={handleClickClosePKInfo}
+          ></form>
+        </>
+      )}
     </div>
   );
 }

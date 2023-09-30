@@ -1,4 +1,4 @@
-import { Suspense, useState, useTransition } from "react";
+import { Suspense, useRef, useState, useTransition } from "react";
 import Navbar from "./Navbar";
 import Pokelist from "./PokeList";
 import MaximazedPokeInfo from "./MaximazedPokeInfo";
@@ -32,6 +32,7 @@ export default function Mainpage({
   const [isPending, startTransition] = useTransition();
   const [data, refetch] = useRefetchableFragment(MainpageFragment, queryData);
   const [isPokeInfoClosed, setIsPokeInfoClosed] = useState(true);
+  const pokeinfoRef = useRef<HTMLDialogElement>(null);
 
   if (!isPokeInfoClosed) {
     document.body.classList.add("hide-overflow");
@@ -43,62 +44,57 @@ export default function Mainpage({
 
   function handlePokecardClick(pokemonName: string) {
     startTransition(() => {
-      refetch({ speciesName: removeUnwantedWords(pokemonName) });
+      refetch({ speciesName: pokemonName });
+    });
+    pokeinfoRef.current?.classList.add("slide_up");
+    pokeinfoRef.current?.showModal();
+    setIsPokeInfoClosed(false);
+    pokeinfoRef.current?.addEventListener("animationend", () => {
+      pokeinfoRef.current?.classList.remove("slide_up");
     });
     setIsPokeInfoClosed(false);
   }
 
-  function removeUnwantedWords(name: string) {
-    const regex = new RegExp("-incarnate$");
-    const replacedString = name.replace(regex, "");
-    console.log(replacedString);
-    return replacedString;
-  }
+  function handleClickClosePKInfo() {
+    pokeinfoRef.current?.classList.add("slide_down");
+    pokeinfoRef.current?.addEventListener(
+      "animationend",
+      () => {
+        pokeinfoRef.current?.classList.remove("slide_down");
 
-  function handleBackdropClick(
-    event: React.MouseEvent<HTMLDivElement>,
-    nodeRef: React.MutableRefObject<null | HTMLDivElement>
-  ) {
-    if (event.target === nodeRef.current) {
-      setIsPokeInfoClosed(true);
-    }
-  }
-
-  async function handleClickClosePKInfo() {
-    const node = document.getElementById("pokeInfoBgID");
-    document.body.classList.remove("hide-overflow");
-    document.getElementById("root")?.classList.remove("hide-overflow");
-    node?.classList.add("slide_up");
-    document
-      .getElementById("pokeInfoBgID")
-      ?.addEventListener("animationend", () => {
-        node?.classList.add("hidden");
+        pokeinfoRef.current?.close();
         setIsPokeInfoClosed(true);
-      });
-
-    // function timeout(ms: number) {
-    //   return new Promise((resolve) => setTimeout(resolve, ms));
-    // }
-    // document.getElementById("pokeInfoBgID")?.classList.add("slide_up");
-    // await timeout(300);
-    // setIsPokeInfoClosed(true);
+      },
+      { once: true }
+    );
   }
 
   return (
     <div className="relative flex flex-col">
       <Navbar />
-
-      <Suspense fallback={<SpriteLoader />}>
-        {!isPokeInfoClosed && (
-          <MaximazedPokeInfo
-            mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
-            handleClickClosePKInfo={handleClickClosePKInfo}
-            isPokeInfoClosed={isPokeInfoClosed}
-            isPending={isPending}
-            handleBackdropClick={handleBackdropClick}
-          />
+      <dialog
+        id="poke-info-dialog"
+        ref={pokeinfoRef}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            e.preventDefault();
+            e.stopPropagation();
+            handleClickClosePKInfo();
+          }
+        }}
+      >
+        {isPokeInfoClosed ? (
+          <></>
+        ) : (
+          <Suspense fallback={<SpriteLoader />}>
+            <MaximazedPokeInfo
+              mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
+              handleClickClosePKInfo={handleClickClosePKInfo}
+              isPending={isPending}
+            />
+          </Suspense>
         )}
-      </Suspense>
+      </dialog>
       <Pokelist
         pokeList={data.pokemon_v2_pokemon}
         handlePokecardClick={handlePokecardClick}
