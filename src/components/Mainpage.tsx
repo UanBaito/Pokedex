@@ -71,6 +71,7 @@ export default function Mainpage({
       <Navbar />
       <main className="flex flex-col justify-center items-center">
         <dialog
+          className="grid grid-cols-1 grid-rows-1"
           aria-label="Pokemon info"
           id="poke-info-dialog"
           ref={pokeinfoRef}

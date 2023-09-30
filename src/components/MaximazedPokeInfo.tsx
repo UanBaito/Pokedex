@@ -104,7 +104,28 @@ export default function MaximazedPokeInfo({
   }
 
   if (!data[0]) {
-    return <></>;
+    return (
+      <>
+        <div className="flex justify-center bg-slate-300 col-span-full row-span-full">
+          <span className="loading loading-spinner loading-lg self-center"></span>
+          <button
+            onClick={() => {
+              handleClickClosePKInfo();
+              handleClearSpriteSettings();
+            }}
+            className="minimize-button fixed right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
+          >
+            <HiOutlineChevronDown />
+          </button>
+        </div>
+
+        <form
+          method="dialog"
+          className="dialog-backdrop"
+          onClick={handleClickClosePKInfo}
+        ></form>
+      </>
+    );
   }
   const flavorText =
     data[0].pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
@@ -112,7 +133,7 @@ export default function MaximazedPokeInfo({
   const pokemonInfo = getPokemonInfo();
 
   return (
-    <div className="bg-slate-300  overflow-y-scroll text-white flex flex-col poke-info">
+    <div className="bg-slate-300 overflow-y-scroll text-white flex flex-col poke-info">
       <button
         onClick={() => {
           handleClickClosePKInfo();
@@ -124,9 +145,19 @@ export default function MaximazedPokeInfo({
       </button>
       {isPending ? (
         <>
-          <div className="flex justify-center h-full">
-            <span className="loading loading-spinner loading-lg self-center "></span>
+          <div className="flex justify-center bg-slate-300 col-span-full row-span-full">
+            <span className="loading loading-spinner loading-lg self-center"></span>
+            <button
+              onClick={() => {
+                handleClickClosePKInfo();
+                handleClearSpriteSettings();
+              }}
+              className="minimize-button fixed right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
+            >
+              <HiOutlineChevronDown />
+            </button>
           </div>
+
           <form
             method="dialog"
             className="dialog-backdrop"
