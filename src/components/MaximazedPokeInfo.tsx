@@ -151,50 +151,50 @@ export default function MaximazedPokeInfo({
         <HiOutlineChevronDown />
       </button>
 
-      <>
-        <PokeInfoSprite
-          sprites={data[0].pokemon_v2_pokemons[0]}
-          spriteSettings={spriteSettings}
-          handleShinyToggle={handleShinyToggle}
-          handleReverseSprite={handleReverseSprite}
-        />
-        <div className="self-center poke-info-name">
-          <h1 className="text-center info-title info-box">
-            {pokemonInfo.name}
-          </h1>
-        </div>
-        <div className="flex justify-center items-center poke-info-types info-box">
-          <span className={`type-badge bg-${pokemonInfo.typeOne}`}>
-            {pokemonInfo.typeOne}
+      <PokeInfoSprite
+        sprites={data[0].pokemon_v2_pokemons[0]}
+        spriteSettings={spriteSettings}
+        handleShinyToggle={handleShinyToggle}
+        handleReverseSprite={handleReverseSprite}
+      />
+      <div className="self-center poke-info-name">
+        <h1 className="text-center info-title info-box">{pokemonInfo.name}</h1>
+      </div>
+      <div className="flex justify-center items-center poke-info-types info-box">
+        <span
+          className={`type-badge bg-${pokemonInfo.typeOne} flex items-center justify-center`}
+        >
+          {pokemonInfo.typeOne}
+        </span>
+        {pokemonInfo.typeTwo && (
+          <span
+            className={`type-badge bg-${pokemonInfo.typeTwo} flex items-center justify-center`}
+          >
+            {pokemonInfo.typeTwo}
           </span>
-          {pokemonInfo.typeTwo && (
-            <span className={`type-badge bg-${pokemonInfo.typeTwo}`}>
-              {pokemonInfo.typeTwo}
-            </span>
-          )}
+        )}
+      </div>
+      <div className="p-1 m-1 border flex justify-between poke-info-weight-height info-box">
+        <div className="w-1/2">
+          <h2 className="inline info-title">Height: </h2>
+          <p className="inline info-value">{pokemonInfo.height}</p>
         </div>
-        <div className="p-1 m-1 border flex justify-between poke-info-weight-height info-box">
-          <div className="w-1/2">
-            <h2 className="inline info-title">Height: </h2>
-            <p className="inline info-value">{pokemonInfo.height}</p>
-          </div>
-          <div className="w-1/2 text-right">
-            <h2 className="inline  info-title">Weight: </h2>
-            <p className="inline info-value">{pokemonInfo.weight}</p>
-          </div>
+        <div className="w-1/2 text-right">
+          <h2 className="inline  info-title">Weight: </h2>
+          <p className="inline info-value">{pokemonInfo.weight}</p>
         </div>
-        <div className="info-box poke-info-description ">
-          <h2 className="font-semibold mb-1 ">Description</h2>
-          <p className="info-value">{replacedFlavorText}</p>
-        </div>
+      </div>
+      <div className="info-box poke-info-description ">
+        <h2 className="font-semibold mb-1 ">Description</h2>
+        <p className="info-value">{replacedFlavorText}</p>
+      </div>
 
-        <Stats stats={data[0].pokemon_v2_pokemons[0]} />
-        <form
-          method="dialog"
-          className="dialog-backdrop"
-          onClick={handleClickClosePKInfo}
-        ></form>
-      </>
+      <Stats stats={data[0].pokemon_v2_pokemons[0]} />
+      <form
+        method="dialog"
+        className="dialog-backdrop"
+        onClick={handleClickClosePKInfo}
+      ></form>
     </div>
   );
 }

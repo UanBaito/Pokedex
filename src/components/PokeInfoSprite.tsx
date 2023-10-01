@@ -168,7 +168,7 @@ export default function PokeInfoSprite({
         onClick={handleReverseSprite}
         disabled={shouldReverseGray()}
         className={
-          "self-center mr-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-900"
+          "self-center mr-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-600"
         }
       >
         <HiRefresh />
