@@ -1,10 +1,13 @@
 import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
-import { graphql, useFragment } from "react-relay";
+import { RefetchFnDynamic, graphql, useFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
 import { useState } from "react";
 import Stats from "./Stats";
 import SpriteLoader from "./SpriteLoader";
+import { MainpageFragment$key } from "./__generated__/MainpageFragment.graphql";
+import Variants from "./Variants";
+import EvolutionChain from "./EvolutionChain";
 
 const MaximazedPokeInfoFragment = graphql`
   fragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies
@@ -26,19 +29,23 @@ const MaximazedPokeInfoFragment = graphql`
     pokemon_v2_pokemonspeciesflavortexts(where: { language_id: { _eq: 9 } }) {
       flavor_text
     }
+    ...VariantsFragment
+    ...EvolutionChainFragment
   }
 `;
 
 export default function MaximazedPokeInfo({
   mainPokeQueryResults,
   handleClickClosePKInfo,
-
   isPending,
+  refetchQuery,
 }: {
   mainPokeQueryResults: MaximazedPokeInfoFragment$key;
   handleClickClosePKInfo: () => void;
-
   isPending: boolean;
+  refetchQuery: React.MutableRefObject<
+    RefetchFnDynamic<any, MainpageFragment$key>
+  >;
 }) {
   const data = useFragment(MaximazedPokeInfoFragment, mainPokeQueryResults);
   const [spriteSettings, setSpriteSettings] = useState({
@@ -46,6 +53,11 @@ export default function MaximazedPokeInfo({
     isShiny: false,
     isFemale: false,
   });
+  const [currentPokemon, setCurrentPokemon] = useState(0);
+
+  function handleVariantClick(index: number) {
+    setCurrentPokemon(index);
+  }
 
   function handleReverseSprite() {
     setSpriteSettings((prevState) => ({
@@ -68,8 +80,9 @@ export default function MaximazedPokeInfo({
       isFemale: false,
     });
   }
+
   function getPokemonInfo() {
-    const dataResults = data[0].pokemon_v2_pokemons[0];
+    const dataResults = currentPokemonResults;
 
     const heightResult = dataResults.height;
     const weightResult = dataResults.weight;
@@ -106,29 +119,13 @@ export default function MaximazedPokeInfo({
 
   if (!data[0]) {
     return (
-      <>
-        <div className="relative bg-slate-300 text-white poke-info-loading">
-          <span className="loading loading-spinner loading-lg"></span>
-
-          <button
-            onClick={() => {
-              handleClickClosePKInfo();
-              handleClearSpriteSettings();
-            }}
-            className="minimize-button fixed right-0 top-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
-          >
-            <HiOutlineChevronDown />
-          </button>
-        </div>
-
-        <form
-          method="dialog"
-          className="dialog-backdrop"
-          onClick={handleClickClosePKInfo}
-        ></form>
-      </>
+      <SpriteLoader
+        handleClickClosePKInfo={handleClickClosePKInfo}
+        handleClearSpriteSettings={handleClearSpriteSettings}
+      />
     );
   }
+  const currentPokemonResults = data[0].pokemon_v2_pokemons[currentPokemon];
   const flavorText =
     data[0].pokemon_v2_pokemonspeciesflavortexts[0].flavor_text;
   const replacedFlavorText = flavorText.replace(/\n|\f|\t/g, " ");
@@ -152,7 +149,7 @@ export default function MaximazedPokeInfo({
       </button>
 
       <PokeInfoSprite
-        sprites={data[0].pokemon_v2_pokemons[0]}
+        sprites={currentPokemonResults}
         spriteSettings={spriteSettings}
         handleShinyToggle={handleShinyToggle}
         handleReverseSprite={handleReverseSprite}
@@ -189,7 +186,17 @@ export default function MaximazedPokeInfo({
         <p className="info-value">{replacedFlavorText}</p>
       </div>
 
-      <Stats stats={data[0].pokemon_v2_pokemons[0]} />
+      <Stats stats={data[0].pokemon_v2_pokemons[currentPokemon]} />
+      <Variants
+        pokemons={data}
+        currentPokemon={currentPokemon}
+        handleVariantClick={handleVariantClick}
+      />
+      <EvolutionChain
+        evolutionChain={data[0]}
+        refetchQuery={refetchQuery}
+        handleVariantClick={handleVariantClick}
+      />
       <form
         method="dialog"
         className="dialog-backdrop"

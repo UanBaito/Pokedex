@@ -32,6 +32,7 @@ export default function Mainpage({
   const [data, refetch] = useRefetchableFragment(MainpageFragment, queryData);
   const [isPokeInfoClosed, setIsPokeInfoClosed] = useState(true);
   const pokeinfoRef = useRef<HTMLDialogElement>(null);
+  const refetchQuery = useRef(refetch);
 
   function handlePokecardClick(pokemonName: string) {
     document.body.style.top = `-${window.scrollY}px`;
@@ -89,6 +90,7 @@ export default function Mainpage({
               mainPokeQueryResults={data.pokemon_v2_pokemonspecies}
               handleClickClosePKInfo={handleClickClosePKInfo}
               isPending={isPending}
+              refetchQuery={refetchQuery}
             />
           )}
         </dialog>

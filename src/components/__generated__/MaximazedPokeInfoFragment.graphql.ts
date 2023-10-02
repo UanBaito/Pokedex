@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<686892e7b8437cfcc24f6f1606e198b8>>
+ * @generated SignedSource<<20841c0215a98463d0f0ec03b4c0ac72>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -26,6 +26,7 @@ export type MaximazedPokeInfoFragment$data = ReadonlyArray<{
   readonly pokemon_v2_pokemonspeciesflavortexts: ReadonlyArray<{
     readonly flavor_text: string;
   }>;
+  readonly " $fragmentSpreads": FragmentRefs<"EvolutionChainFragment" | "VariantsFragment">;
   readonly " $fragmentType": "MaximazedPokeInfoFragment";
 }>;
 export type MaximazedPokeInfoFragment$key = ReadonlyArray<{
@@ -142,6 +143,16 @@ return {
         }
       ],
       "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "VariantsFragment"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "EvolutionChainFragment"
     }
   ],
   "type": "pokemon_v2_pokemonspecies",
@@ -149,6 +160,6 @@ return {
 };
 })();
 
-(node as any).hash = "fa54a0b72f9623ee5cc362f470b7f8a9";
+(node as any).hash = "ab4f7810a03e1dc5815fef9a3b257af1";
 
 export default node;

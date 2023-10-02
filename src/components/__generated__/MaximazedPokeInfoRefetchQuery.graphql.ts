@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b2ee9034e738a9ff5459c0feb3d2cef4>>
+ * @generated SignedSource<<de86a5824ecc337a3ceea70e6e218028>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -41,10 +41,17 @@ v2 = {
   "name": "name",
   "storageKey": null
 },
-v3 = [
+v3 = {
+  "alias": "pokeID",
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v4 = [
   (v2/*: any*/)
 ],
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "concreteType": "pokemon_v2_pokemontype",
@@ -66,13 +73,13 @@ v4 = {
       "kind": "LinkedField",
       "name": "pokemon_v2_type",
       "plural": false,
-      "selections": (v3/*: any*/),
+      "selections": (v4/*: any*/),
       "storageKey": null
     }
   ],
   "storageKey": null
 },
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -129,14 +136,8 @@ return {
         "plural": true,
         "selections": [
           (v2/*: any*/),
-          {
-            "alias": "pokeID",
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
-          },
-          (v4/*: any*/),
+          (v3/*: any*/),
+          (v5/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -153,7 +154,7 @@ return {
                 "kind": "LinkedField",
                 "name": "pokemon_v2_generation",
                 "plural": false,
-                "selections": (v3/*: any*/),
+                "selections": (v4/*: any*/),
                 "storageKey": null
               }
             ],
@@ -211,7 +212,7 @@ return {
                 "name": "weight",
                 "storageKey": null
               },
-              (v4/*: any*/),
+              (v5/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -245,7 +246,7 @@ return {
                 "name": "pokemon_v2_pokemonstats",
                 "plural": true,
                 "selections": [
-                  (v5/*: any*/),
+                  (v6/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -287,7 +288,7 @@ return {
                                 "name": "max",
                                 "plural": false,
                                 "selections": [
-                                  (v5/*: any*/)
+                                  (v6/*: any*/)
                                 ],
                                 "storageKey": null
                               }
@@ -333,6 +334,37 @@ return {
               }
             ],
             "storageKey": "pokemon_v2_pokemonspeciesflavortexts(where:{\"language_id\":{\"_eq\":9}})"
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "pokemon_v2_evolutionchain",
+            "kind": "LinkedField",
+            "name": "pokemon_v2_evolutionchain",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "pokemon_v2_pokemonspecies",
+                "kind": "LinkedField",
+                "name": "pokemon_v2_pokemonspecies",
+                "plural": true,
+                "selections": [
+                  (v2/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "evolves_from_species_id",
+                    "storageKey": null
+                  },
+                  (v3/*: any*/)
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -340,12 +372,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1fd10342a9f1da8e3ffe32e4c0986b80",
+    "cacheID": "8297c7959411b7b463c3d470ac326867",
     "id": null,
     "metadata": {},
     "name": "MaximazedPokeInfoRefetchQuery",
     "operationKind": "query",
-    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MainpageFragment_1IjDk4\n}\n\nfragment MainpageFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    ...MaximazedPokeInfoFragment\n  }\n}\n\nfragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    name\n    height\n    weight\n    pokemon_v2_pokemontypes {\n      slot\n      pokemon_v2_type {\n        name\n      }\n    }\n    ...PokeInfoSpriteFragment\n    ...StatsFragment\n  }\n  pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n    flavor_text\n  }\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    name\n  }\n}\n\nfragment StatsFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonstats {\n    base_stat\n    pokemon_v2_stat {\n      name\n      pokemon_v2_pokemonstats_aggregate(where: {pokemon_v2_pokemon: {is_default: {_eq: true}}}) {\n        aggregate {\n          max {\n            base_stat\n          }\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query MaximazedPokeInfoRefetchQuery(\n  $speciesName: String = \"\"\n) {\n  ...MainpageFragment_1IjDk4\n}\n\nfragment EvolutionChainFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_evolutionchain {\n    pokemon_v2_pokemonspecies {\n      name\n      evolves_from_species_id\n      pokeID: id\n    }\n  }\n}\n\nfragment MainpageFragment_1IjDk4 on query_root {\n  pokemon_v2_pokemon(order_by: {id: asc}, where: {is_default: {_eq: true}}) {\n    ...PokeListFragment\n  }\n  pokemon_v2_pokemonspecies(where: {name: {_eq: $speciesName}}) {\n    ...MaximazedPokeInfoFragment\n  }\n}\n\nfragment MaximazedPokeInfoFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    name\n    height\n    weight\n    pokemon_v2_pokemontypes {\n      slot\n      pokemon_v2_type {\n        name\n      }\n    }\n    ...PokeInfoSpriteFragment\n    ...StatsFragment\n  }\n  pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {\n    flavor_text\n  }\n  ...VariantsFragment\n  ...EvolutionChainFragment\n}\n\nfragment PokeInfoSpriteFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonsprites {\n    sprites\n    pokemon_id\n  }\n}\n\nfragment PokeListFragment on pokemon_v2_pokemon {\n  name\n  ...PokecardFragment\n  pokemon_v2_pokemontypes {\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    pokemon_v2_generation {\n      name\n    }\n  }\n}\n\nfragment PokecardFragment on pokemon_v2_pokemon {\n  name\n  pokeID: id\n  pokemon_v2_pokemontypes {\n    slot\n    pokemon_v2_type {\n      name\n    }\n  }\n  pokemon_v2_pokemonspecy {\n    name\n  }\n}\n\nfragment StatsFragment on pokemon_v2_pokemon {\n  pokemon_v2_pokemonstats {\n    base_stat\n    pokemon_v2_stat {\n      name\n      pokemon_v2_pokemonstats_aggregate(where: {pokemon_v2_pokemon: {is_default: {_eq: true}}}) {\n        aggregate {\n          max {\n            base_stat\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment VariantsFragment on pokemon_v2_pokemonspecies {\n  pokemon_v2_pokemons {\n    name\n  }\n}\n"
   }
 };
 })();
