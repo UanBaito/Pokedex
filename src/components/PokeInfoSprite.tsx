@@ -1,6 +1,7 @@
-import { HiRefresh, HiOutlineSparkles } from "react-icons/hi";
+import { HiRefresh, HiOutlineSparkles, HiAdjustments } from "react-icons/hi";
 import { graphql, useFragment } from "react-relay";
 import { PokeInfoSpriteFragment$key } from "./__generated__/PokeInfoSpriteFragment.graphql";
+import { useState } from "react";
 
 const PokeInfoSpriteFragment = graphql`
   fragment PokeInfoSpriteFragment on pokemon_v2_pokemon {
@@ -40,6 +41,7 @@ export default function PokeInfoSprite({
   handleShinyToggle: () => void;
 }) {
   const data = useFragment(PokeInfoSpriteFragment, sprites);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!data) {
     return;
@@ -163,27 +165,36 @@ export default function PokeInfoSprite({
   );
 
   return (
-    <div className="flex justify-center h-44 poke-info-sprite">
+    <div className="poke-info-sprite info-box">
       <button
-        onClick={handleReverseSprite}
-        disabled={shouldReverseGray()}
-        className={
-          "self-center mr-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-600"
-        }
+        className="poke-info-spritesettings-button"
+        onClick={() => {
+          setIsOpen((prevState) => !prevState);
+        }}
       >
-        <HiRefresh />
+        <HiAdjustments />
       </button>
-      <img className="h-44 object-cover" src={spriteString}></img>
 
-      <button
-        onClick={handleShinyToggle}
-        disabled={shouldShinyGray()}
-        className={
-          "self-center ml-4 bg-white text-black text-xl rounded-full w-8 h-8 flex justify-center items-center disabled:bg-gray-900"
-        }
+      <div
+        className={`settings-buttons ${isOpen ? "settings-buttons-open" : ""}`}
       >
-        <HiOutlineSparkles />
-      </button>
+        <button
+          onClick={handleReverseSprite}
+          disabled={shouldReverseGray()}
+          className={"poke-info-sprite-button"}
+        >
+          <HiRefresh />
+        </button>
+        <button
+          onClick={handleShinyToggle}
+          disabled={shouldShinyGray()}
+          className={"poke-info-sprite-button"}
+        >
+          <HiOutlineSparkles />
+        </button>
+      </div>
+
+      <img className="poke-info-sprite-img" src={spriteString}></img>
     </div>
   );
 }

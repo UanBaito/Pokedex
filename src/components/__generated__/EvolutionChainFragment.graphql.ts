@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5fb341f67326f2561a1a5a2d4cf428fd>>
+ * @generated SignedSource<<e1e660119e6c001e4b044fd70f660bf3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,6 +16,11 @@ export type EvolutionChainFragment$data = {
       readonly evolves_from_species_id: number | null;
       readonly name: string;
       readonly pokeID: number;
+      readonly pokemon_v2_pokemons: ReadonlyArray<{
+        readonly pokemon_v2_pokemonsprites: ReadonlyArray<{
+          readonly sprites: string;
+        }>;
+      }>;
     }>;
   } | null;
   readonly " $fragmentType": "EvolutionChainFragment";
@@ -67,6 +72,35 @@ const node: ReaderFragment = {
               "kind": "ScalarField",
               "name": "id",
               "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "pokemon_v2_pokemon",
+              "kind": "LinkedField",
+              "name": "pokemon_v2_pokemons",
+              "plural": true,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "pokemon_v2_pokemonsprites",
+                  "kind": "LinkedField",
+                  "name": "pokemon_v2_pokemonsprites",
+                  "plural": true,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "sprites",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
             }
           ],
           "storageKey": null
@@ -79,6 +113,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "40be37034a39fcaea338b18c46087eb1";
+(node as any).hash = "bf1b6e8b59f2cdf304ac25c982560cd1";
 
 export default node;

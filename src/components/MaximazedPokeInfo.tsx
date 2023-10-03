@@ -56,6 +56,7 @@ export default function MaximazedPokeInfo({
   const [currentPokemon, setCurrentPokemon] = useState(0);
 
   function handleVariantClick(index: number) {
+    handleClearSpriteSettings();
     setCurrentPokemon(index);
   }
 
@@ -143,8 +144,10 @@ export default function MaximazedPokeInfo({
           handleClickClosePKInfo();
           handleClearSpriteSettings();
         }}
-        className="minimize-button fixed right-0 bg-white rounded-full text-black z-50 w-10 h-10 inline-flex justify-center items-center text-2xl m-4"
+        className="minimize-button"
       >
+        {/* fixed right-0 bg-white rounded-full text-black z-50 w-10 h-10
+        inline-flex justify-center items-center text-2xl m-4 */}
         <HiOutlineChevronDown />
       </button>
 
@@ -154,35 +157,37 @@ export default function MaximazedPokeInfo({
         handleShinyToggle={handleShinyToggle}
         handleReverseSprite={handleReverseSprite}
       />
-      <div className="self-center poke-info-name">
-        <h1 className="text-center info-title info-box">{pokemonInfo.name}</h1>
-      </div>
-      <div className="flex justify-center items-center poke-info-types info-box">
-        <span
-          className={`type-badge bg-${pokemonInfo.typeOne} flex items-center justify-center`}
-        >
-          {pokemonInfo.typeOne}
-        </span>
-        {pokemonInfo.typeTwo && (
-          <span
-            className={`type-badge bg-${pokemonInfo.typeTwo} flex items-center justify-center`}
-          >
-            {pokemonInfo.typeTwo}
-          </span>
-        )}
-      </div>
-      <div className="p-1 m-1 border flex justify-between poke-info-weight-height info-box">
-        <div className="w-1/2">
-          <h2 className="inline info-title">Height: </h2>
-          <p className="inline info-value">{pokemonInfo.height}</p>
+      <div className="info-box">
+        <div className="poke-info-name">
+          <h1 className="text-center info-title">{pokemonInfo.name}</h1>
         </div>
-        <div className="w-1/2 text-right">
-          <h2 className="inline  info-title">Weight: </h2>
-          <p className="inline info-value">{pokemonInfo.weight}</p>
+        <div className="flex justify-center items-center poke-info-types info-title">
+          <span
+            className={`type-badge bg-${pokemonInfo.typeOne} flex items-center justify-center`}
+          >
+            {pokemonInfo.typeOne}
+          </span>
+          {pokemonInfo.typeTwo && (
+            <span
+              className={`type-badge bg-${pokemonInfo.typeTwo} flex items-center justify-center`}
+            >
+              {pokemonInfo.typeTwo}
+            </span>
+          )}
+        </div>
+        <div className="flex justify-between poke-info-weight-height info-title">
+          <div className="w-1/2 text-center">
+            <h2 className="inline ">Height: </h2>
+            <p className="inline">{pokemonInfo.height}</p>
+          </div>
+          <div className="w-1/2 text-center">
+            <h2 className="inline">Weight: </h2>
+            <p className="inline">{pokemonInfo.weight}</p>
+          </div>
         </div>
       </div>
       <div className="info-box poke-info-description ">
-        <h2 className="font-semibold mb-1 ">Description</h2>
+        <h2 className="info-title text-center">Description</h2>
         <p className="info-value">{replacedFlavorText}</p>
       </div>
 

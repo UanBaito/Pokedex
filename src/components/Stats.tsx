@@ -44,12 +44,35 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
       }
     }
 
+    let shortenedStatName: string;
+
+    switch (v.pokemon_v2_stat?.name) {
+      case "hp":
+        shortenedStatName = "HP";
+        break;
+      case "attack":
+        shortenedStatName = "Atk";
+        break;
+      case "defense":
+        shortenedStatName = "Def";
+        break;
+      case "special-attack":
+        shortenedStatName = "Sp.Atk";
+        break;
+      case "special-defense":
+        shortenedStatName = "Sp.Def";
+        break;
+      case "speed":
+        shortenedStatName = "Spd";
+        break;
+      default:
+        shortenedStatName = "???";
+    }
+
     return (
       <div className="stat-block" key={v.pokemon_v2_stat?.name}>
-        <h3 className="stat-label inline info-title">
-          {v.pokemon_v2_stat?.name}:
-        </h3>
-        <h4 className="stat-number inline info-value"> {baseStat}</h4>
+        <h3 className="stat-label inline">{shortenedStatName}: </h3>
+        <h4 className="stat-number inline"> {baseStat}</h4>
         <div className="stat-bar">
           <div
             className="stat-fill"
@@ -62,8 +85,8 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
 
   return (
     <div className="info-box poke-info-stats">
-      <h2 className="stats-title info-title">Stats: </h2>
-      {mappedStats}
+      <h2 className="stats-title info-title text-center">Stats</h2>
+      <div className="info-value">{mappedStats}</div>
     </div>
   );
 }

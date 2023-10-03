@@ -138,9 +138,56 @@ html {
 }
 
 .info-box {
-  padding: 0.2rem;
-  margin: 0.2rem;
-  background-color: rgb(100 116 139);
+  background-color: #1da89c;
+  border-radius: 0.8rem;
+  box-shadow: #00000048 0px 4px 4px;
+  margin: 0.2rem 0.7rem;
+}
+
+.info-title {
+  color: #cdcdcd;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 2.375rem;
+  background-color: #333333;
+  border-radius: 0.625rem;
+  height: 2.375rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.info-value {
+  color: #cdcdcd;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #333333;
+  border-radius: 0.625rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding: 0.2rem 0.3rem;
+}
+
+.minimize-button {
+  color: black;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: white;
+  z-index: 9999;
+  margin: 1.25rem;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  box-shadow: #00000048 0px 4px 4px;
 }
 
 #poke-list {
@@ -148,12 +195,71 @@ html {
   overflow-y: hidden;
 }
 
-.info-title {
-  color: white;
-  text-transform: capitalize;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.5rem;
+/* =========================== Sprite =========================== */
+
+.poke-info-sprite {
+  position: relative;
+  width: 96%;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background-image: url(/Red-pokeball.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.poke-info-sprite-img {
+  width: 15rem;
+}
+
+.poke-info-spritesettings-button {
+  position: absolute;
+  left: 0;
+  margin: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 2.3rem;
+  height: 2.3rem;
+  font-size: 1.3rem;
+  border-radius: 9999px;
+  background-color: white;
+  box-shadow: #00000048 0px 4px 4px;
+  z-index: 50 !important;
+}
+
+.poke-info-sprite-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 2.3rem;
+  height: 2.3rem;
+  font-size: 1.3rem;
+  border-radius: 9999px;
+  background-color: white;
+  box-shadow: #00000048 0px 4px 4px;
+  z-index: 40 !important;
+  margin-bottom: 0.5rem;
+}
+
+.poke-info-sprite-button:disabled {
+  background-color: rgb(83, 80, 80);
+}
+
+.settings-buttons {
+  margin: 0.7rem;
+  position: absolute;
+  left: -80px;
+  top: 2.8rem;
+  transition: left 0.4s ease-out;
+}
+
+.settings-buttons-open {
+  left: 0px !important;
 }
 
 /* =========================== Stats =========================== */
@@ -165,17 +271,114 @@ html {
 .stat-bar {
   background-color: transparent;
   overflow-x: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .stat-fill {
   min-height: 0.6rem !important;
-  height: 100%;
+  border-radius: 3px;
 }
 .stat-block {
-  max-height: 100%;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 6fr;
+  gap: 0.5rem;
 }
 
-/* bg-black bg-opacity-30 p-1 m-1 border flex justify-between */
+/* =========================== Variants =========================== */
+
+.poke-info-variants {
+  padding-bottom: 1rem;
+}
+
+.poke-info-variants ul {
+  background-color: #333333;
+  max-height: 13.75rem;
+  overflow-y: scroll;
+}
+
+.poke-info-variants ul li {
+  background: transparent;
+  border-top: 1px solid #ff5b5b;
+  border-bottom: 1px solid #ff5b5b;
+  height: 3rem;
+}
+.poke-info-variants ul h3 {
+  text-transform: capitalize;
+
+  font-size: 1rem;
+}
+
+.poke-info-variants ul button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poke-info-variants ul img {
+  min-width: 15%;
+  margin: 0 0.1rem;
+  object-position: 0 -1rem;
+}
+
+.selected-variant {
+  background-color: rgba(0, 0, 0, 0.329) !important;
+}
+
+/* =========================== Evolution Chain =========================== */
+.poke-info-evolution {
+}
+
+.poke-info-evolution ul li {
+  background-image: url(/Red-pokeball.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.poke-info-evolution ul {
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.poke-info-evolution ul li h3 {
+  display: flex;
+  text-transform: capitalize;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 0.2rem;
+}
+
+.poke-info-evolution ul div {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.evolves-to {
+  transform: rotate(90deg);
+  position: absolute;
+  display: inline;
+  bottom: -4.5rem;
+  max-width: 3rem;
+  max-height: 100px;
+}
+
+.poke-info-evolution button {
+  width: 100%;
+}
+
+.poke-info-evolution button img {
+  width: 10rem;
+}
 
 /* =========================== media-queries =========================== */
 
@@ -186,12 +389,6 @@ html {
 }
 
 @media screen and (min-width: 550px) {
-  .poke-info-stats {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1.9rem repeat(3, 1fr);
-  }
   .stats-title {
     grid-column: span 2;
   }

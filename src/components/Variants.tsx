@@ -28,7 +28,7 @@ export default function Variant({
     return (
       <li
         key={v.name + "-variant"}
-        className={currentPokemon === i ? "selected-variant" : ""}
+        className={`${currentPokemon === i ? "selected-variant" : ""}`}
       >
         <button
           onClick={() => {
@@ -42,5 +42,10 @@ export default function Variant({
     );
   });
 
-  return <ul>{mappedVariants}</ul>;
+  return (
+    <div className="poke-info-variants info-box">
+      <h2 className=" info-title text-center">Variants</h2>
+      <ul>{mappedVariants}</ul>
+    </div>
+  );
 }
