@@ -1,6 +1,7 @@
 import { RefetchFnDynamic, graphql, useFragment } from "react-relay";
 import { EvolutionChainFragment$key } from "./__generated__/EvolutionChainFragment.graphql";
 import { MainpageFragment$key } from "./__generated__/MainpageFragment.graphql";
+import { useTransition } from "react";
 
 const EvolutionChainFragment = graphql`
   fragment EvolutionChainFragment on pokemon_v2_pokemonspecies {
@@ -32,12 +33,15 @@ export default function EvolutionChain({
   refetchQuery,
   handleVariantClick,
 }: props) {
+  const [isPending, startTransition] = useTransition();
   const data = useFragment(EvolutionChainFragment, evolutionChain);
   const evoChainResults =
     data.pokemon_v2_evolutionchain?.pokemon_v2_pokemonspecies;
 
   function handleClickEvo(speciesName: string) {
-    refetchQuery.current({ speciesName: speciesName });
+    startTransition(() => {
+      refetchQuery.current({ speciesName: speciesName });
+    });
   }
 
   type evo = {
@@ -95,28 +99,43 @@ export default function EvolutionChain({
                 ""
               }
             ></img>
-            <h3 className="info-value">{v.name}</h3>
           </button>
+          <h3 className="info-value">{v.name}</h3>
         </li>
       );
     });
-
+    console.log(mappedEvoStage);
     // add arrow if the pokemon can evolve
-    if (evoChainContainers[i + 1]?.find((v) => v)) {
-      return (
-        <div key={"evo-stage-" + i}>
-          {mappedEvoStage}
-
-          <img className="evolves-to" src="/EvolvesToArrow.svg"></img>
-        </div>
-      );
-    } else {
-      return <div key={"evo-stage-" + i}>{mappedEvoStage}</div>;
+    if (mappedEvoStage[0]) {
+      if (evoChainContainers[i + 1]?.find((v) => v)) {
+        return (
+          <>
+            {" "}
+            <div key={"evo-stage-" + i} className="evo-container">
+              {mappedEvoStage}
+            </div>
+            <img className="evolves-to" src="/EvolvesToArrow.svg"></img>
+          </>
+        );
+      } else {
+        return (
+          <div key={"evo-stage-" + i} className="evo-container">
+            {mappedEvoStage}
+          </div>
+        );
+      }
     }
   });
 
   return (
     <div className="poke-info-evolution info-box">
+      <div
+        className={`opacity-0 refetch-poke-evo flex justify-center align-middle ${
+          isPending ? "refetch-poke-evo-loading" : ""
+        }`}
+      >
+        <img src="/Poke_Ball_icon.svg" className="w-32 animate-spin"></img>
+      </div>
       <h2 className="info-title text-center">Evolution Chain</h2>
       <ul>{mappedEvoStages}</ul>
     </div>

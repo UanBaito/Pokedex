@@ -194,7 +194,13 @@ export default function PokeInfoSprite({
         </button>
       </div>
 
-      <img className="poke-info-sprite-img" src={spriteString}></img>
+      <img
+        className="poke-info-sprite-img"
+        src={spriteString}
+        onError={(e) => {
+          e.currentTarget.src = "/static-assets-upload497003337259914719.webp";
+        }}
+      ></img>
     </div>
   );
 }

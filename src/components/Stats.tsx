@@ -86,7 +86,7 @@ export default function Stats({ stats }: { stats: StatsFragment$key }) {
   return (
     <div className="info-box poke-info-stats">
       <h2 className="stats-title info-title text-center">Stats</h2>
-      <div className="info-value">{mappedStats}</div>
+      <div className="info-value poke-info-stats-box">{mappedStats}</div>
     </div>
   );
 }

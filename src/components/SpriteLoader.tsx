@@ -12,8 +12,8 @@ export default function SpriteLoader({
 }: props) {
   return (
     <>
-      <div className="relative bg-slate-300 text-white poke-info-loading">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="bg-slate-300 poke-info-loading">
+        <img src="/Poke_Ball_icon.svg" className="w-32 animate-spin"></img>
 
         <button
           onClick={() => {

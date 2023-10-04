@@ -12,7 +12,10 @@ const VariantsFragment = graphql`
   fragment VariantsFragment on pokemon_v2_pokemonspecies @relay(plural: true) {
     pokemon_v2_pokemons {
       name
+      pokeID: id
     }
+
+    pokemon_shape_id
   }
 `;
 
@@ -23,6 +26,11 @@ export default function Variant({
 }: props) {
   const data = useFragment(VariantsFragment, pokemons);
   const variants = data[0].pokemon_v2_pokemons;
+  let shape: number | string | null = data[0].pokemon_shape_id;
+
+  if (shape && shape < 10) {
+    shape = "0" + shape;
+  }
 
   const mappedVariants = variants.map((v, i) => {
     return (
@@ -35,7 +43,13 @@ export default function Variant({
             handleVariantClick(i);
           }}
         >
-          <img src="/1.png"></img>
+          <img
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = `/shapes/Body${shape}VI.png`;
+            }}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${v.pokeID}.png`}
+          ></img>
           <h3>{v.name}</h3>
         </button>
       </li>
@@ -43,8 +57,9 @@ export default function Variant({
   });
 
   return (
-    <div className="poke-info-variants info-box">
+    <div className="info-box poke-info-variants">
       <h2 className=" info-title text-center">Variants</h2>
+
       <ul>{mappedVariants}</ul>
     </div>
   );

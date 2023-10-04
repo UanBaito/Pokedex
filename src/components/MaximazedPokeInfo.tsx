@@ -157,7 +157,7 @@ export default function MaximazedPokeInfo({
         handleShinyToggle={handleShinyToggle}
         handleReverseSprite={handleReverseSprite}
       />
-      <div className="info-box">
+      <div className="info-box poke-info-misc">
         <div className="poke-info-name">
           <h1 className="text-center info-title">{pokemonInfo.name}</h1>
         </div>
@@ -175,12 +175,12 @@ export default function MaximazedPokeInfo({
             </span>
           )}
         </div>
-        <div className="flex justify-between poke-info-weight-height info-title">
-          <div className="w-1/2 text-center">
+        <div className="flex justify-between poke-info-weight-height ">
+          <div className="w-1/2 text-center info-title">
             <h2 className="inline ">Height: </h2>
             <p className="inline">{pokemonInfo.height}</p>
           </div>
-          <div className="w-1/2 text-center">
+          <div className="w-1/2 text-center info-title">
             <h2 className="inline">Weight: </h2>
             <p className="inline">{pokemonInfo.weight}</p>
           </div>
