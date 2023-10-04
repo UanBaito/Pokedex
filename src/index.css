@@ -346,6 +346,10 @@ html {
 
 /* =========================== Evolution Chain =========================== */
 
+.poke-info-evolution {
+  max-width: 669px;
+}
+
 .poke-info-evolution ul li {
   background-image: url(/Red-pokeball.png);
   background-size: contain;
@@ -354,6 +358,7 @@ html {
 
 .poke-info-evolution ul {
   display: flex;
+  max-width: 100%;
 
   flex-direction: column;
   align-items: center;
@@ -372,15 +377,14 @@ html {
   position: relative;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-
+  max-width: 100%;
+  flex-wrap: wrap !important;
   align-items: center;
   justify-content: center;
 }
 
 .evolves-to {
   transform: rotate(90deg);
-
   display: inline;
   bottom: -4.5rem;
   max-width: 3rem;
@@ -388,12 +392,10 @@ html {
 }
 
 .poke-info-evolution button {
-  width: 100%;
 }
 
 .poke-info-evolution button img {
-  width: 10rem;
-  max-width: 10rem;
+  min-width: 96px;
 }
 
 .refetch-poke-evo {
@@ -532,7 +534,6 @@ html {
   }
 
   .poke-info-evolution ul li img {
-    width: 6rem;
     grid-area: evo-sprite;
   }
 
