@@ -76,9 +76,8 @@ export default function EvolutionChain({
     ) {
       thirdEvo.push(evolution);
     } else {
-      console.log(evolution.name + " appears to not fit in this chan");
+      return;
     }
-    console.log(evolution);
   });
 
   const evoChainContainers = [firstEvo, secondEvo, thirdEvo];
@@ -104,7 +103,7 @@ export default function EvolutionChain({
         </li>
       );
     });
-    console.log(mappedEvoStage);
+
     // add arrow if the pokemon can evolve
     if (mappedEvoStage[0]) {
       if (evoChainContainers[i + 1]?.find((v) => v)) {

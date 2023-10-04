@@ -46,7 +46,12 @@ export default function Variant({
           <img
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = `/shapes/Body${shape}VI.png`;
+              const shapeID = shape;
+              if (shapeID) {
+                e.currentTarget.src = `/shapes/Body${shape}VI.png`;
+              } else {
+                e.currentTarget.src = `/shapes/Body01VI.png`;
+              }
             }}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${v.pokeID}.png`}
           ></img>
