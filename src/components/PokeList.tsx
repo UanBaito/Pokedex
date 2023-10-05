@@ -110,19 +110,18 @@ export default function Pokelist({
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </form>
 
-      <div className="relative">
-        <ul className="flex flex-wrap justify-center max-w-5xl">
-          {visiblePokeCards}
-        </ul>
-        <button
-          className="scroll-top-button"
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          <HiChevronUp />
-        </button>
-      </div>
+      <ul className="flex flex-wrap justify-center max-w-5xl w-full">
+        {visiblePokeCards}
+      </ul>
+      <button
+        className="scroll-top-button"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        <HiChevronUp />
+      </button>
+
       <LoadMorePokemonsButton
         hasNextPage={hasNextPage}
         loadMorePokemons={loadMorePokemons}

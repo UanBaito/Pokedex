@@ -56,6 +56,16 @@ export default function PokeInfoSprite({
     data.pokemon_v2_pokemonsprites[0].sprites
   );
 
+  function rotate180() {
+    const icon = document.getElementById("rotate-icon");
+    if (icon) {
+      icon.classList.add("rotate180");
+      icon.addEventListener("animationend", () => {
+        icon.classList.remove("rotate180");
+      });
+    }
+  }
+
   function shouldReverseGray() {
     if (
       isSpriteAvailable(
@@ -199,25 +209,29 @@ export default function PokeInfoSprite({
         <button
           onClick={handleGenderToggle}
           disabled={shouldGenderGray()}
-          className={"poke-info-sprite-button"}
-        >
-          <img
-            className="h-7"
-            src="/male-and-female-symbol-svgrepo-com.svg"
-          ></img>
-        </button>
+          className={`poke-info-sprite-button gender-toggle ${
+            spriteSettings.isFemale ? "female" : "male"
+          }`}
+        ></button>
 
         <button
-          onClick={handleReverseSprite}
+          onClick={() => {
+            handleReverseSprite();
+            rotate180();
+          }}
           disabled={shouldReverseGray()}
           className={"poke-info-sprite-button"}
         >
-          <HiRefresh />
+          <div id="rotate-icon">
+            <HiRefresh />
+          </div>
         </button>
         <button
           onClick={handleShinyToggle}
           disabled={shouldShinyGray()}
-          className={"poke-info-sprite-button"}
+          className={`poke-info-sprite-button ${
+            spriteSettings.isShiny ? "shiny-toggle" : ""
+          }`}
         >
           <HiOutlineSparkles />
         </button>

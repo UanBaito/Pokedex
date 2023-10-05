@@ -44,6 +44,20 @@
   }
 }
 
+@keyframes rotate180 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-180deg);
+  }
+}
+
+.rotate180 {
+  animation: rotate180 0.3s linear;
+}
+
 .slide_left {
   animation: slide_left 0.5s ease;
   translate: 0, 100vw;
@@ -80,11 +94,6 @@ html {
   z-index: 0;
 }
 
-main {
-  position: static;
-  max-width: 1024px;
-  margin: auto;
-}
 /* =========================== Filters =========================== */
 
 .filter-labels {
@@ -243,6 +252,7 @@ main {
 }
 
 .poke-info-sprite-button {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -255,6 +265,10 @@ main {
   box-shadow: #00000048 0px 4px 4px;
   z-index: 40 !important;
   margin-bottom: 0.5rem;
+}
+
+.shiny-toggle svg {
+  fill: gold;
 }
 
 .scroll-top-button {
@@ -289,6 +303,41 @@ main {
 
 .settings-buttons-open {
   left: 0px !important;
+}
+
+.gender-toggle {
+}
+
+.male::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url(/Male-símbolo2.svg);
+  top: 50%;
+  transform: translate(0, -50%);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.female::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-image: url(Female_symbol.svg);
+  top: 50%;
+  transform: translate(0, -50%);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.male:disabled::before {
+  opacity: 0.5;
+}
+
+.female:disabled::before {
+  opacity: 0.5;
 }
 
 /* =========================== Misc =========================== */
