@@ -2,7 +2,7 @@ import { HiOutlineChevronDown } from "react-icons/hi";
 import PokeInfoSprite from "./PokeInfoSprite";
 import { RefetchFnDynamic, graphql, useFragment } from "react-relay";
 import { MaximazedPokeInfoFragment$key } from "./__generated__/MaximazedPokeInfoFragment.graphql";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Stats from "./Stats";
 import SpriteLoader from "./SpriteLoader";
 import { MainpageFragment$key } from "./__generated__/MainpageFragment.graphql";
@@ -54,6 +54,7 @@ export default function MaximazedPokeInfo({
     isFemale: false,
   });
   const [currentPokemon, setCurrentPokemon] = useState(0);
+  const spriteRef = useRef(null);
 
   function handleVariantClick(index: number) {
     handleClearSpriteSettings();
@@ -64,6 +65,13 @@ export default function MaximazedPokeInfo({
     setSpriteSettings((prevState) => ({
       ...prevState,
       facingFront: !prevState.facingFront,
+    }));
+  }
+
+  function handleGenderToggle() {
+    setSpriteSettings((prevState) => ({
+      ...prevState,
+      isFemale: !prevState.isFemale,
     }));
   }
 
@@ -156,6 +164,8 @@ export default function MaximazedPokeInfo({
         spriteSettings={spriteSettings}
         handleShinyToggle={handleShinyToggle}
         handleReverseSprite={handleReverseSprite}
+        spriteRef={spriteRef}
+        handleGenderToggle={handleGenderToggle}
       />
       <div className="info-box poke-info-misc">
         <div className="poke-info-name">
@@ -198,6 +208,7 @@ export default function MaximazedPokeInfo({
         handleVariantClick={handleVariantClick}
       />
       <EvolutionChain
+        spriteRef={spriteRef}
         evolutionChain={data[0]}
         refetchQuery={refetchQuery}
         handleVariantClick={handleVariantClick}

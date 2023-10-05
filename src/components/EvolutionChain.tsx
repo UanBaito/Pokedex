@@ -26,12 +26,14 @@ type props = {
     RefetchFnDynamic<any, MainpageFragment$key>
   >;
   handleVariantClick: (index: number) => void;
+  spriteRef: React.MutableRefObject<null | HTMLDivElement>;
 };
 
 export default function EvolutionChain({
   evolutionChain,
   refetchQuery,
   handleVariantClick,
+  spriteRef,
 }: props) {
   const [isPending, startTransition] = useTransition();
   const data = useFragment(EvolutionChainFragment, evolutionChain);
@@ -42,6 +44,7 @@ export default function EvolutionChain({
     startTransition(() => {
       refetchQuery.current({ speciesName: speciesName });
     });
+    spriteRef.current?.scrollIntoView({ behavior: "smooth" });
   }
   type evo = {
     evolves_from_species_id: number | null;

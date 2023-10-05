@@ -34,11 +34,15 @@ export default function PokeInfoSprite({
   spriteSettings,
   handleReverseSprite,
   handleShinyToggle,
+  spriteRef,
+  handleGenderToggle,
 }: {
   sprites: PokeInfoSpriteFragment$key;
   spriteSettings: spriteSettings;
   handleReverseSprite: () => void;
   handleShinyToggle: () => void;
+  spriteRef: React.MutableRefObject<null | HTMLDivElement>;
+  handleGenderToggle: () => void;
 }) {
   const data = useFragment(PokeInfoSpriteFragment, sprites);
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +62,20 @@ export default function PokeInfoSprite({
         !spriteSettings.facingFront,
         spriteSettings.isShiny,
         spriteSettings.isFemale
+      )
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function shouldGenderGray() {
+    if (
+      isSpriteAvailable(
+        spriteSettings.facingFront,
+        spriteSettings.isShiny,
+        !spriteSettings.isFemale
       )
     ) {
       return false;
@@ -165,7 +183,7 @@ export default function PokeInfoSprite({
   );
 
   return (
-    <div className="poke-info-sprite info-box">
+    <div className="poke-info-sprite info-box" ref={spriteRef}>
       <button
         className="poke-info-spritesettings-button"
         onClick={() => {
@@ -178,6 +196,17 @@ export default function PokeInfoSprite({
       <div
         className={`settings-buttons ${isOpen ? "settings-buttons-open" : ""}`}
       >
+        <button
+          onClick={handleGenderToggle}
+          disabled={shouldGenderGray()}
+          className={"poke-info-sprite-button"}
+        >
+          <img
+            className="h-7"
+            src="/male-and-female-symbol-svgrepo-com.svg"
+          ></img>
+        </button>
+
         <button
           onClick={handleReverseSprite}
           disabled={shouldReverseGray()}
