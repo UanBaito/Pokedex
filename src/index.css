@@ -109,10 +109,15 @@ html {
   max-width: 1024px !important;
   max-height: 720px !important;
   border-radius: 0;
+  transition: box-shadow 300ms linear;
+}
+
+#poke-info-dialog[open] {
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.589);
 }
 
 #poke-info-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
 }
 
 .poke-info {
