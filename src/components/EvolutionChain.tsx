@@ -43,7 +43,6 @@ export default function EvolutionChain({
       refetchQuery.current({ speciesName: speciesName });
     });
   }
-
   type evo = {
     evolves_from_species_id: number | null;
     name: string;
@@ -61,22 +60,17 @@ export default function EvolutionChain({
   const thirdEvo: evo[] = [];
 
   sortedEvoChainResults?.forEach((evolution) => {
-    if (
+    if (evolution.evolves_from_species_id === null) {
+      return;
+    } else if (
       firstEvo.some(
         (evolutionFirst) =>
           evolutionFirst.pokeID === evolution.evolves_from_species_id
       )
     ) {
       secondEvo.push(evolution);
-    } else if (
-      secondEvo.some(
-        (evolutionSecond) =>
-          evolutionSecond.pokeID === evolution.evolves_from_species_id
-      )
-    ) {
-      thirdEvo.push(evolution);
     } else {
-      return;
+      thirdEvo.push(evolution);
     }
   });
 
@@ -109,10 +103,7 @@ export default function EvolutionChain({
       if (evoChainContainers[i + 1]?.find((v) => v)) {
         return (
           <>
-            {" "}
-            <div key={"evo-stage-" + i} className="evo-container">
-              {mappedEvoStage}
-            </div>
+            <div className="evo-container">{mappedEvoStage}</div>
             <img className="evolves-to" src="/EvolvesToArrow.svg"></img>
           </>
         );
