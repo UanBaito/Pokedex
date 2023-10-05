@@ -76,6 +76,23 @@ html {
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
 .hide-overflow {
   overflow-y: hidden !important;
 }
@@ -94,6 +111,15 @@ html {
   z-index: 0;
 }
 
+.poke-card {
+  transform: scale(1);
+  transition: transform 250ms ease;
+}
+
+.poke-card:hover {
+  transform: scale(1.05);
+}
+
 /* =========================== Filters =========================== */
 
 .filter-labels {
@@ -105,7 +131,7 @@ html {
 
 .filters {
   margin-top: 0.2rem;
-  width: 100vw;
+  width: 95vw;
 }
 
 #filter-div {
@@ -138,6 +164,7 @@ html {
   z-index: 9999;
   max-width: 100%;
   max-height: 100dvh;
+  overflow-x: hidden;
 }
 
 .poke-info-loading {
@@ -340,6 +367,19 @@ html {
   opacity: 0.5;
 }
 
+.pokeID {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: #00000048 0px 4px 4px;
+  background-color: #333333;
+  color: #cdcdcd;
+  outline: gray solid 1px;
+  font-weight: 700;
+  margin: 0.4rem;
+  padding: 0 0.2rem;
+}
+
 /* =========================== Misc =========================== */
 .poke-info-misc .poke-info-weight-height {
   width: 95%;
@@ -392,7 +432,7 @@ html {
 
 .poke-info-variants ul li {
   background: transparent;
-  border-top: 1px solid #ff5b5b;
+
   border-bottom: 1px solid #ff5b5b;
   height: 3rem;
 }
