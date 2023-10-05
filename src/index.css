@@ -80,6 +80,11 @@ html {
   z-index: 0;
 }
 
+main {
+  position: static;
+  max-width: 1024px;
+  margin: auto;
+}
 /* =========================== Filters =========================== */
 
 .filter-labels {
@@ -250,6 +255,24 @@ html {
   box-shadow: #00000048 0px 4px 4px;
   z-index: 40 !important;
   margin-bottom: 0.5rem;
+}
+
+.scroll-top-button {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 2.8rem;
+  height: 2.8rem;
+  font-size: 2rem;
+  border-radius: 9999px;
+  background-color: white;
+  box-shadow: #00000048 0px 4px 4px;
+  z-index: 40 !important;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
 }
 
 .poke-info-sprite-button:disabled {
@@ -425,6 +448,9 @@ html {
 /* =========================== media-queries =========================== */
 
 @media screen and (min-width: 600px) {
+  .poke-card-li {
+    max-width: 50%;
+  }
   .poke-card {
     margin: 0.5rem;
   }
@@ -569,6 +595,12 @@ html {
       "sprite stats"
       "misc stats"
       "variants evolution";
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .poke-card-li {
+    max-width: 33%;
   }
 }
 

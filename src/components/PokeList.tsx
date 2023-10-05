@@ -7,6 +7,7 @@ import type { PokeListFragment$key } from "./__generated__/PokeListFragment.grap
 import TypeFilterInput from "./TypeFilterInput";
 import GenFilterInput from "./GenFilterInput";
 import LoadMorePokemonsButton from "./LoadMorePokemonsButton";
+import { HiChevronUp } from "react-icons/hi";
 
 const PokeListFragment = graphql`
   fragment PokeListFragment on pokemon_v2_pokemon @relay(plural: true) {
@@ -109,9 +110,19 @@ export default function Pokelist({
         <GenFilterInput genFilter={genFilter} setGenFilter={setGenFilter} />
       </form>
 
-      <ul className="flex flex-wrap justify-center max-w-5xl">
-        {visiblePokeCards}
-      </ul>
+      <div className="relative">
+        <ul className="flex flex-wrap justify-center max-w-5xl">
+          {visiblePokeCards}
+        </ul>
+        <button
+          className="scroll-top-button"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
+          <HiChevronUp />
+        </button>
+      </div>
       <LoadMorePokemonsButton
         hasNextPage={hasNextPage}
         loadMorePokemons={loadMorePokemons}
