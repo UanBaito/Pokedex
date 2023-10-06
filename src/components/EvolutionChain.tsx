@@ -82,7 +82,7 @@ export default function EvolutionChain({
   const mappedEvoStages = evoChainContainers?.map((stageContainer, i) => {
     const mappedEvoStage = stageContainer.map((v) => {
       return (
-        <li key={v.name + "-evo"}>
+        <li key={v.name + "-evo"} className="evo-container-item">
           <button
             onClick={() => {
               handleVariantClick(0);
@@ -96,7 +96,7 @@ export default function EvolutionChain({
               }
             ></img>
           </button>
-          <h3 className="info-value">{v.name}</h3>
+          <h3 className="info-value evo-name">{v.name}</h3>
         </li>
       );
     });
@@ -105,16 +105,19 @@ export default function EvolutionChain({
     if (mappedEvoStage[0]) {
       if (evoChainContainers[i + 1]?.find((v) => v)) {
         return (
-          <>
-            <div className="evo-container">{mappedEvoStage}</div>
-            <img className="evolves-to" src="/EvolvesToArrow.svg"></img>
-          </>
+          <li
+            className="evo-stages-item"
+            data-has-nextevo="true"
+            key={"evo-stage-" + i}
+          >
+            <ul className="evo-container-list">{mappedEvoStage}</ul>
+          </li>
         );
       } else {
         return (
-          <div key={"evo-stage-" + i} className="evo-container">
-            {mappedEvoStage}
-          </div>
+          <li className="evo-stages-item" key={"evo-stage-" + i}>
+            <ul className="evo-container-list"> {mappedEvoStage}</ul>
+          </li>
         );
       }
     }
@@ -123,14 +126,14 @@ export default function EvolutionChain({
   return (
     <div className="poke-info-evolution info-box">
       <div
-        className={`opacity-0 refetch-poke-evo flex justify-center align-middle ${
+        className={`refetch-poke-evo ${
           isPending ? "refetch-poke-evo-loading" : ""
         }`}
       >
         <img src="/Poke_Ball_icon.svg" className="w-32 animate-spin"></img>
       </div>
       <h2 className="info-title text-center">Evolution Chain</h2>
-      <ul>{mappedEvoStages}</ul>
+      <ul className="evo-stages-list">{mappedEvoStages}</ul>
     </div>
   );
 }

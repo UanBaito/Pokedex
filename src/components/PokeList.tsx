@@ -115,6 +115,7 @@ export default function Pokelist({
       </ul>
       <button
         className="scroll-top-button"
+        aria-label="Scroll to top"
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
