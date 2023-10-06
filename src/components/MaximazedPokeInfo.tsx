@@ -16,6 +16,7 @@ const MaximazedPokeInfoFragment = graphql`
       name
       height
       weight
+      pokeID: id
       pokemon_v2_pokemontypes {
         slot
         pokemon_v2_type {
@@ -158,7 +159,6 @@ export default function MaximazedPokeInfo({
         inline-flex justify-center items-center text-2xl m-4 */}
         <HiOutlineChevronDown />
       </button>
-
       <PokeInfoSprite
         sprites={currentPokemonResults}
         spriteSettings={spriteSettings}
@@ -167,6 +167,11 @@ export default function MaximazedPokeInfo({
         spriteRef={spriteRef}
         handleGenderToggle={handleGenderToggle}
       />
+
+      <h3 className="pokeID">
+        N.º
+        {data[0].pokemon_v2_pokemons[0].pokeID}
+      </h3>
       <div className="info-box poke-info-misc">
         <div className="poke-info-name">
           <h1 className="text-center info-title">{pokemonInfo.name}</h1>
@@ -200,7 +205,6 @@ export default function MaximazedPokeInfo({
         <h2 className="info-title text-center">Description</h2>
         <p className="info-value">{replacedFlavorText}</p>
       </div>
-
       <Stats stats={data[0].pokemon_v2_pokemons[currentPokemon]} />
       <Variants
         pokemons={data}

@@ -161,6 +161,7 @@ body {
 }
 
 .poke-info {
+  position: relative;
   z-index: 9999;
   max-width: 100%;
   max-height: 100dvh;
@@ -369,8 +370,7 @@ body {
 
 .pokeID {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  left: 50%;
   box-shadow: #00000048 0px 4px 4px;
   background-color: #333333;
   color: #cdcdcd;
@@ -555,15 +555,15 @@ body {
     position: static !important;
   }
 
+  .minimize-button {
+    position: absolute;
+  }
+
   #poke-info-dialog {
     min-height: 0;
     min-width: 0;
     border-radius: 10px;
   }
-  .minimize-button {
-    position: absolute;
-  }
-
   .poke-info-loading {
     max-width: 1024px;
     max-height: 720px;

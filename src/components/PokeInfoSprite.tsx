@@ -194,10 +194,6 @@ export default function PokeInfoSprite({
 
   return (
     <div className="poke-info-sprite info-box" ref={spriteRef}>
-      <h3 className="pokeID">
-        N.º
-        {pokeID}
-      </h3>
       <button
         className="poke-info-spritesettings-button"
         onClick={() => {

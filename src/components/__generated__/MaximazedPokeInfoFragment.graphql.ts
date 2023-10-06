@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<20841c0215a98463d0f0ec03b4c0ac72>>
+ * @generated SignedSource<<93fda391c7b687c198a160bebddb7611>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,6 +14,7 @@ export type MaximazedPokeInfoFragment$data = ReadonlyArray<{
   readonly pokemon_v2_pokemons: ReadonlyArray<{
     readonly height: number | null;
     readonly name: string;
+    readonly pokeID: number;
     readonly pokemon_v2_pokemontypes: ReadonlyArray<{
       readonly pokemon_v2_type: {
         readonly name: string;
@@ -71,6 +72,13 @@ return {
           "args": null,
           "kind": "ScalarField",
           "name": "weight",
+          "storageKey": null
+        },
+        {
+          "alias": "pokeID",
+          "args": null,
+          "kind": "ScalarField",
+          "name": "id",
           "storageKey": null
         },
         {
@@ -160,6 +168,6 @@ return {
 };
 })();
 
-(node as any).hash = "ab4f7810a03e1dc5815fef9a3b257af1";
+(node as any).hash = "a8ab6dd827b72350ae2adf806c06fefb";
 
 export default node;
